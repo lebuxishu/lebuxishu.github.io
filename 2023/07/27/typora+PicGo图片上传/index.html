@@ -19,23 +19,43 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="lebuxishu的博客">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="typora+PicGo介绍 typora是一个Markdown格式的编辑器(ps:可以下破解版，有钱也可以支持正版) PicGo是一个自动上传图片到图床的工具  搭建图片上传的整体思路 typora向本地的36677端口发送图片上传的请求 PicGo默认监听本地36677端口，并将监听的数据以接口的形式发送到，指定Lskypro所在的图床，返回一个链接  搭建流程 下载并安装node.js  下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typora+PicGo图片上传">
+<meta property="og:url" content="http://example.com/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/index.html">
 <meta property="og:site_name" content="lebuxishu的博客">
+<meta property="og:description" content="typora+PicGo介绍 typora是一个Markdown格式的编辑器(ps:可以下破解版，有钱也可以支持正版) PicGo是一个自动上传图片到图床的工具  搭建图片上传的整体思路 typora向本地的36677端口发送图片上传的请求 PicGo默认监听本地36677端口，并将监听的数据以接口的形式发送到，指定Lskypro所在的图床，返回一个链接  搭建流程 下载并安装node.js  下">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727145530980.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/12320230726220152.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727150131651.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727150359875.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/2023072622112315.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151000013.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151018745.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151029854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151048968.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151339259.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151451691.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151628406.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303211401394.png">
+<meta property="article:published_time" content="2023-07-27T09:06:05.000Z">
+<meta property="article:modified_time" content="2023-07-27T09:13:27.991Z">
 <meta property="article:author" content="lebuxishu">
+<meta property="article:tag" content="HEXO">
+<meta property="article:tag" content="img上传">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727145530980.png">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/","path":"2023/07/27/typora+PicGo图片上传/","title":"typora+PicGo图片上传"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>lebuxishu的博客</title>
+<title>typora+PicGo图片上传 | lebuxishu的博客</title>
   
 
 
@@ -68,7 +88,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">lebuxishu的博客</h1>
+      <p class="site-title">lebuxishu的博客</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -94,7 +114,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -107,6 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#typora-PicGo%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">typora+PicGo介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%9A%84%E6%95%B4%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">图片上传的整体思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">搭建流程</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -171,197 +192,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/avatar.jpg">
-      <meta itemprop="name" content="lebuxishu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lebuxishu的博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | lebuxishu的博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">利用github搭建hexo博客</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-07-27 17:06:05 / 修改时间：17:22:34" itemprop="dateCreated datePublished" datetime="2023-07-27T17:06:05+08:00">2023-07-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
-<li>提前安装好<a target="_blank" rel="noopener" href="https://nodejs.org/en">node.js</a>左边的那个</li>
-<li>提前安装好<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">GIt</a></li>
-<li>提前注册好一个<a target="_blank" rel="noopener" href="https://github.com/">github</a>账号</li>
-<li>如果文章图片没有显示，请自行挂代理</li>
-</ol>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
-<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
-<li>在选定的目录中，右键Git Bash Here</li>
-<li>使用npm命令安装Hexo，输入：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
-
-<p>构建好的效果:</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
-<ol start="4">
-<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>配置ssh</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
-<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
-<ul>
-<li>尝试ssh连接,测试是否成功</li>
-</ul>
-<blockquote>
-<p>ssh -T <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;</a>   #注意邮箱地址不用改</p>
-</blockquote>
-<ul>
-<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
-</ul>
-<blockquote>
-<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-</blockquote>
-<ul>
-<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
-</ul>
-<blockquote>
-<p>npm install hexo-deployer-git –save</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
-<ul>
-<li>返回Git Bash Here还需要继续配置</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>准备上传代码</li>
-</ol>
-<ul>
-<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
-</li>
-<li><p>点击创建</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
-</li>
-<li><p>编辑_config.yml文件，在最后改成这样</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功</p>
-</li>
-<li><p>最后上传</p>
-</li>
-</ul>
-<blockquote>
-<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
-<ul>
-<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
-<ol start="7">
-<li>hexo命令介绍</li>
-</ol>
-<blockquote>
-<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
-<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
-<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
-</blockquote>
-<ol start="8">
-<li>hexo目录结构</li>
-</ol>
-<blockquote>
-<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
-</blockquote>
-<ol start="9">
-<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
-</ol>
-<hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#57;&#52;&#54;&#x35;&#48;&#48;&#x38;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x31;&#57;&#57;&#52;&#54;&#x35;&#48;&#48;&#x38;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></em> </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,13 +216,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | lebuxishu的博客">
+      <meta itemprop="name" content="typora+PicGo图片上传 | lebuxishu的博客">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/" class="post-title-link" itemprop="url">typora+PicGo图片上传</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          typora+PicGo图片上传
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -413,8 +254,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="typora-PicGo介绍"><a href="#typora-PicGo介绍" class="headerlink" title="typora+PicGo介绍"></a>typora+PicGo介绍</h2><ol>
+    <div class="post-body" itemprop="articleBody"><h2 id="typora-PicGo介绍"><a href="#typora-PicGo介绍" class="headerlink" title="typora+PicGo介绍"></a>typora+PicGo介绍</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://typora.io/">typora</a>是一个Markdown格式的编辑器(ps:可以下破解版，有钱也可以支持正版)</li>
 <li><a target="_blank" rel="noopener" href="https://molunerfinn.com/PicGo/">PicGo</a>是一个自动上传图片到图床的工具</li>
 </ol>
@@ -471,7 +311,6 @@
 <hr>
 <p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#52;&#54;&#53;&#48;&#48;&#x38;&#x36;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;">&#x31;&#57;&#x39;&#52;&#54;&#53;&#48;&#48;&#x38;&#x36;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;</a></em> </p>
 
-      
     </div>
 
     
@@ -479,11 +318,26 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/HEXO/" rel="tag"># HEXO</a>
+              <a href="/tags/img%E4%B8%8A%E4%BC%A0/" rel="tag"># img上传</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" rel="next" title="利用github搭建hexo博客">
+                  利用github搭建hexo博客 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
