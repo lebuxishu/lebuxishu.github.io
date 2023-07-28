@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="准备前提 提前安装好node.js左边的那个 提前安装好GIt 提前注册好一个github账号（ps:挂代理） 如果文章图片没有显示，请自行挂代理  操作步骤 在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog) 在选定的目录中，右键Git Bash Here 使用npm命令安装Hexo，输入：  1234npm install -g hexo-cli #该命令执行不成功可以">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png">
 <meta property="article:published_time" content="2023-07-27T09:06:05.000Z">
-<meta property="article:modified_time" content="2023-07-28T08:20:24.588Z">
+<meta property="article:modified_time" content="2023-07-28T12:27:55.444Z">
 <meta property="article:author" content="lebuxishu">
 <meta property="article:tag" content="HEXO">
 <meta property="article:tag" content="blog">
@@ -92,6 +92,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -100,11 +101,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -166,10 +193,6 @@
 
         </div>
       </div>
-        <div class="back-to-top animated" role="button" aria-label="返回顶部">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
     </div>
 
     
@@ -240,7 +263,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-28 16:20:24" itemprop="dateModified" datetime="2023-07-28T16:20:24+08:00">2023-07-28</time>
+      <time title="修改时间：2023-07-28 20:27:55" itemprop="dateModified" datetime="2023-07-28T20:27:55+08:00">2023-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -253,6 +276,13 @@
     </span>
 
   
+    <span id="/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="post-meta-item leancloud_visitors" data-flag-title="利用github搭建hexo博客" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
@@ -310,7 +340,7 @@
 <li>尝试ssh连接,测试是否成功</li>
 </ul>
 <blockquote>
-<p>ssh -T <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#109;</a>   #注意邮箱地址不用改</p>
+<p>ssh -T <a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;">&#103;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;</a>   #注意邮箱地址不用改</p>
 </blockquote>
 <ul>
 <li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
@@ -379,7 +409,7 @@
 <li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
 </ol>
 <hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#49;&#x39;&#x39;&#x34;&#54;&#53;&#48;&#x30;&#56;&#54;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;">&#49;&#x39;&#x39;&#x34;&#54;&#53;&#48;&#x30;&#56;&#54;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;</a></em> </p>
+<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#52;&#x36;&#53;&#48;&#48;&#x38;&#54;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;">&#x31;&#57;&#x39;&#52;&#x36;&#53;&#48;&#48;&#x38;&#54;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;</a></em> </p>
 
     </div>
 
@@ -407,8 +437,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/HEXO/" rel="tag"># HEXO</a>
-              <a href="/tags/blog/" rel="tag"># blog</a>
+              <a href="/tags/HEXO/" rel="tag"><i class="fa fa-tag"></i> HEXO</a>
+              <a href="/tags/blog/" rel="tag"><i class="fa fa-tag"></i> blog</a>
           </div>
 
         
@@ -466,6 +496,10 @@
   </footer>
 
   
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -476,16 +510,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
   
 
 
-
-
-
-
-  
-
-
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 
 
