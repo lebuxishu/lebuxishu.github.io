@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="本文介绍如何进行信息收集">
 <meta property="og:type" content="article">
@@ -316,7 +316,7 @@
 <li>地址</li>
 <li>股东信息等等</li>
 </ol>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
 <h3 id="2-whois信息"><a href="#2-whois信息" class="headerlink" title="2. whois信息"></a>2. whois信息</h3><p>如果要查询域名的IP、所有者等信息的传输协议，就可以用whois</p>
 <p><strong>whois信息可以获取关键注册人的信息，其中包括：</strong></p>
 <blockquote>
@@ -341,19 +341,19 @@
 <ul>
 <li>IP段的收集<br>一般IP的话，我们在收集子域名的时候，就大概知道目标网站的IP段了。<br>也可以通过whois命令获取。即通过中国互联网信息中心<a target="_blank" rel="noopener" href="https://ipwhois.cnnic.cn/index.jsp">https://ipwhois.cnnic.cn/index.jsp</a> 进行查询：</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
 <ul>
 <li>Google语法</li>
 </ul>
 <p>可以利用Google和Bing这样的搜索引擎进行搜索查询（site:<a target="_blank" rel="noopener" href="http://www.xxx.com)/">www.xxx.com）</a></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
 <h3 id="4-DNS"><a href="#4-DNS" class="headerlink" title="4. DNS"></a>4. DNS</h3><p>通过DNS解析找到IP地址,主要有以下几种方法:<br><strong>（1）ping</strong></p>
 <p><strong>（2）nslookup</strong></p>
 <p>NSLOOKUP是NT、2000中连接DNS服务器，查询域名信息的一个非常有用的命令，可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解析。在已安装TCP&#x2F;IP协议的电脑上面均可以使用这个命令。主要用来诊断域名系统 (DNS) 基础结构的信息。</p>
 <p>直接查询：<code>nslookup 域名</code></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
 <p>查询更具体的信息：<code>slookup -d 域名</code></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
 <p><strong>（3）dig工具</strong></p>
 <p><code>dig</code> 和 <code>nslookup</code> 之间差异不大，但 <code>dig</code> 更像一个加强版的 <code>nslookup</code>，可以查询到一些由域名服务器管理的信息，这在排查某些问题的时候非常有用。</p>
 <p><strong>（4）dnsenum工具</strong></p>
@@ -378,13 +378,13 @@
 <h3 id="5-网络空间搜索引擎收集敏感信息"><a href="#5-网络空间搜索引擎收集敏感信息" class="headerlink" title="5. 网络空间搜索引擎收集敏感信息"></a>5. 网络空间搜索引擎收集敏感信息</h3><p>网络空间搜索引擎通过全网扫描的方式，将基础数据进行格式化存储，供安全人员按需搜索使用，提升了安全人员的工作效率。</p>
 <p>目前国内外的网络空间搜索引擎有 shodan、zoomeye、fofa</p>
 <h4 id="shodan"><a href="#shodan" class="headerlink" title="shodan"></a>shodan</h4><p><a target="_blank" rel="noopener" href="https://www.shodan.io/">Shodan</a> 是目前最为知名的黑客搜索引擎。</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
 <p>简单语法：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hostname：      # 搜索指定的主机或域名,例如 hostname:&quot;google&quot;</span><br><span class="line">port：          # 搜索指定的端口或服务,例如 port:&quot;21&quot;</span><br><span class="line">country：       # 搜索指定的国家,例如 country:&quot;CN&quot;</span><br><span class="line">city：          # 搜索指定的城市,例如 city:&quot;hunan&quot;</span><br><span class="line">org：           # 搜索指定的组织或公司,例如 org:&quot;google&quot;</span><br><span class="line">isp：           # 搜索指定的ISP供应商,例如 isp:&quot;China Telecom&quot;</span><br><span class="line">product：       # 搜索指定的操作系统/软件/平台,例如 product:&quot;Apache httpd&quot;</span><br><span class="line">version：       # 搜索指定的软件版本,例如 version:&quot;1.6.2&quot;</span><br><span class="line">geo：           # 搜索指定的地理位置,参数为经纬度,例如 geo:&quot;31.8639, 117.2808&quot;</span><br><span class="line">before/after：  # 搜索指定收录时间前后的数据,格式为dd-mm-yy,例如 before:&quot;11-11-15&quot;</span><br><span class="line">net：           # 搜索指定的IP地址或子网,例如 net:&quot;210.45.240.0/24&quot;a</span><br></pre></td></tr></table></figure>
 
 <h4 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h4><p><a target="_blank" rel="noopener" href="https://www.zoomeye.org/">ZoomEye</a> 是北京知道创宇公司发布的网络空间侦测引擎</p>
 <p>&#x27A4;ZoomEye 支持公网设备指纹检索和 Web 指纹检索。网站指纹包括应用名、版本、前端框架、后端框架、服务端语言、服务器操作系统、网站容器、内容管理系统和数据库等。设备指纹包括应用名、版本、开放端口、操作系统、服务名、地理位置等。</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
 <p>简单语法：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app:nginx           # 组件名</span><br><span class="line">ver:1.0             # 版本</span><br><span class="line">os:windows          # 操作系统</span><br><span class="line">country:&quot;China&quot;     # 国家</span><br><span class="line">city:&quot;hunan&quot;        # 城市</span><br><span class="line">port:80             # 端口</span><br><span class="line">hostname:google     # 主机名</span><br><span class="line">site:google.com     # 网站域名</span><br><span class="line">desc:nmask          # 描述</span><br><span class="line">keywords:passwd     # 关键词</span><br><span class="line">service:ftp         # 服务类型</span><br><span class="line">ip:8.8.8.8          # ip地址</span><br><span class="line">cidr:8.8.8.8/24     # ip地址段</span><br></pre></td></tr></table></figure>
 
@@ -504,7 +504,6 @@
   
   <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>

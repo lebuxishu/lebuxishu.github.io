@@ -1,125 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>利用github搭建hexo博客</title>
-    <url>/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>本文介绍如何使用GitHub + Hexo搭建个人博客网站，完全免费，所有内容本人亲测，绝对可用。</p>
-<span id="more"></span>
-
-<h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
-<li>提前安装好<a href="https://nodejs.org/en">node.js</a>左边的那个</li>
-<li>提前安装好<a href="https://git-scm.com/downloads">GIt</a></li>
-<li>提前注册好一个<a href="https://github.com/">github</a>账号（ps:挂代理）</li>
-<li>如果文章图片没有显示，请自行挂代理</li>
-</ol>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
-<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
-<li>在选定的目录中，右键Git Bash Here</li>
-<li>使用npm命令安装Hexo，输入：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli #该命令执行不成功可以查看一下博客目录是不是只读，或者重新创建文件夹。</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
-
-<p>构建好的效果:</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
-<ol start="4">
-<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了或者http://localhost:4000/ </span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>配置ssh</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥，如果是重新创建请删除用户目录下的.ssh文件夹</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
-<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
-</ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
-<ul>
-<li>尝试ssh连接,测试是否成功</li>
-</ul>
-<blockquote>
-<p>ssh -T <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#105;&#116;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>   #注意邮箱地址不用改</p>
-</blockquote>
-<ul>
-<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
-</ul>
-<blockquote>
-<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-</blockquote>
-<ul>
-<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
-</ul>
-<blockquote>
-<p>npm install hexo-deployer-git –save</p>
-</blockquote>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
-<ul>
-<li>返回Git Bash Here继续配置</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>准备上传代码</li>
-</ol>
-<ul>
-<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
-</li>
-<li><p>点击创建</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
-</li>
-<li><p>编辑_config.yml（站点配置文件）文件，在最后改成这样</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功 PS:建议直接Tab</p>
-</li>
-<li><p>最后上传</p>
-</li>
-</ul>
-<blockquote>
-<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面<br>PS:上传之前也可以hexo clean #清除缓存一下</p>
-</blockquote>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
-<ul>
-<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
-</ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
-<ol start="7">
-<li>hexo命令介绍</li>
-</ol>
-<blockquote>
-<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
-<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
-<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
-</blockquote>
-<ol start="8">
-<li>hexo目录结构</li>
-</ol>
-<blockquote>
-<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
-</blockquote>
-<ol start="9">
-<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
-<li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
-</ol>
-<hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#49;&#x39;&#x39;&#x34;&#54;&#53;&#48;&#x30;&#56;&#x36;&#64;&#113;&#x71;&#46;&#x63;&#x6f;&#x6d;">&#49;&#x39;&#x39;&#x34;&#54;&#53;&#48;&#x30;&#56;&#x36;&#64;&#113;&#x71;&#46;&#x63;&#x6f;&#x6d;</a></em> </p>
-]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>HEXO</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>typora+PicGo图片上传</title>
     <url>/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<p>本文介绍了如何使用typora + PicGo上传图片到图床</p>
@@ -141,46 +22,46 @@
 <li><p>typora-偏好设置</p>
 </li>
 </ol>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727145530980.png" alt="image-20230727145530980"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727145530980.png" alt="image-20230727145530980"></p>
 <ol start="4">
 <li>PicGo设置</li>
 </ol>
 <ul>
 <li>在PicGo设置中将请选择显示的图床除GitHub外全部取消</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/12320230726220152.png" alt="12320230726220152"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/12320230726220152.png" alt="12320230726220152"></p>
 <ul>
 <li>点击图床设置，选择GitHub，点击+新建</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727150131651.png" alt="image-20230727150131651"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727150131651.png" alt="image-20230727150131651"></p>
 <ul>
 <li>填写GitHub 设置，图床配置名：随便输；设定仓库名：在GitHub上创建的用户名+储存库名；设定分支名：默认；设定Token：GitHub上的Token；设定存储路径：随便</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727150359875.png" alt="image-20230727150359875"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727150359875.png" alt="image-20230727150359875"></p>
 <ul>
 <li>在GitHub上新建储存库image</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/2023072622112315.png" alt="2023072622112315"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/2023072622112315.png" alt="2023072622112315"></p>
 <ul>
 <li>设置Token</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151000013.png" alt="image-20230727151000013"></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151018745.png" alt="image-20230727151018745"></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151029854.png" alt="image-20230727151029854"></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151048968.png" alt="image-20230727151048968"></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151339259.png" alt="image-20230727151339259"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151000013.png" alt="image-20230727151000013"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151018745.png" alt="image-20230727151018745"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151029854.png" alt="image-20230727151029854"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151048968.png" alt="image-20230727151048968"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151339259.png" alt="image-20230727151339259"></p>
 <ul>
 <li>全部设置完成点设为默认图床</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151451691.png" alt="image-20230727151451691"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151451691.png" alt="image-20230727151451691"></p>
 <ol start="5">
 <li>typora进行测试</li>
 </ol>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151628406.png" alt="image-20230727151628406"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727151628406.png" alt="image-20230727151628406"></p>
 <p>图片上传成功即可<br>改成这样即可成功，图片自动上传到图床</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303211401394.png" alt="202303211401394"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303211401394.png" alt="202303211401394"></p>
 <hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#49;&#57;&#57;&#52;&#x36;&#53;&#x30;&#x30;&#x38;&#54;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;">&#49;&#57;&#57;&#52;&#x36;&#53;&#x30;&#x30;&#x38;&#54;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;</a></em> </p>
+<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#x34;&#54;&#x35;&#x30;&#48;&#56;&#x36;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#109;">&#x31;&#57;&#x39;&#x34;&#54;&#x35;&#x30;&#48;&#56;&#x36;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#109;</a></em> </p>
 ]]></content>
       <categories>
         <category>博客搭建</category>
@@ -204,7 +85,7 @@
 <li>地址</li>
 <li>股东信息等等</li>
 </ol>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
 <h3 id="2-whois信息"><a href="#2-whois信息" class="headerlink" title="2. whois信息"></a>2. whois信息</h3><p>如果要查询域名的IP、所有者等信息的传输协议，就可以用whois</p>
 <p><strong>whois信息可以获取关键注册人的信息，其中包括：</strong></p>
 <blockquote>
@@ -229,19 +110,19 @@
 <ul>
 <li>IP段的收集<br>一般IP的话，我们在收集子域名的时候，就大概知道目标网站的IP段了。<br>也可以通过whois命令获取。即通过中国互联网信息中心<a href="https://ipwhois.cnnic.cn/index.jsp">https://ipwhois.cnnic.cn/index.jsp</a> 进行查询：</li>
 </ul>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
 <ul>
 <li>Google语法</li>
 </ul>
 <p>可以利用Google和Bing这样的搜索引擎进行搜索查询（site:<a href="http://www.xxx.com)/">www.xxx.com）</a></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
 <h3 id="4-DNS"><a href="#4-DNS" class="headerlink" title="4. DNS"></a>4. DNS</h3><p>通过DNS解析找到IP地址,主要有以下几种方法:<br><strong>（1）ping</strong></p>
 <p><strong>（2）nslookup</strong></p>
 <p>NSLOOKUP是NT、2000中连接DNS服务器，查询域名信息的一个非常有用的命令，可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解析。在已安装TCP&#x2F;IP协议的电脑上面均可以使用这个命令。主要用来诊断域名系统 (DNS) 基础结构的信息。</p>
 <p>直接查询：<code>nslookup 域名</code></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
 <p>查询更具体的信息：<code>slookup -d 域名</code></p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
 <p><strong>（3）dig工具</strong></p>
 <p><code>dig</code> 和 <code>nslookup</code> 之间差异不大，但 <code>dig</code> 更像一个加强版的 <code>nslookup</code>，可以查询到一些由域名服务器管理的信息，这在排查某些问题的时候非常有用。</p>
 <p><strong>（4）dnsenum工具</strong></p>
@@ -266,13 +147,13 @@
 <h3 id="5-网络空间搜索引擎收集敏感信息"><a href="#5-网络空间搜索引擎收集敏感信息" class="headerlink" title="5. 网络空间搜索引擎收集敏感信息"></a>5. 网络空间搜索引擎收集敏感信息</h3><p>网络空间搜索引擎通过全网扫描的方式，将基础数据进行格式化存储，供安全人员按需搜索使用，提升了安全人员的工作效率。</p>
 <p>目前国内外的网络空间搜索引擎有 shodan、zoomeye、fofa</p>
 <h4 id="shodan"><a href="#shodan" class="headerlink" title="shodan"></a>shodan</h4><p><a href="https://www.shodan.io/">Shodan</a> 是目前最为知名的黑客搜索引擎。</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
 <p>简单语法：</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">hostname：      # 搜索指定的主机或域名,例如 hostname:&quot;google&quot;</span><br><span class="line">port：          # 搜索指定的端口或服务,例如 port:&quot;21&quot;</span><br><span class="line">country：       # 搜索指定的国家,例如 country:&quot;CN&quot;</span><br><span class="line">city：          # 搜索指定的城市,例如 city:&quot;hunan&quot;</span><br><span class="line">org：           # 搜索指定的组织或公司,例如 org:&quot;google&quot;</span><br><span class="line">isp：           # 搜索指定的ISP供应商,例如 isp:&quot;China Telecom&quot;</span><br><span class="line">product：       # 搜索指定的操作系统/软件/平台,例如 product:&quot;Apache httpd&quot;</span><br><span class="line">version：       # 搜索指定的软件版本,例如 version:&quot;1.6.2&quot;</span><br><span class="line">geo：           # 搜索指定的地理位置,参数为经纬度,例如 geo:&quot;31.8639, 117.2808&quot;</span><br><span class="line">before/after：  # 搜索指定收录时间前后的数据,格式为dd-mm-yy,例如 before:&quot;11-11-15&quot;</span><br><span class="line">net：           # 搜索指定的IP地址或子网,例如 net:&quot;210.45.240.0/24&quot;a</span><br></pre></td></tr></table></figure>
 
 <h4 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h4><p><a href="https://www.zoomeye.org/">ZoomEye</a> 是北京知道创宇公司发布的网络空间侦测引擎</p>
 <p>&#x27A4;ZoomEye 支持公网设备指纹检索和 Web 指纹检索。网站指纹包括应用名、版本、前端框架、后端框架、服务端语言、服务器操作系统、网站容器、内容管理系统和数据库等。设备指纹包括应用名、版本、开放端口、操作系统、服务名、地理位置等。</p>
-<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
 <p>简单语法：</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">app:nginx           # 组件名</span><br><span class="line">ver:1.0             # 版本</span><br><span class="line">os:windows          # 操作系统</span><br><span class="line">country:&quot;China&quot;     # 国家</span><br><span class="line">city:&quot;hunan&quot;        # 城市</span><br><span class="line">port:80             # 端口</span><br><span class="line">hostname:google     # 主机名</span><br><span class="line">site:google.com     # 网站域名</span><br><span class="line">desc:nmask          # 描述</span><br><span class="line">keywords:passwd     # 关键词</span><br><span class="line">service:ftp         # 服务类型</span><br><span class="line">ip:8.8.8.8          # ip地址</span><br><span class="line">cidr:8.8.8.8/24     # ip地址段</span><br></pre></td></tr></table></figure>
 
@@ -300,6 +181,125 @@
       <tags>
         <tag>Wed安全</tag>
         <tag>信息收集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用github搭建hexo博客</title>
+    <url>/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>本文介绍如何使用GitHub + Hexo搭建个人博客网站，完全免费，所有内容本人亲测，绝对可用。</p>
+<span id="more"></span>
+
+<h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
+<li>提前安装好<a href="https://nodejs.org/en">node.js</a>左边的那个</li>
+<li>提前安装好<a href="https://git-scm.com/downloads">GIt</a></li>
+<li>提前注册好一个<a href="https://github.com/">github</a>账号（ps:挂代理）</li>
+<li>如果文章图片没有显示，请自行挂代理</li>
+</ol>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
+<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
+<li>在选定的目录中，右键Git Bash Here</li>
+<li>使用npm命令安装Hexo，输入：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli #该命令执行不成功可以查看一下博客目录是不是只读，或者重新创建文件夹。</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>构建好的效果:</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
+<ol start="4">
+<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了或者http://localhost:4000/ </span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>配置ssh</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥，如果是重新创建请删除用户目录下的.ssh文件夹</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
+<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
+<ul>
+<li>尝试ssh连接,测试是否成功</li>
+</ul>
+<blockquote>
+<p>ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;</a>   #注意邮箱地址不用改</p>
+</blockquote>
+<ul>
+<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
+</ul>
+<blockquote>
+<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+<ul>
+<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
+</ul>
+<blockquote>
+<p>npm install hexo-deployer-git –save</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
+<ul>
+<li>返回Git Bash Here继续配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>准备上传代码</li>
+</ol>
+<ul>
+<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
+</li>
+<li><p>点击创建</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
+</li>
+<li><p>编辑_config.yml（站点配置文件）文件，在最后改成这样</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功 PS:建议直接Tab</p>
+</li>
+<li><p>最后上传</p>
+</li>
+</ul>
+<blockquote>
+<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面<br>PS:上传之前也可以hexo clean #清除缓存一下</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
+<ul>
+<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
+<ol start="7">
+<li>hexo命令介绍</li>
+</ol>
+<blockquote>
+<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
+<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
+<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
+</blockquote>
+<ol start="8">
+<li>hexo目录结构</li>
+</ol>
+<blockquote>
+<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
+</blockquote>
+<ol start="9">
+<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
+<li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
+</ol>
+<hr>
+<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#49;&#x39;&#x39;&#52;&#x36;&#53;&#48;&#48;&#56;&#54;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;">&#49;&#x39;&#x39;&#52;&#x36;&#53;&#48;&#48;&#56;&#54;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;</a></em> </p>
+]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>HEXO</tag>
+        <tag>blog</tag>
       </tags>
   </entry>
 </search>
