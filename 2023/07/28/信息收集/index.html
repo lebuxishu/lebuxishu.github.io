@@ -18,22 +18,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="信息收集信息收集是指通过各种方式获取所需要的信息，以便我们在后续的渗透过程更好的进行。最简单的比如说目标站点的IP、中间件、脚本语言、端口、邮箱等等。我觉得信息收集在渗透测试的过程当中，是最重要的一环，这一环节没做好，没收集到足够多的可利用的信息，很难进行下一步的操作。">
+    <meta name="description" content="本文介绍如何进行信息收集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息收集">
 <meta property="og:url" content="http://example.com/2023/07/28/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.html">
 <meta property="og:site_name" content="lebuxishu的博客">
-<meta property="og:description" content="信息收集信息收集是指通过各种方式获取所需要的信息，以便我们在后续的渗透过程更好的进行。最简单的比如说目标站点的IP、中间件、脚本语言、端口、邮箱等等。我觉得信息收集在渗透测试的过程当中，是最重要的一环，这一环节没做好，没收集到足够多的可利用的信息，很难进行下一步的操作。">
+<meta property="og:description" content="本文介绍如何进行信息收集">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png">
 <meta property="article:published_time" content="2023-07-28T13:29:44.000Z">
-<meta property="article:modified_time" content="2023-07-29T09:53:48.905Z">
+<meta property="article:modified_time" content="2023-07-31T08:27:24.781Z">
 <meta property="article:author" content="lebuxishu">
 <meta property="article:tag" content="Wed安全">
 <meta property="article:tag" content="信息收集">
@@ -148,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">信息收集的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 查企业信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-whois%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. whois信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 子域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-CDN"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. CDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 网络空间搜索引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shodan"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">shodan</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZoomEye"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">ZoomEye</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FOFA"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">FOFA</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">信息收集的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E4%BC%81%E4%B8%9A%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 查企业信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-whois%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. whois信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 子域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DNS"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%94%B6%E9%9B%86%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 网络空间搜索引擎收集敏感信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shodan"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">shodan</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZoomEye"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">ZoomEye</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FOFA"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">FOFA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E2%80%94%E6%8C%87%E7%BA%B9%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 网站信息收集—指纹信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6"><span class="nav-number">1.1.7.</span> <span class="nav-text">7. 社会工程学</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -260,7 +262,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-29 17:53:48" itemprop="dateModified" datetime="2023-07-29T17:53:48+08:00">2023-07-29</time>
+      <time title="修改时间：2023-07-31 16:27:24" itemprop="dateModified" datetime="2023-07-31T16:27:24+08:00">2023-07-31</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,14 +288,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>10 分钟</span>
     </span>
 </div>
 
@@ -303,9 +305,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>信息收集是指通过各种方式获取所需要的信息，以便我们在后续的渗透过程更好的进行。最简单的比如说目标站点的IP、中间件、脚本语言、端口、邮箱等等。我觉得信息收集在渗透测试的过程当中，是最重要的一环，这一环节没做好，没收集到足够多的可利用的信息，很难进行下一步的操作。</p>
+    <div class="post-body" itemprop="articleBody"><p>本文介绍如何进行信息收集</p>
 <span id="more"></span>
-
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>信息收集是指通过各种方式获取所需要的信息，以便我们在后续的渗透过程更好的进行。最简单的比如说目标站点的IP、中间件、脚本语言、端口、邮箱等等。我觉得信息收集在渗透测试的过程当中，是最重要的一环，这一环节没做好，没收集到足够多的可利用的信息，很难进行下一步的操作。</p>
 <h2 id="信息收集的方法"><a href="#信息收集的方法" class="headerlink" title="信息收集的方法"></a>信息收集的方法</h2><h3 id="1-查企业信息"><a href="#1-查企业信息" class="headerlink" title="1. 查企业信息"></a>1. 查企业信息</h3><p>使用爱企查，天眼查，企查查，领英对域名所有者（一般是公司）进行查询<br>可以收集到：</p>
 <ol>
 <li>法人</li>
@@ -314,7 +316,7 @@
 <li>地址</li>
 <li>股东信息等等</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
 <h3 id="2-whois信息"><a href="#2-whois信息" class="headerlink" title="2. whois信息"></a>2. whois信息</h3><p>如果要查询域名的IP、所有者等信息的传输协议，就可以用whois</p>
 <p><strong>whois信息可以获取关键注册人的信息，其中包括：</strong></p>
 <blockquote>
@@ -339,27 +341,50 @@
 <ul>
 <li>IP段的收集<br>一般IP的话，我们在收集子域名的时候，就大概知道目标网站的IP段了。<br>也可以通过whois命令获取。即通过中国互联网信息中心<a target="_blank" rel="noopener" href="https://ipwhois.cnnic.cn/index.jsp">https://ipwhois.cnnic.cn/index.jsp</a> 进行查询：</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
 <ul>
 <li>Google语法</li>
 </ul>
 <p>可以利用Google和Bing这样的搜索引擎进行搜索查询（site:<a target="_blank" rel="noopener" href="http://www.xxx.com)/">www.xxx.com）</a></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
-<h3 id="4-CDN"><a href="#4-CDN" class="headerlink" title="4. CDN"></a>4. CDN</h3><p>很多时候，网站都会开启CDN加速，导致我们查询到的IP不是真实的IP，所以得先查询到真实的IP地址。</p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
+<h3 id="4-DNS"><a href="#4-DNS" class="headerlink" title="4. DNS"></a>4. DNS</h3><p>通过DNS解析找到IP地址,主要有以下几种方法:<br><strong>（1）ping</strong></p>
+<p><strong>（2）nslookup</strong></p>
+<p>NSLOOKUP是NT、2000中连接DNS服务器，查询域名信息的一个非常有用的命令，可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解析。在已安装TCP&#x2F;IP协议的电脑上面均可以使用这个命令。主要用来诊断域名系统 (DNS) 基础结构的信息。</p>
+<p>直接查询：<code>nslookup 域名</code></p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
+<p>查询更具体的信息：<code>slookup -d 域名</code></p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
+<p><strong>（3）dig工具</strong></p>
+<p><code>dig</code> 和 <code>nslookup</code> 之间差异不大，但 <code>dig</code> 更像一个加强版的 <code>nslookup</code>，可以查询到一些由域名服务器管理的信息，这在排查某些问题的时候非常有用。</p>
+<p><strong>（4）dnsenum工具</strong></p>
+<p>dnsenum会自动检测域传送漏洞<br>使用<code>dnsenum -h</code>来查询全部命令</p>
+<p><strong>（5）站长之家</strong></p>
+<p>站长之家官网首页(<a target="_blank" rel="noopener" href="http://tool.chinaz.com/">http://tool.chinaz.com</a>)<br> 站长之家DNS查询(<a target="_blank" rel="noopener" href="https://tool.chinaz.com/dns/">https://tool.chinaz.com/dns/</a>)</p>
+<p><strong>（6）CDN技术</strong></p>
+<p>很多时候，网站都会开启CDN加速，导致我们查询到的IP不是真实的IP，所以得先查询到真实的IP地址。</p>
 <ul>
-<li>可以全网爆破查询真实ip</li>
-<li>或者DNS的查询（<a target="_blank" rel="noopener" href="https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX">https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX</a> ）</li>
+<li><p>可以全网爆破查询真实ip,返回结果有多个，说明启用了CND技术。</p>
+</li>
+<li><p>或者DNS的查询（<a target="_blank" rel="noopener" href="https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX">https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX</a> ）</p>
+</li>
+<li><p>绕过CDN寻找真实IP的方法<br>（1）<strong>内部邮箱源：</strong>一般的邮件系统都在内部，没有经过CDN的解析，通过目标网站用户注册或者RSS订阅功能，查看邮件、寻找邮件头中的邮件服务器域名IP，ping 这个邮件服务器的域名， 就可以获得目标的真实IP （注意，必须是目标自己的邮件服务器，第三方或公共邮件服务器是没有用的）。</p>
+<p>（2）<strong>扫描网站测试文件</strong>，如phpinfo 、test 等，从而找到目标的真实IP 。</p>
+<p>（3）<strong>分站域名：</strong>很多网站主站的访问量会比较大，所以主站都是挂CDN 的，但是分站可能没有挂CDN，可以通过ping二级域名获取分站IP，可能会出现分站和主站不是同一个IP但在同一个C段下面的情况，从而能判断出目标的真实IP段。</p>
+<p>（4）<strong>国外访问：</strong>国内的CDN往往只对国内用户的访问加速，而国外的CDN就不一定了。因此，通过国外在线代理网站访问，可能会得到真实的IP。</p>
+<p>（5）<strong>查询历史域名的解析记录：</strong>也许目标很久以前并没有用过CDN，所以可以通过网站<a target="_blank" rel="noopener" href="https://www.netcraft.com/">NETC RAFT</a>来观察域名的IP历史记录，也可以大致分析出目标的真实IP段。</p>
+<p>（6）<strong>如果目标网站有自己的App</strong>，可以尝试利用Fiddler或BurpSuite截取App的请求，从里面找到目标的真实IP。</p>
+</li>
 </ul>
-<h3 id="5-网络空间搜索引擎"><a href="#5-网络空间搜索引擎" class="headerlink" title="5. 网络空间搜索引擎"></a>5. 网络空间搜索引擎</h3><p>网络空间搜索引擎通过全网扫描的方式，将基础数据进行格式化存储，供安全人员按需搜索使用，提升了安全人员的工作效率。</p>
+<h3 id="5-网络空间搜索引擎收集敏感信息"><a href="#5-网络空间搜索引擎收集敏感信息" class="headerlink" title="5. 网络空间搜索引擎收集敏感信息"></a>5. 网络空间搜索引擎收集敏感信息</h3><p>网络空间搜索引擎通过全网扫描的方式，将基础数据进行格式化存储，供安全人员按需搜索使用，提升了安全人员的工作效率。</p>
 <p>目前国内外的网络空间搜索引擎有 shodan、zoomeye、fofa</p>
 <h4 id="shodan"><a href="#shodan" class="headerlink" title="shodan"></a>shodan</h4><p><a target="_blank" rel="noopener" href="https://www.shodan.io/">Shodan</a> 是目前最为知名的黑客搜索引擎。</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
 <p>简单语法：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hostname：      # 搜索指定的主机或域名,例如 hostname:&quot;google&quot;</span><br><span class="line">port：          # 搜索指定的端口或服务,例如 port:&quot;21&quot;</span><br><span class="line">country：       # 搜索指定的国家,例如 country:&quot;CN&quot;</span><br><span class="line">city：          # 搜索指定的城市,例如 city:&quot;hunan&quot;</span><br><span class="line">org：           # 搜索指定的组织或公司,例如 org:&quot;google&quot;</span><br><span class="line">isp：           # 搜索指定的ISP供应商,例如 isp:&quot;China Telecom&quot;</span><br><span class="line">product：       # 搜索指定的操作系统/软件/平台,例如 product:&quot;Apache httpd&quot;</span><br><span class="line">version：       # 搜索指定的软件版本,例如 version:&quot;1.6.2&quot;</span><br><span class="line">geo：           # 搜索指定的地理位置,参数为经纬度,例如 geo:&quot;31.8639, 117.2808&quot;</span><br><span class="line">before/after：  # 搜索指定收录时间前后的数据,格式为dd-mm-yy,例如 before:&quot;11-11-15&quot;</span><br><span class="line">net：           # 搜索指定的IP地址或子网,例如 net:&quot;210.45.240.0/24&quot;a</span><br></pre></td></tr></table></figure>
 
 <h4 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h4><p><a target="_blank" rel="noopener" href="https://www.zoomeye.org/">ZoomEye</a> 是北京知道创宇公司发布的网络空间侦测引擎</p>
 <p>&#x27A4;ZoomEye 支持公网设备指纹检索和 Web 指纹检索。网站指纹包括应用名、版本、前端框架、后端框架、服务端语言、服务器操作系统、网站容器、内容管理系统和数据库等。设备指纹包括应用名、版本、开放端口、操作系统、服务名、地理位置等。</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
+<p><img data-src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
 <p>简单语法：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app:nginx           # 组件名</span><br><span class="line">ver:1.0             # 版本</span><br><span class="line">os:windows          # 操作系统</span><br><span class="line">country:&quot;China&quot;     # 国家</span><br><span class="line">city:&quot;hunan&quot;        # 城市</span><br><span class="line">port:80             # 端口</span><br><span class="line">hostname:google     # 主机名</span><br><span class="line">site:google.com     # 网站域名</span><br><span class="line">desc:nmask          # 描述</span><br><span class="line">keywords:passwd     # 关键词</span><br><span class="line">service:ftp         # 服务类型</span><br><span class="line">ip:8.8.8.8          # ip地址</span><br><span class="line">cidr:8.8.8.8/24     # ip地址段</span><br></pre></td></tr></table></figure>
 
@@ -368,6 +393,18 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title=&quot;abc&quot;        # 从标题中搜索abc。例：标题中有北京的网站。</span><br><span class="line">header=&quot;abc&quot;       # 从http头中搜索abc。例：jboss服务器。</span><br><span class="line">body=&quot;abc&quot;         # 从html正文中搜索abc。例：正文包含Hacked by。</span><br><span class="line">domain=&quot;qq.com&quot;    # 搜索根域名带有qq.com的网站。例： 根域名是qq.com的网站。</span><br><span class="line">host=&quot;.gov.cn&quot;     # 从url中搜索.gov.cn,注意搜索要用host作为名称。</span><br><span class="line">port=&quot;443&quot;         # 查找对应443端口的资产。例： 查找对应443端口的资产。</span><br><span class="line">ip=&quot;1.1.1.1&quot;       # 从ip中搜索包含1.1.1.1的网站,注意搜索要用ip作为名称。</span><br><span class="line">protocol=&quot;https&quot;   # 搜索制定协议类型(在开启端口扫描的情况下有效)。例： 查询https协议资产。</span><br><span class="line">city=&quot;Beijing&quot;     # 搜索指定城市的资产。例： 搜索指定城市的资产。</span><br><span class="line">region=&quot;Zhejiang&quot;  # 搜索指定行政区的资产。例： 搜索指定行政区的资产。</span><br><span class="line">country=&quot;CN&quot;       # 搜索指定国家(编码)的资产。例： 搜索指定国家(编码)的资产。</span><br><span class="line">cert=&quot;google.com&quot;  # 搜索证书(https或者imaps等)中带有google.com的资产。</span><br></pre></td></tr></table></figure>
 
 <p>每个平台都有自己的特点和优势，我们可以使用多个平台来补充自己的结果，让搜索的信息更全。</p>
+<h3 id="6-网站信息收集—指纹信息"><a href="#6-网站信息收集—指纹信息" class="headerlink" title="6. 网站信息收集—指纹信息"></a>6. 网站信息收集—指纹信息</h3><p><strong>CMS及Web指纹识别的必要性</strong></p>
+<p><strong>必要性</strong>：在渗透测试中，只有识别出相应的Web容器或者CMS ，才能查找与其相关的漏洞，然后才能进行相应的渗透操作。</p>
+<p><strong>CMS：</strong>内容管理系统是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。</p>
+<ul>
+<li><strong>云悉指纹：</strong><a target="_blank" rel="noopener" href="https://www.yunsee.cn/">https://www.yunsee.cn/</a></li>
+<li><strong>36OFinger-P：</strong><a target="_blank" rel="noopener" href="https://fp.shuziguanxing.com/#/">https://fp.shuziguanxing.com/#/</a></li>
+<li><strong>潮汐指纹：</strong><a target="_blank" rel="noopener" href="http://finger.tidesec.net/">http://finger.tidesec.net/</a></li>
+</ul>
+<h3 id="7-社会工程学"><a href="#7-社会工程学" class="headerlink" title="7. 社会工程学"></a>7. 社会工程学</h3><p>（1）社会工程学在渗透测试中起着不小的作用，利用社会工程学，攻击者可以从一名员工的口中挖掘出本应该是秘密的信息。</p>
+<p>（2）假设攻击者对一家公司进行渗透测试，正在收集目标的真实IP阶段，此时就可以利用收集到的这家公司的某位销售人员的电子邮箱。首先，给这位销售人员发送邮件，假装对某个产品很感兴趣，显然销售人员会回复邮件。这样攻击者就可以通过分析邮件头来收集这家公司的真实IP地址及内部电子邮件服务器的相关信息。</p>
+<p>（3）通过进一步地应用社会工程学，假设现在己经收集了目标人物的邮箱、QQ 、电话号码、姓名，以及域名服务商， 也通过爆破或者撞库的方法获取邮箱的密码，这时就可以冒充目标人物要求客服人员协助重置域管理密码，甚至技术人员会帮着重置密码，从而使攻击者拿下域管理控制台，然后做域劫持。</p>
+<p>（4）除此以外，还可以利用“社工库”查询想要得到的信息，社工库是用社会工程学进行攻击时积累的各方数据的结构化数据库。这个数据库里有大量信息，甚至可以找到每个人的各种行为记录。利用收集到的邮箱，可以在社工库中找到己经泄露的密码，其实还可以通过搜索引擎搜索到社交账号等信息，然后通过利用社交和社会工程学得到的信息构造密码字典，对目标用户的邮箱和OA账号进行爆破或者撞库。</p>
 
     </div>
 
@@ -420,13 +457,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">3k</span>
+    <span title="站点总字数">4k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">16 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -467,6 +504,7 @@
   
   <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
