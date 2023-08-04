@@ -1,6 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>利用github搭建hexo博客</title>
+    <url>/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>本文介绍如何使用GitHub + Hexo搭建个人博客网站，完全免费，所有内容本人亲测，绝对可用。</p>
+<span id="more"></span>
+
+<h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
+<li>提前安装好<a href="https://nodejs.org/en">node.js</a>左边的那个</li>
+<li>提前安装好<a href="https://git-scm.com/downloads">GIt</a></li>
+<li>提前注册好一个<a href="https://github.com/">github</a>账号（ps:挂代理）</li>
+<li>如果文章图片没有显示，请自行挂代理</li>
+</ol>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
+<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
+<li>在选定的目录中，右键Git Bash Here</li>
+<li>使用npm命令安装Hexo，输入：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli #该命令执行不成功可以查看一下博客目录是不是只读，或者重新创建文件夹。</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>构建好的效果:</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
+<ol start="4">
+<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了或者http://localhost:4000/ </span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>配置ssh</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥，如果是重新创建请删除用户目录下的.ssh文件夹</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
+<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
+<ul>
+<li>尝试ssh连接,测试是否成功</li>
+</ul>
+<blockquote>
+<p>ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>   #注意邮箱地址不用改</p>
+</blockquote>
+<ul>
+<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
+</ul>
+<blockquote>
+<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+<ul>
+<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
+</ul>
+<blockquote>
+<p>npm install hexo-deployer-git –save</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
+<ul>
+<li>返回Git Bash Here继续配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>准备上传代码</li>
+</ol>
+<ul>
+<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
+</li>
+<li><p>点击创建</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
+</li>
+<li><p>编辑_config.yml（站点配置文件）文件，在最后改成这样</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功 PS:建议直接Tab</p>
+</li>
+<li><p>最后上传</p>
+</li>
+</ul>
+<blockquote>
+<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面<br>PS:上传之前也可以hexo clean #清除缓存一下</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
+<ul>
+<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
+<ol start="7">
+<li>hexo命令介绍</li>
+</ol>
+<blockquote>
+<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
+<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
+<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
+</blockquote>
+<ol start="8">
+<li>hexo目录结构</li>
+</ol>
+<blockquote>
+<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
+</blockquote>
+<ol start="9">
+<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
+<li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
+</ol>
+<hr>
+<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#52;&#x36;&#x35;&#48;&#x30;&#56;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x31;&#57;&#x39;&#52;&#x36;&#x35;&#48;&#x30;&#56;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></em> </p>
+]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>HEXO</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>typora+PicGo图片上传</title>
     <url>/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<p>本文介绍了如何使用typora + PicGo上传图片到图床</p>
@@ -61,7 +180,7 @@
 <p>图片上传成功即可<br>改成这样即可成功，图片自动上传到图床</p>
 <p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303211401394.png" alt="202303211401394"></p>
 <hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#x34;&#54;&#x35;&#x30;&#48;&#56;&#x36;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#109;">&#x31;&#57;&#x39;&#x34;&#54;&#x35;&#x30;&#48;&#56;&#x36;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#109;</a></em> </p>
+<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#49;&#57;&#x39;&#52;&#x36;&#53;&#x30;&#x30;&#56;&#54;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;">&#49;&#57;&#x39;&#52;&#x36;&#53;&#x30;&#x30;&#56;&#54;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;</a></em> </p>
 ]]></content>
       <categories>
         <category>博客搭建</category>
@@ -69,6 +188,562 @@
       <tags>
         <tag>HEXO</tag>
         <tag>img上传</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown语法</title>
+    <url>/2023/08/04/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p>本文介绍markdown语法的使用</p>
+<span id="more"></span>
+
+<h2 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h2><p>语法：# (一级标题)  ## (二级标题)  ### (三级标题) ……</p>
+<p>代码：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br></pre></td></tr></table></figure>
+
+<p>效果: </p>
+<blockquote>
+<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2></blockquote>
+<p>快捷键:</p>
+<blockquote>
+<ul>
+<li>Ctrl+数字1~6可以快速将选中的文本调成对应级别的标题</li>
+<li>Ctrl+0可以快速将选中的文本调成普通文本</li>
+<li>Ctrl+加号&#x2F;减号对标题级别进行加减</li>
+</ul>
+</blockquote>
+<h2 id="二、段落"><a href="#二、段落" class="headerlink" title="二、段落"></a>二、段落</h2><h3 id="1、换行"><a href="#1、换行" class="headerlink" title="1、换行"></a>1、换行</h3><p>代码:  </p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;这是一个段落</span><br><span class="line">&gt;这是一个段落</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果: </p>
+<blockquote>
+<p>这是一个段落<br>这是一个段落</p>
+</blockquote>
+<h3 id="2、分割线"><a href="#2、分割线" class="headerlink" title="2、分割线"></a>2、分割线</h3><p>语法:  —或者***+回车</p>
+<p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;---或者***</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>效果:</p>
+<hr>
+</blockquote>
+<h2 id="三、文字显示"><a href="#三、文字显示" class="headerlink" title="三、文字显示"></a>三、文字显示</h2><h3 id="1、字体"><a href="#1、字体" class="headerlink" title="1、字体"></a>1、字体</h3><p>语法:</p>
+<blockquote>
+<ul>
+<li>粗体:  用一对双星号包裹</li>
+<li>删除线:  用一对双飘号包裹</li>
+<li>下划线:  用一对u标签包裹</li>
+<li>斜体:  用一对单星号包裹</li>
+<li>高亮:  用一对双等号包裹</li>
+</ul>
+</blockquote>
+<p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;**这是粗体**</span><br><span class="line">&gt;~~这是删除线~~</span><br><span class="line">&gt;&lt;u&gt;这是下划线&lt;/u&gt;</span><br><span class="line">&gt;*这是斜体*</span><br><span class="line">&gt;==这是高亮==</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<p><strong>这是粗体</strong><br><del>这是删除线</del><br><u>这是下划线</u><br><em>这是斜体</em><br>&#x3D;&#x3D;这是高亮&#x3D;&#x3D;</p>
+</blockquote>
+<blockquote>
+<p>快捷键:</p>
+<ul>
+<li>加粗:  Ctrl+B</li>
+<li>删除线:  Shift+Alt+5</li>
+<li>下划线:  Ctrl+U</li>
+<li>斜体:  Ctrl+I</li>
+</ul>
+</blockquote>
+<h3 id="2、上下标"><a href="#2、上下标" class="headerlink" title="2、上下标"></a>2、上下标</h3><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;x^2^</span><br><span class="line">&gt;H~2~O</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<p>x^2^<br>H<del>2</del>O</p>
+</blockquote>
+<h2 id="四、列表"><a href="#四、列表" class="headerlink" title="四、列表"></a>四、列表</h2><h3 id="1、无序列表"><a href="#1、无序列表" class="headerlink" title="1、无序列表"></a>1、无序列表</h3><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;*/-/+ +空格</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<p>1.只有同一级别:</p>
+<ul>
+<li>苹果</li>
+<li>香蕉</li>
+<li>橘子</li>
+</ul>
+<p>2.子集类:</p>
+<ul>
+<li>一级分类</li>
+<li>二级分类 <ul>
+<li>三级分类</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><strong>快捷键:  Ctrl+Shift+]</strong></p>
+<h3 id="2、有序列表"><a href="#2、有序列表" class="headerlink" title="2、有序列表"></a>2、有序列表</h3><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;数字+.+空格</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<ol>
+<li>第一个标题</li>
+<li>第二个标题</li>
+<li>第三个标题</li>
+</ol>
+<ul>
+<li>子内容1<ul>
+<li>子内容2</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>第四个标题</li>
+</ol>
+</blockquote>
+<p><strong>快捷键:  Ctrl+Shift+[</strong></p>
+<h3 id="3、任务列表"><a href="#3、任务列表" class="headerlink" title="3、任务列表"></a>3、任务列表</h3><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;- [ ] 吃早餐</span><br><span class="line">&gt;- [x] 背单词</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<ul>
+<li><input disabled="" type="checkbox"> 吃早餐</li>
+<li><input checked="" disabled="" type="checkbox"> 背单词</li>
+</ul>
+</blockquote>
+<h2 id="五、区块显示"><a href="#五、区块显示" class="headerlink" title="五、区块显示"></a>五、区块显示</h2><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;&gt;+回车</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<blockquote>
+<p>这是最外层区块</p>
+<blockquote>
+<p>这是内层区块</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是最内层区块</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="六、代码显示"><a href="#六、代码显示" class="headerlink" title="六、代码显示"></a>六、代码显示</h2><h3 id="1、行内代码"><a href="#1、行内代码" class="headerlink" title="1、行内代码"></a>1、行内代码</h3><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;`int a=0;`（说明：`位于Esc下面）</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<p><code>int a=0;</code></p>
+</blockquote>
+<p><strong>快捷键:  Ctrl+Shift+&#96;</strong></p>
+<h3 id="2、代码块"><a href="#2、代码块" class="headerlink" title="2、代码块"></a>2、代码块</h3><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;​```js/java/c#/text</span><br><span class="line">&gt;内容</span><br><span class="line">&gt;```</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<pre><code>
+</code></pre>
+</blockquote>
+<p><strong>快捷键:  Ctrl+Shift+K</strong></p>
+<h2 id="七、链接"><a href="#七、链接" class="headerlink" title="七、链接"></a>七、链接</h2><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;www.baidu.com</span><br><span class="line">&gt;[百度一下](https://www.baidu.com)</span><br><span class="line">&gt;[百度一下](https://www.baidu.com &quot;https://www.baidu.com&quot;)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<p><a href="http://www.baidu.com/">www.baidu.com</a><br><a href="https://www.baidu.com/">百度一下</a><br><a href="https://www.baidu.com/" title="https://www.baidu.com">百度一下</a></p>
+</blockquote>
+<p><strong>快捷键:  Ctrl+K</strong></p>
+<h2 id="八、脚注"><a href="#八、脚注" class="headerlink" title="八、脚注"></a>八、脚注</h2><blockquote>
+<p>说明:  对文本进行解释说明。</p>
+</blockquote>
+<p>代码: </p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;[^文本]</span><br><span class="line">&gt;[^文本]:解释说明</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<p>这是一个技术<a href="%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E9%9D%9E%E5%B8%B8%E5%A5%BD%E7%94%A8%E7%9A%84%E6%A1%86%E6%9E%B6%E3%80%82">^①</a></p>
+</blockquote>
+<h2 id="九、表格"><a href="#九、表格" class="headerlink" title="九、表格"></a>九、表格</h2><p>代码:</p>
+<blockquote>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&gt;|  1   |  2   |  3   |</span><br><span class="line">&gt;| :--- | :--: | ---: |</span><br><span class="line">&gt;|  4   |  5   |  6   |</span><br><span class="line">&gt;|  7   |  8   |  9   |</span><br><span class="line">&gt;|  10  |  11  |  12  |</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>效果:</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th align="center">2</th>
+<th align="right">3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td align="center">5</td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">8</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td>10</td>
+<td align="center">11</td>
+<td align="right">12</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p><strong>快捷键:  Ctrl+T</strong></p>
+]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>HEXO</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机基础</title>
+    <url>/2023/08/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>本文介绍计算机基础</p>
+<span id="more"></span>
+
+<h2 id="重要端口及服务"><a href="#重要端口及服务" class="headerlink" title="重要端口及服务"></a>重要端口及服务</h2><table>
+<thead>
+<tr>
+<th align="center">端口</th>
+<th align="center">服务</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">21</td>
+<td align="center">FTP</td>
+<td align="center">FTP控制端口，检查匿名登录、弱口令</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">SSH</td>
+<td align="center">SSH远程登录协议，检查弱口令</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">Telnet</td>
+<td align="center">Telnet终端仿真协议</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">DNS服务</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">80</td>
+<td align="center">Web</td>
+<td align="center">检查常见Web漏洞及管理后台</td>
+</tr>
+<tr>
+<td align="center">111</td>
+<td align="center">NFS</td>
+<td align="center">网络文件系统</td>
+</tr>
+<tr>
+<td align="center">389</td>
+<td align="center">LDAP</td>
+<td align="center">轻型目录访问协议，检查是否存在匿名访问</td>
+</tr>
+<tr>
+<td align="center">443</td>
+<td align="center">OpenSSL</td>
+<td align="center">检查心脏滴血及Web漏洞</td>
+</tr>
+<tr>
+<td align="center">445</td>
+<td align="center">SMB</td>
+<td align="center">检查是否存在MS17-010、MS08-067漏洞</td>
+</tr>
+<tr>
+<td align="center">512</td>
+<td align="center">Rexec</td>
+<td align="center">检查远程shell命令及暴力破解</td>
+</tr>
+<tr>
+<td align="center">873</td>
+<td align="center">Rsync</td>
+<td align="center">检查匿名登录、弱口令</td>
+</tr>
+<tr>
+<td align="center">1433</td>
+<td align="center">SQL Server</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">1521</td>
+<td align="center">Oracle</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">2049</td>
+<td align="center">NFS</td>
+<td align="center">NFS未授权访问</td>
+</tr>
+<tr>
+<td align="center">2181</td>
+<td align="center">Zookeeper</td>
+<td align="center">分布式协调系统</td>
+</tr>
+<tr>
+<td align="center">2375</td>
+<td align="center">Docker Remote</td>
+<td align="center">API未授权访问</td>
+</tr>
+<tr>
+<td align="center">3306</td>
+<td align="center">MySQL</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">3389</td>
+<td align="center">RDP</td>
+<td align="center">远程桌面</td>
+</tr>
+<tr>
+<td align="center">4848</td>
+<td align="center">GlassFish</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">5432</td>
+<td align="center">PostgreSQL</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">5601</td>
+<td align="center">Kibana</td>
+<td align="center">开源分析及可视化平台</td>
+</tr>
+<tr>
+<td align="center">5672</td>
+<td align="center">RabbitMQ</td>
+<td align="center">开源消息队列服务软件</td>
+</tr>
+<tr>
+<td align="center">5900</td>
+<td align="center">VNC</td>
+<td align="center">远程桌面控制软件，检查弱口令</td>
+</tr>
+<tr>
+<td align="center">5984</td>
+<td align="center">CouchDB</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">6379</td>
+<td align="center">Redis</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">7001</td>
+<td align="center">Weblogic</td>
+<td align="center">Weblogic Console默认端口</td>
+</tr>
+<tr>
+<td align="center">8000-9090</td>
+<td align="center">Web</td>
+<td align="center">常见Web端口，运维一般将管理后台开在这些非80端口上</td>
+</tr>
+<tr>
+<td align="center">8080</td>
+<td align="center">Jenkins</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8080</td>
+<td align="center">Kubernetes Api Server</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8081</td>
+<td align="center">Apache-Flink</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8089</td>
+<td align="center">Druid</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8090</td>
+<td align="center">Confluence</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8095</td>
+<td align="center">Atlassian Crowd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8161</td>
+<td align="center">Active MQ</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8888</td>
+<td align="center">Jupyter Notebook</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8983</td>
+<td align="center">Solr</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9000</td>
+<td align="center">Fast-CGI</td>
+<td align="center">对外访问可直接Get shell</td>
+</tr>
+<tr>
+<td align="center">9060</td>
+<td align="center">Websephere</td>
+<td align="center">管理端口</td>
+</tr>
+<tr>
+<td align="center">9092</td>
+<td align="center">Kafka</td>
+<td align="center">开源流处理平台</td>
+</tr>
+<tr>
+<td align="center">9200</td>
+<td align="center">Elasticsearch(http)</td>
+<td align="center">全文搜索引擎</td>
+</tr>
+<tr>
+<td align="center">9300</td>
+<td align="center">Elasticsearch(tcp)</td>
+<td align="center">全文搜索引擎</td>
+</tr>
+<tr>
+<td align="center">10000</td>
+<td align="center">Virualmin&#x2F;Webmin</td>
+<td align="center">服务器虚拟主机管理系统</td>
+</tr>
+<tr>
+<td align="center">10051</td>
+<td align="center">Zabbix</td>
+<td align="center">监控系统</td>
+</tr>
+<tr>
+<td align="center">11211</td>
+<td align="center">Memcache</td>
+<td align="center">分布式高速缓存系统，检查未授权访问</td>
+</tr>
+<tr>
+<td align="center">20880</td>
+<td align="center">Dubbo</td>
+<td align="center">阿里巴巴开源分布式服务框架</td>
+</tr>
+<tr>
+<td align="center">27017</td>
+<td align="center">MongoDB</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">28017</td>
+<td align="center">MongoDB</td>
+<td align="center">数据库服务（统计页面）</td>
+</tr>
+<tr>
+<td align="center">50030</td>
+<td align="center">Hadoop Hive</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">50070</td>
+<td align="center">Hadoop</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h2><blockquote>
+<p>信息响应 (100–199)<br>成功响应 (200–299)<br>重定向消息 (300–399)<br>客户端错误响应 (400–499)<br>服务端错误响应 (500–599)</p>
+</blockquote>
+<h2 id="HTTP-请求方法"><a href="#HTTP-请求方法" class="headerlink" title="HTTP 请求方法"></a>HTTP 请求方法</h2><table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">GET</td>
+<td align="left">请求指定的页面信息，并返回实体主体。</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">HEAD</td>
+<td align="left">类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">POST</td>
+<td align="left">向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和&#x2F;或已有资源的修改。</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">PUT</td>
+<td align="left">从客户端向服务器传送的数据取代指定的文档的内容。</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">DELETE</td>
+<td align="left">请求服务器删除指定的页面。</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">CONNECT</td>
+<td align="left">HTTP&#x2F;1.1 协议中预留给能够将连接改为管道方式的代理服务器。</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">OPTIONS</td>
+<td align="left">允许客户端查看服务器的性能。</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">TRACE</td>
+<td align="left">回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">PATCH</td>
+<td align="left">是对 PUT 方法的补充，用来对已知资源进行局部更新 。</td>
+</tr>
+</tbody></table>
+<h2 id="burp数据包参数详解"><a href="#burp数据包参数详解" class="headerlink" title="burp数据包参数详解"></a>burp数据包参数详解</h2><blockquote>
+<p><code>GET</code>:表示GET请求<br><code>Post </code>: 表示post请求<br><code>Host</code>:表示当前请求要被发送的目的地。<br><code>Cookie</code>:某些网站为了辨别用户身份，进行Session跟踪而储存在用户本地终端上的数据（通常经过加密），由用户客户端计算机暂时或永久保存的信息<br><code>User-Agent</code> :表示客户机的软件环境<br><code>Accept</code>:表示客户端支持的数据类型<br><code>Accept-Language</code>:表示客户机的语言环境<br><code>Accept-Encoding</code>:表示客户机支持的数据压缩格式<br><code>Referer</code>:表示当前请求资源所在页面的完整路径：协议+域名+查询参数（注意不包含锚点信息）<br><code>Origin</code>：表示当前请求资源所在页面的协议和域名，用来说明请求从哪里发起的<br><code>Sec-Fetch-Dest</code>: 表示请求的目的地，即如何使用获取的数据；<br><code>Sec-Fetch-Mode</code>:该请求头表明了一个请求的模式<br><code>Sec-Fetch-Site</code>: 表示一个请求发起者的来源与目标资源来源之间的关系<br><code>content-lenth</code>：是一个实体消息首部,用来指明发送给接受方的消息主体的大小。<br><code>TE: trailers </code>：表示客户端期望在采用分块传输编码的响应中接收挂载字段。</p>
+</blockquote>
+<h2 id="Windows操作系统的常用指令"><a href="#Windows操作系统的常用指令" class="headerlink" title="Windows操作系统的常用指令"></a>Windows操作系统的常用指令</h2><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">cd</span><br><span class="line">dir                        //查看目录文件</span><br><span class="line">md 目录名（文件夹）          //删除目录</span><br><span class="line">rd 目录名（文件夹）          //删除目录</span><br><span class="line">ipconfig                  //查看本机ip</span><br><span class="line">copy 路径\文件名 路径\文件名 //把一个文件拷贝到另一个地方。 </span><br><span class="line">move 路径\文件名 路径\文件名 //把一个文件移动到另一个地方。 </span><br><span class="line">del 文件名                 //这个是专门删除文件的，不能删除文件夹</span><br><span class="line">ping ip(主机名)            //用来测试网络是否畅通</span><br><span class="line">netstat -all              //查看网络连接、状态以及对应的进程id</span><br><span class="line">tracert                   //路由跟踪实用程序</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux操作系统的常用指令"><a href="#Linux操作系统的常用指令" class="headerlink" title="Linux操作系统的常用指令"></a>Linux操作系统的常用指令</h2><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">cd /                //切换到根目录</span><br><span class="line">cd ../              //切换到上一级目录 或者使用命令：cd ..</span><br><span class="line">cd ~                //切换到home目录</span><br><span class="line">cd -           	    //切换到上次访问的目录</span><br><span class="line">ls                  //查看当前目录下的所有目录和文件</span><br><span class="line">ls -a               //查看当前目录下的所有目录和文件（包括隐藏的文件）</span><br><span class="line">mkdir tools         //在当前目录下创建一个名为tools的目录</span><br><span class="line">mkdir /bin/tools    //在指定目录下创建一个名为tools的目录</span><br><span class="line">rm 文件名            //删除当前目录下的文件</span><br><span class="line">mv 当前目录名 新目录名 //修改目录名，同样适用与文件操作</span><br><span class="line">cp                  //拷贝目录</span><br><span class="line">pwd                 //显示当前位置路径</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>计算机</tag>
       </tags>
   </entry>
   <entry>
@@ -174,132 +849,24 @@
 <p>（2）假设攻击者对一家公司进行渗透测试，正在收集目标的真实IP阶段，此时就可以利用收集到的这家公司的某位销售人员的电子邮箱。首先，给这位销售人员发送邮件，假装对某个产品很感兴趣，显然销售人员会回复邮件。这样攻击者就可以通过分析邮件头来收集这家公司的真实IP地址及内部电子邮件服务器的相关信息。</p>
 <p>（3）通过进一步地应用社会工程学，假设现在己经收集了目标人物的邮箱、QQ 、电话号码、姓名，以及域名服务商， 也通过爆破或者撞库的方法获取邮箱的密码，这时就可以冒充目标人物要求客服人员协助重置域管理密码，甚至技术人员会帮着重置密码，从而使攻击者拿下域管理控制台，然后做域劫持。</p>
 <p>（4）除此以外，还可以利用“社工库”查询想要得到的信息，社工库是用社会工程学进行攻击时积累的各方数据的结构化数据库。这个数据库里有大量信息，甚至可以找到每个人的各种行为记录。利用收集到的邮箱，可以在社工库中找到己经泄露的密码，其实还可以通过搜索引擎搜索到社交账号等信息，然后通过利用社交和社会工程学得到的信息构造密码字典，对目标用户的邮箱和OA账号进行爆破或者撞库。</p>
-]]></content>
+<h3 id="8-敏感目录"><a href="#8-敏感目录" class="headerlink" title="8. 敏感目录"></a>8. 敏感目录</h3><p>敏感目录扫描能够得到其他网页的很多信息，找到后台管理页面，尝试进入后台，然后提升权限等<br>扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄露<br>工具</p>
+<blockquote>
+<p>常用工具：御剑，小米范WEB目录扫描器，dirb，dirsearch</p>
+</blockquote>
+<h4 id="小米范WEB目录扫描器"><a href="#小米范WEB目录扫描器" class="headerlink" title="小米范WEB目录扫描器"></a>小米范WEB目录扫描器</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230804102827534.png" alt="image-20230804102827534"></p>
+<h4 id="御剑"><a href="#御剑" class="headerlink" title="御剑"></a>御剑</h4><p>御剑后台扫描工具</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230804102613159.png" alt="image-20230804102613159"></p>
+<h4 id="dirb"><a href="#dirb" class="headerlink" title="dirb"></a>dirb</h4><p>Kali Linux内置工具<br>dirb是一个基于字典的web目录扫描工具,会用递归的方式来获取更多的目录,它还支持代理和http认证限制访问的网站</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirb https:www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h4 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h4><p>dirsearch是一个python开发的目录扫描工具,目的是扫描网站的敏感文件和目录从而找到突破口。<br>项目地址：<a href="https://github.com/maurosoria/dirsearch/">https://github.com/maurosoria/dirsearch/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirsearch -u http://www.baidu.com</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>渗透</category>
       </categories>
       <tags>
         <tag>Wed安全</tag>
         <tag>信息收集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用github搭建hexo博客</title>
-    <url>/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>本文介绍如何使用GitHub + Hexo搭建个人博客网站，完全免费，所有内容本人亲测，绝对可用。</p>
-<span id="more"></span>
-
-<h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
-<li>提前安装好<a href="https://nodejs.org/en">node.js</a>左边的那个</li>
-<li>提前安装好<a href="https://git-scm.com/downloads">GIt</a></li>
-<li>提前注册好一个<a href="https://github.com/">github</a>账号（ps:挂代理）</li>
-<li>如果文章图片没有显示，请自行挂代理</li>
-</ol>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
-<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
-<li>在选定的目录中，右键Git Bash Here</li>
-<li>使用npm命令安装Hexo，输入：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli #该命令执行不成功可以查看一下博客目录是不是只读，或者重新创建文件夹。</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
-
-<p>构建好的效果:</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
-<ol start="4">
-<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了或者http://localhost:4000/ </span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>配置ssh</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥，如果是重新创建请删除用户目录下的.ssh文件夹</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
-<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
-<ul>
-<li>尝试ssh连接,测试是否成功</li>
-</ul>
-<blockquote>
-<p>ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;</a>   #注意邮箱地址不用改</p>
-</blockquote>
-<ul>
-<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
-</ul>
-<blockquote>
-<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-</blockquote>
-<ul>
-<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
-</ul>
-<blockquote>
-<p>npm install hexo-deployer-git –save</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
-<ul>
-<li>返回Git Bash Here继续配置</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>准备上传代码</li>
-</ol>
-<ul>
-<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
-</li>
-<li><p>点击创建</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
-</li>
-<li><p>编辑_config.yml（站点配置文件）文件，在最后改成这样</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功 PS:建议直接Tab</p>
-</li>
-<li><p>最后上传</p>
-</li>
-</ul>
-<blockquote>
-<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面<br>PS:上传之前也可以hexo clean #清除缓存一下</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
-<ul>
-<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
-<ol start="7">
-<li>hexo命令介绍</li>
-</ol>
-<blockquote>
-<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
-<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
-<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
-</blockquote>
-<ol start="8">
-<li>hexo目录结构</li>
-</ol>
-<blockquote>
-<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
-</blockquote>
-<ol start="9">
-<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
-<li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
-</ol>
-<hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#49;&#x39;&#x39;&#52;&#x36;&#53;&#48;&#48;&#56;&#54;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;">&#49;&#x39;&#x39;&#52;&#x36;&#53;&#48;&#48;&#56;&#54;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#x6d;</a></em> </p>
-]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>HEXO</tag>
-        <tag>blog</tag>
       </tags>
   </entry>
 </search>

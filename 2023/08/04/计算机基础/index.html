@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文介绍计算机基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机基础">
+<meta property="og:url" content="http://example.com/2023/08/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="lebuxishu的博客">
+<meta property="og:description" content="本文介绍计算机基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-04T01:02:14.000Z">
+<meta property="article:modified_time" content="2023-08-04T04:17:28.084Z">
+<meta property="article:author" content="lebuxishu">
+<meta property="article:tag" content="计算机">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/08/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/08/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/","path":"2023/08/04/计算机基础/","title":"计算机基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>计算机基础 | lebuxishu的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">lebuxishu的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到楽不吸鼠的博客💜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E7%AB%AF%E5%8F%A3%E5%8F%8A%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">重要端口及服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%93%8D%E5%BA%94%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">HTTP响应码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">HTTP 请求方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#burp%E6%95%B0%E6%8D%AE%E5%8C%85%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">burp数据包参数详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">Windows操作系统的常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">Linux操作系统的常用指令</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lebuxishu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lebuxishu</p>
+  <div class="site-description" itemprop="description">欢迎来到我的世界💜</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lebuxishu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lebuxishu" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://sunwu57.github.io/" title="https:&#x2F;&#x2F;sunwu57.github.io&#x2F;" rel="noopener" target="_blank">sunwu57</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/next-theme/hexo-theme-next/tree/master" title="https:&#x2F;&#x2F;github.com&#x2F;next-theme&#x2F;hexo-theme-next&#x2F;tree&#x2F;master" rel="noopener" target="_blank">next-theme</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://huzisama.github.io/" title="https:&#x2F;&#x2F;huzisama.github.io&#x2F;" rel="noopener" target="_blank">狐梓</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lebuxishu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lebuxishu的博客">
+      <meta itemprop="description" content="欢迎来到我的世界💜">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="计算机基础 | lebuxishu的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-04 09:02:14 / 修改时间：12:17:28" itemprop="dateCreated datePublished" datetime="2023-08-04T09:02:14+08:00">2023-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文介绍计算机基础</p>
+<span id="more"></span>
+
+<h2 id="重要端口及服务"><a href="#重要端口及服务" class="headerlink" title="重要端口及服务"></a>重要端口及服务</h2><table>
+<thead>
+<tr>
+<th align="center">端口</th>
+<th align="center">服务</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">21</td>
+<td align="center">FTP</td>
+<td align="center">FTP控制端口，检查匿名登录、弱口令</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">SSH</td>
+<td align="center">SSH远程登录协议，检查弱口令</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">Telnet</td>
+<td align="center">Telnet终端仿真协议</td>
+</tr>
+<tr>
+<td align="center">53</td>
+<td align="center">DNS服务</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">80</td>
+<td align="center">Web</td>
+<td align="center">检查常见Web漏洞及管理后台</td>
+</tr>
+<tr>
+<td align="center">111</td>
+<td align="center">NFS</td>
+<td align="center">网络文件系统</td>
+</tr>
+<tr>
+<td align="center">389</td>
+<td align="center">LDAP</td>
+<td align="center">轻型目录访问协议，检查是否存在匿名访问</td>
+</tr>
+<tr>
+<td align="center">443</td>
+<td align="center">OpenSSL</td>
+<td align="center">检查心脏滴血及Web漏洞</td>
+</tr>
+<tr>
+<td align="center">445</td>
+<td align="center">SMB</td>
+<td align="center">检查是否存在MS17-010、MS08-067漏洞</td>
+</tr>
+<tr>
+<td align="center">512</td>
+<td align="center">Rexec</td>
+<td align="center">检查远程shell命令及暴力破解</td>
+</tr>
+<tr>
+<td align="center">873</td>
+<td align="center">Rsync</td>
+<td align="center">检查匿名登录、弱口令</td>
+</tr>
+<tr>
+<td align="center">1433</td>
+<td align="center">SQL Server</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">1521</td>
+<td align="center">Oracle</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">2049</td>
+<td align="center">NFS</td>
+<td align="center">NFS未授权访问</td>
+</tr>
+<tr>
+<td align="center">2181</td>
+<td align="center">Zookeeper</td>
+<td align="center">分布式协调系统</td>
+</tr>
+<tr>
+<td align="center">2375</td>
+<td align="center">Docker Remote</td>
+<td align="center">API未授权访问</td>
+</tr>
+<tr>
+<td align="center">3306</td>
+<td align="center">MySQL</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">3389</td>
+<td align="center">RDP</td>
+<td align="center">远程桌面</td>
+</tr>
+<tr>
+<td align="center">4848</td>
+<td align="center">GlassFish</td>
+<td align="center">未授权访问</td>
+</tr>
+<tr>
+<td align="center">5432</td>
+<td align="center">PostgreSQL</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">5601</td>
+<td align="center">Kibana</td>
+<td align="center">开源分析及可视化平台</td>
+</tr>
+<tr>
+<td align="center">5672</td>
+<td align="center">RabbitMQ</td>
+<td align="center">开源消息队列服务软件</td>
+</tr>
+<tr>
+<td align="center">5900</td>
+<td align="center">VNC</td>
+<td align="center">远程桌面控制软件，检查弱口令</td>
+</tr>
+<tr>
+<td align="center">5984</td>
+<td align="center">CouchDB</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">6379</td>
+<td align="center">Redis</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">7001</td>
+<td align="center">Weblogic</td>
+<td align="center">Weblogic Console默认端口</td>
+</tr>
+<tr>
+<td align="center">8000-9090</td>
+<td align="center">Web</td>
+<td align="center">常见Web端口，运维一般将管理后台开在这些非80端口上</td>
+</tr>
+<tr>
+<td align="center">8080</td>
+<td align="center">Jenkins</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8080</td>
+<td align="center">Kubernetes Api Server</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8081</td>
+<td align="center">Apache-Flink</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8089</td>
+<td align="center">Druid</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8090</td>
+<td align="center">Confluence</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8095</td>
+<td align="center">Atlassian Crowd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8161</td>
+<td align="center">Active MQ</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8888</td>
+<td align="center">Jupyter Notebook</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">8983</td>
+<td align="center">Solr</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">9000</td>
+<td align="center">Fast-CGI</td>
+<td align="center">对外访问可直接Get shell</td>
+</tr>
+<tr>
+<td align="center">9060</td>
+<td align="center">Websephere</td>
+<td align="center">管理端口</td>
+</tr>
+<tr>
+<td align="center">9092</td>
+<td align="center">Kafka</td>
+<td align="center">开源流处理平台</td>
+</tr>
+<tr>
+<td align="center">9200</td>
+<td align="center">Elasticsearch(http)</td>
+<td align="center">全文搜索引擎</td>
+</tr>
+<tr>
+<td align="center">9300</td>
+<td align="center">Elasticsearch(tcp)</td>
+<td align="center">全文搜索引擎</td>
+</tr>
+<tr>
+<td align="center">10000</td>
+<td align="center">Virualmin&#x2F;Webmin</td>
+<td align="center">服务器虚拟主机管理系统</td>
+</tr>
+<tr>
+<td align="center">10051</td>
+<td align="center">Zabbix</td>
+<td align="center">监控系统</td>
+</tr>
+<tr>
+<td align="center">11211</td>
+<td align="center">Memcache</td>
+<td align="center">分布式高速缓存系统，检查未授权访问</td>
+</tr>
+<tr>
+<td align="center">20880</td>
+<td align="center">Dubbo</td>
+<td align="center">阿里巴巴开源分布式服务框架</td>
+</tr>
+<tr>
+<td align="center">27017</td>
+<td align="center">MongoDB</td>
+<td align="center">数据库服务</td>
+</tr>
+<tr>
+<td align="center">28017</td>
+<td align="center">MongoDB</td>
+<td align="center">数据库服务（统计页面）</td>
+</tr>
+<tr>
+<td align="center">50030</td>
+<td align="center">Hadoop Hive</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">50070</td>
+<td align="center">Hadoop</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="HTTP响应码"><a href="#HTTP响应码" class="headerlink" title="HTTP响应码"></a>HTTP响应码</h2><blockquote>
+<p>信息响应 (100–199)<br>成功响应 (200–299)<br>重定向消息 (300–399)<br>客户端错误响应 (400–499)<br>服务端错误响应 (500–599)</p>
+</blockquote>
+<h2 id="HTTP-请求方法"><a href="#HTTP-请求方法" class="headerlink" title="HTTP 请求方法"></a>HTTP 请求方法</h2><table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">GET</td>
+<td align="left">请求指定的页面信息，并返回实体主体。</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">HEAD</td>
+<td align="left">类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">POST</td>
+<td align="left">向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和&#x2F;或已有资源的修改。</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">PUT</td>
+<td align="left">从客户端向服务器传送的数据取代指定的文档的内容。</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">DELETE</td>
+<td align="left">请求服务器删除指定的页面。</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">CONNECT</td>
+<td align="left">HTTP&#x2F;1.1 协议中预留给能够将连接改为管道方式的代理服务器。</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">OPTIONS</td>
+<td align="left">允许客户端查看服务器的性能。</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">TRACE</td>
+<td align="left">回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">PATCH</td>
+<td align="left">是对 PUT 方法的补充，用来对已知资源进行局部更新 。</td>
+</tr>
+</tbody></table>
+<h2 id="burp数据包参数详解"><a href="#burp数据包参数详解" class="headerlink" title="burp数据包参数详解"></a>burp数据包参数详解</h2><blockquote>
+<p><code>GET</code>:表示GET请求<br><code>Post </code>: 表示post请求<br><code>Host</code>:表示当前请求要被发送的目的地。<br><code>Cookie</code>:某些网站为了辨别用户身份，进行Session跟踪而储存在用户本地终端上的数据（通常经过加密），由用户客户端计算机暂时或永久保存的信息<br><code>User-Agent</code> :表示客户机的软件环境<br><code>Accept</code>:表示客户端支持的数据类型<br><code>Accept-Language</code>:表示客户机的语言环境<br><code>Accept-Encoding</code>:表示客户机支持的数据压缩格式<br><code>Referer</code>:表示当前请求资源所在页面的完整路径：协议+域名+查询参数（注意不包含锚点信息）<br><code>Origin</code>：表示当前请求资源所在页面的协议和域名，用来说明请求从哪里发起的<br><code>Sec-Fetch-Dest</code>: 表示请求的目的地，即如何使用获取的数据；<br><code>Sec-Fetch-Mode</code>:该请求头表明了一个请求的模式<br><code>Sec-Fetch-Site</code>: 表示一个请求发起者的来源与目标资源来源之间的关系<br><code>content-lenth</code>：是一个实体消息首部,用来指明发送给接受方的消息主体的大小。<br><code>TE: trailers </code>：表示客户端期望在采用分块传输编码的响应中接收挂载字段。</p>
+</blockquote>
+<h2 id="Windows操作系统的常用指令"><a href="#Windows操作系统的常用指令" class="headerlink" title="Windows操作系统的常用指令"></a>Windows操作系统的常用指令</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">dir                        //查看目录文件</span><br><span class="line">md 目录名（文件夹）          //删除目录</span><br><span class="line">rd 目录名（文件夹）          //删除目录</span><br><span class="line">ipconfig                  //查看本机ip</span><br><span class="line">copy 路径\文件名 路径\文件名 //把一个文件拷贝到另一个地方。 </span><br><span class="line">move 路径\文件名 路径\文件名 //把一个文件移动到另一个地方。 </span><br><span class="line">del 文件名                 //这个是专门删除文件的，不能删除文件夹</span><br><span class="line">ping ip(主机名)            //用来测试网络是否畅通</span><br><span class="line">netstat -all              //查看网络连接、状态以及对应的进程id</span><br><span class="line">tracert                   //路由跟踪实用程序</span><br></pre></td></tr></table></figure>
+
+<h2 id="Linux操作系统的常用指令"><a href="#Linux操作系统的常用指令" class="headerlink" title="Linux操作系统的常用指令"></a>Linux操作系统的常用指令</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd /                //切换到根目录</span><br><span class="line">cd ../              //切换到上一级目录 或者使用命令：cd ..</span><br><span class="line">cd ~                //切换到home目录</span><br><span class="line">cd -           	    //切换到上次访问的目录</span><br><span class="line">ls                  //查看当前目录下的所有目录和文件</span><br><span class="line">ls -a               //查看当前目录下的所有目录和文件（包括隐藏的文件）</span><br><span class="line">mkdir tools         //在当前目录下创建一个名为tools的目录</span><br><span class="line">mkdir /bin/tools    //在指定目录下创建一个名为tools的目录</span><br><span class="line">rm 文件名            //删除当前目录下的文件</span><br><span class="line">mv 当前目录名 新目录名 //修改目录名，同样适用与文件操作</span><br><span class="line">cp                  //拷贝目录</span><br><span class="line">pwd                 //显示当前位置路径</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag"><i class="fa fa-tag"></i> 计算机</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/28/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="prev" title="信息收集">
+                  <i class="fa fa-angle-left"></i> 信息收集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/04/markdown%E8%AF%AD%E6%B3%95/" rel="next" title="markdown语法">
+                  markdown语法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lebuxishu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">7k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">24 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  
+</body>
+</html>
