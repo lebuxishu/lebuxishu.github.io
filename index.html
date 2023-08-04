@@ -456,7 +456,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-08-04 14:48:03 / 修改时间：16:27:23" itemprop="dateCreated datePublished" datetime="2023-08-04T14:48:03+08:00">2023-08-04</time>
+      <time title="创建时间：2023-08-04 14:48:03 / 修改时间：17:13:54" itemprop="dateCreated datePublished" datetime="2023-08-04T14:48:03+08:00">2023-08-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -475,7 +475,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>523</span>
+      <span>524</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -493,17 +493,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="信息收集之GitHub搜索语法"><a href="#信息收集之GitHub搜索语法" class="headerlink" title="信息收集之GitHub搜索语法"></a>信息收集之GitHub搜索语法</h2><p>在渗透测试的信息收集阶段，可以去Github和码云上搜索与目标有关的信息，或者就有意想不到的收获。(有些开发人员将代码上传到代码库的时候，有可能连一些重要的配置信息也上传了)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">in:name test               #仓库标题搜索含有关键字test</span><br><span class="line">in:descripton test         #仓库描述搜索含有关键字</span><br><span class="line">in:readme test             #Readme文件搜素含有关键字</span><br><span class="line">stars:&gt;3000 test           #stars数量大于3000的搜索关键字</span><br><span class="line">stars:1000..3000 test      #stars数量大于1000小于3000的搜索关键字</span><br><span class="line">forks:&gt;1000 test           #forks数量大于1000的搜索关键字</span><br><span class="line">forks:1000..3000 test      #forks数量大于1000小于3000的搜索关键字</span><br><span class="line">size:&gt;=5000 test           #指定仓库大于5000k(5M)的搜索关键字</span><br><span class="line">pushed:&gt;2019-02-12 test    #发布时间大于2019-02-12的搜索关键字</span><br><span class="line">created:&gt;2019-02-12 test   #创建时间大于2019-02-12的搜索关键字</span><br><span class="line">user:test                  #用户名搜素</span><br><span class="line">license:apache-2.0 test    #明确仓库的 LICENSE 搜索关键字</span><br><span class="line">language:java test         #在java语言的代码中搜索关键字</span><br><span class="line">user:test in:name test     #组合搜索,用户名test的标题含有test的</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-Github-进行邮件配置信息收集"><a href="#使用-Github-进行邮件配置信息收集" class="headerlink" title="使用 Github 进行邮件配置信息收集"></a>使用 Github 进行邮件配置信息收集</h3><p>很多网站及系统都会使用 pop3 和 smtp 发送来邮件，不少开发者由于安全意识不足会把相关的配置信息也放到Github上，所以如果这时候我们动用一下google搜索命令语句，构造一下关键字，就能把这些信息给找出来了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">site:Github.com smtp</span><br><span class="line">site:Github.com smtp @qq.com</span><br><span class="line">site:Github.com smtp @126.com</span><br><span class="line">site:Github.com smtp @163.com</span><br><span class="line">site:Github.com smtp @sina.com.cn</span><br><span class="line">site:Github.com smtp password</span><br><span class="line">site:Github.com String password smtp</span><br><span class="line">……</span><br><span class="line">我们也可以锁定域名搜索结合厂商域名 灵活运用例如搜百度的</span><br><span class="line">site:Github.com smtp @baidu.com</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Github进行数据库信息收集"><a href="#使用Github进行数据库信息收集" class="headerlink" title="使用Github进行数据库信息收集"></a>使用Github进行数据库信息收集</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">site:Github.com sa password</span><br><span class="line">site:Github.com root password</span><br><span class="line">site:Github.com User ID=’sa’;Password</span><br><span class="line">site:Github.com inurl:sql</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Github进行-SVN-信息收集"><a href="#使用Github进行-SVN-信息收集" class="headerlink" title="使用Github进行 SVN 信息收集"></a>使用Github进行 SVN 信息收集</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">site:Github.com svn</span><br><span class="line">site:Github.com svn username</span><br><span class="line">site:Github.com svn password</span><br><span class="line">site:Github.com svn username password </span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Github进行综合信息收集"><a href="#使用Github进行综合信息收集" class="headerlink" title="使用Github进行综合信息收集"></a>使用Github进行综合信息收集</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">site:Github.com password</span><br><span class="line">site:Github.com ftp ftppassword</span><br><span class="line">site:Github.com 密码</span><br><span class="line">site:Github.com 内部</span><br></pre></td></tr></table></figure>
+          <h2 id="信息收集之GitHub搜索语法"><a href="#信息收集之GitHub搜索语法" class="headerlink" title="信息收集之GitHub搜索语法"></a>信息收集之GitHub搜索语法</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/04/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8BGitHub%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

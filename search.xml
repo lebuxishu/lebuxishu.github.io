@@ -193,7 +193,9 @@
   <entry>
     <title>信息收集之GitHub搜索语法</title>
     <url>/2023/08/04/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8BGitHub%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="信息收集之GitHub搜索语法"><a href="#信息收集之GitHub搜索语法" class="headerlink" title="信息收集之GitHub搜索语法"></a>信息收集之GitHub搜索语法</h2><p>在渗透测试的信息收集阶段，可以去Github和码云上搜索与目标有关的信息，或者就有意想不到的收获。(有些开发人员将代码上传到代码库的时候，有可能连一些重要的配置信息也上传了)</p>
+    <content><![CDATA[<h2 id="信息收集之GitHub搜索语法"><a href="#信息收集之GitHub搜索语法" class="headerlink" title="信息收集之GitHub搜索语法"></a>信息收集之GitHub搜索语法</h2><span id="more"></span>
+
+<p>在渗透测试的信息收集阶段，可以去Github和码云上搜索与目标有关的信息，或者就有意想不到的收获。(有些开发人员将代码上传到代码库的时候，有可能连一些重要的配置信息也上传了)</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">in:name test               #仓库标题搜索含有关键字test</span><br><span class="line">in:descripton test         #仓库描述搜索含有关键字</span><br><span class="line">in:readme test             #Readme文件搜素含有关键字</span><br><span class="line">stars:&gt;3000 test           #stars数量大于3000的搜索关键字</span><br><span class="line">stars:1000..3000 test      #stars数量大于1000小于3000的搜索关键字</span><br><span class="line">forks:&gt;1000 test           #forks数量大于1000的搜索关键字</span><br><span class="line">forks:1000..3000 test      #forks数量大于1000小于3000的搜索关键字</span><br><span class="line">size:&gt;=5000 test           #指定仓库大于5000k(5M)的搜索关键字</span><br><span class="line">pushed:&gt;2019-02-12 test    #发布时间大于2019-02-12的搜索关键字</span><br><span class="line">created:&gt;2019-02-12 test   #创建时间大于2019-02-12的搜索关键字</span><br><span class="line">user:test                  #用户名搜素</span><br><span class="line">license:apache-2.0 test    #明确仓库的 LICENSE 搜索关键字</span><br><span class="line">language:java test         #在java语言的代码中搜索关键字</span><br><span class="line">user:test in:name test     #组合搜索,用户名test的标题含有test的</span><br></pre></td></tr></table></figure>
 
 <h3 id="使用-Github-进行邮件配置信息收集"><a href="#使用-Github-进行邮件配置信息收集" class="headerlink" title="使用 Github 进行邮件配置信息收集"></a>使用 Github 进行邮件配置信息收集</h3><p>很多网站及系统都会使用 pop3 和 smtp 发送来邮件，不少开发者由于安全意识不足会把相关的配置信息也放到Github上，所以如果这时候我们动用一下google搜索命令语句，构造一下关键字，就能把这些信息给找出来了。</p>
